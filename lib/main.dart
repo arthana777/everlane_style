@@ -1,4 +1,6 @@
 
+import 'package:device_preview/device_preview.dart';
+import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,8 +8,10 @@ import 'Home/homescreen.dart';
 
 void main() {
   runApp(
-   const MyApp(),
-  );
+      DevicePreview(
+    enabled: true,
+    builder: (context) => const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: HomeScreen(),
+            home: ProductDetails(),
           );
         });
   }

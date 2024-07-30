@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
                Icon(Icons.search_rounded,size: 30.sp,),
-               SizedBox(width: 30,),
+               SizedBox(width: 30.w,),
                Icon(Icons.shopping_bag_outlined,size: 30.sp,),
              ],
            ),
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                   itemCount: 6,
                   itemBuilder: (context,index){
                     return Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -63,9 +63,10 @@ class HomeScreen extends StatelessWidget {
                                   image: AssetImage("asset/images/womencover.jpg"),fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(100),
                             ),
-                            
                           ),
-                          Text("categor")
+                          SizedBox(
+                            height: 15.h,
+                              child: Text("category")),
                         ],
                       ),
                     );
@@ -73,50 +74,53 @@ class HomeScreen extends StatelessWidget {
             ),
           SizedBox(height: 20,),
         
-          ImageSlideshow(
-          width: double.infinity,
-          height: 500.h,
-          initialPage: 0,
-          indicatorColor: Colors.black,
-          indicatorBackgroundColor: Colors.grey,
-          children: [
-        
-            Container(
-              width: double.infinity,
-              height: 500.h,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                    color: Colors.black,
-                    blurStyle: BlurStyle.outer,
-                    offset: Offset(0, 4)
-                  )
-                ],
-                image: DecorationImage(
-                    image: AssetImage("asset/images/womencover.jpg",),fit: BoxFit.cover),
-        
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70)),
+          SizedBox(
+            height: 600.h,
+            child: ImageSlideshow(
+            width: double.infinity,
+            height: 500.h,
+            initialPage: 0,
+            indicatorColor: Colors.black,
+            indicatorBackgroundColor: Colors.grey,
+            children: [
+
+              Container(
+                width: double.infinity,
+                height: 500.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      spreadRadius: 0,
+                      color: Colors.black,
+                      blurStyle: BlurStyle.outer,
+                      offset: Offset(0, 4)
+                    )
+                  ],
+                  image: DecorationImage(
+                      image: AssetImage("asset/images/womencover.jpg",),fit: BoxFit.cover),
+
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70)),
+                ),
               ),
-            ),
-        
-            Container(
-              width: double.infinity,
-              height: 500.h,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                image: DecorationImage(
-                    image: AssetImage("asset/images/mencover.jpg",),fit: BoxFit.cover,
+
+              Container(
+                width: double.infinity,
+                height: 500.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  image: DecorationImage(
+                      image: AssetImage("asset/images/mencover.jpg",),fit: BoxFit.cover,
+                      ),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70)),
+                ),
+              ),
+            ],
+            //autoPlayInterval: 3000,
+            isLoop: true,
                     ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70)),
-              ),
-            ),
-          ],
-          //autoPlayInterval: 3000,
-          isLoop: true,
-        ),
+          ),
             Padding(
               padding: const EdgeInsets.only(left: 20,right: 20,top: 30,bottom: 30),
               child: Text("Trending",style: CustomFont().subtitleText,),
@@ -125,12 +129,16 @@ class HomeScreen extends StatelessWidget {
         SizedBox(
           height: 300.h,
           child: ListView.builder(
-    scrollDirection:  Axis.horizontal,
+            scrollDirection:  Axis.horizontal,
             itemCount: 7,
             itemBuilder: (context,index)=>
                 Padding(
                   padding: const EdgeInsets.only(left: 20,right: 00),
-                  child: ProductCard(),
+                  child: InkWell(
+                    onTap: (){
+
+                    },
+                      child: ProductCard()),
                 ),
           ),
         ),
@@ -140,7 +148,7 @@ class HomeScreen extends StatelessWidget {
               child: Text("Title",style: CustomFont().subtitleText,),
             ),
             SizedBox(
-              height: 500.h,
+              height: 950.h,
               child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
                 itemCount: 4,
