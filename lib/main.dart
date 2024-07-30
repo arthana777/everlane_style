@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(DevicePreview(
+  runApp(
+      DevicePreview(
     enabled: true,
     builder: (context) => const MyApp(),
   ));
