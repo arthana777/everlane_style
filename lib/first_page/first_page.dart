@@ -1,6 +1,7 @@
 import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/signup_page/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FirstPage extends StatelessWidget {
@@ -13,8 +14,8 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       SizedBox(
-        height: double.infinity,
-        width: double.infinity,
+        height: double.infinity.h,
+        width: double.infinity.w,
         child: Image.asset(
           "asset/images/login.jpg",
           fit: BoxFit.cover,
@@ -24,19 +25,19 @@ class FirstPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 500, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 500, left: 20, right: 20).r,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Card(
                   child: Container(
-                    height: 55,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
+                    height: 55.h,
+                    width: double.infinity.w,
+                    decoration:  BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
-                        Radius.circular(15),
+                       const Radius.circular(15).w,
                       ),
                     ),
                     child: ListTile(
@@ -51,11 +52,11 @@ class FirstPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 50),
+                        padding: const EdgeInsets.only(left: 50).r,
                         child: Text(
                           "Sign In Account",
                           style: GoogleFonts.quicksand(
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w500,
                               color: Colors.black),
                         ),
@@ -63,15 +64,15 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                 SizedBox(height: 15.h),
                 Card(
                   child: Container(
-                    height: 55,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF3BBFC3),
+                    height: 55.h,
+                    width: double.infinity.w,
+                    decoration:  BoxDecoration(
+                      color: const Color(0xFF3BBFC3),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                        const Radius.circular(10).w,
                       ),
                     ),
                     child: ListTile(
@@ -86,11 +87,11 @@ class FirstPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 40),
+                        padding: const EdgeInsets.only(left: 40).r,
                         child: Text(
                           "Sign Up Account",
                           style: GoogleFonts.quicksand(
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w500,
                               color: Colors.white),
                         ),

@@ -2,6 +2,7 @@ import 'package:everlane_style/custom_textfield/custom_textfield.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Signup extends StatelessWidget {
   Signup({super.key});
@@ -25,18 +26,18 @@ class Signup extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.only(top: 250),
+            padding: const EdgeInsets.only(top: 250).r,
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white70,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
+                  topLeft: const Radius.circular(60).w,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 100),
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 100).r,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -48,8 +49,8 @@ class Signup extends StatelessWidget {
                         inputType: TextInputType.name,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 15.h,
                       ),
                       CustomTextfield(
                         controller: nameController,
@@ -57,17 +58,17 @@ class Signup extends StatelessWidget {
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 15.h,
                       ),
                       CustomTextfield(
                         controller: nameController,
-                        name: 'Enter Yor Email',
+                        name: 'Enter Username',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 15.h,
                       ),
                       CustomTextfield(
                         controller: nameController,
@@ -75,8 +76,8 @@ class Signup extends StatelessWidget {
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 15.h,
                       ),
                       InkWell(
                         onTap: () {
@@ -86,19 +87,22 @@ class Signup extends StatelessWidget {
                                 builder: (context) => SiginPage()),
                           );
                         },
-                        child: Card(
-                          child: Container(
-                            height: 45,
-                            width: 130,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFF3BBFC3),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            child: Center(
-                                child: Text(
-                              "Create",
-                              style: CustomFont().buttontext,
-                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10).r,
+                          child: Card(
+                            child: Container(
+                              height: 45.h,
+                              width: 130.w,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFF3BBFC3),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.r))),
+                              child: Center(
+                                  child: Text(
+                                "Create",
+                                style: CustomFont().buttontext,
+                              )),
+                            ),
                           ),
                         ),
                       )
