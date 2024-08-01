@@ -1,7 +1,12 @@
+
+
 import 'package:everlane_style/Home/homescreen.dart';
-import 'package:everlane_style/custom_textfield/custom_textfield.dart';
+import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../categories/category_bloc.dart';
 
 class SiginPage extends StatelessWidget {
   SiginPage({super.key});
@@ -61,6 +66,8 @@ class SiginPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
+                              context.read<CategoryBloc>().add(LoadCategories());
+                              //context.read<CategoryBloc>().add(LoadSubCategories());
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
