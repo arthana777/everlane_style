@@ -30,12 +30,12 @@ class CategoryBanner extends StatelessWidget {
             color: Colors.transparent
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 50,top: 50),
+            padding: const EdgeInsets.only(left: 30,top: 30),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Text("Sleevless",style: CustomFont().appbarText,),
+              Text("Summer",style: CustomFont().appbarText,),
 
             ],),
           ),

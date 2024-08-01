@@ -1,5 +1,6 @@
-import 'package:everlane_style/custom_textfield/custom_textfield.dart';
+
 import 'package:everlane_style/on_board/onboard1.dart';
+import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

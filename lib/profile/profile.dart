@@ -1,4 +1,5 @@
-import 'package:everlane_style/custom_textfield/custom_textfield.dart';
+
+import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,7 +88,7 @@ class Profile extends StatelessWidget {
               ),
               CustomTextfield(
                 controller: emailController,
-                
+
                 name: 'Enter Your Username',
                 inputType: TextInputType.emailAddress,
                 textCapitalization: TextCapitalization.words,

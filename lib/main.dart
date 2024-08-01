@@ -1,6 +1,9 @@
+
+import 'package:everlane_style/categories/category_bloc.dart';
 import 'package:everlane_style/first_page/first_page.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -8,13 +11,14 @@ void main() {
   runApp(MultiProvider(
       providers: [
       
-         ChangeNotifierProvider(create: (_)=> NavigationProvider()),
+         ChangeNotifierProvider(create:(_)=> NavigationProvider()),
          
       ],
       child: const MyApp(),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -27,14 +31,20 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
+return MultiProvider(
+            providers: [
+              BlocProvider(
+                create: (BuildContext context) => CategoryBloc(),
+              ),
+
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+          
+  
+              home: FirstPage(),
+
             ),
-            home: FirstPage(),
           );
         });
   }
