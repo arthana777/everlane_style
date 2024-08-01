@@ -1,3 +1,4 @@
+import 'package:everlane_style/on_board/onboard2.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class Onboard1 extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,42 +45,53 @@ class Onboard1 extends StatelessWidget {
               ),
               SizedBox(
                 height: 500.h,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(height: 20.h),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      height: 100.h,
-                      width: double.infinity.w,
-                      decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              spreadRadius: 0,
-                              blurRadius: 2,
-                              offset: Offset(1, 2),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10).w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            items[index],
-                            style: CustomFont().titleText,
-                          ),
-                          CircleAvatar(
-                            radius: 35.w,
-                            backgroundImage: AssetImage(
-                              imageUrls[index],
-                            ),
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>  Onboard2(),
                       ),
                     );
                   },
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) =>
+                        SizedBox(height: 20.h),
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding:  const EdgeInsets.only(left: 10, right: 10).r,
+                        height: 100.h,
+                        width: double.infinity.w,
+                        decoration: BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 0,
+                                blurRadius: 2,
+                                offset: Offset(1, 2),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10).w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              items[index],
+                              style: CustomFont().titleText,
+                            ),
+                            CircleAvatar(
+                              radius: 35.w,
+                              backgroundImage: AssetImage(
+                                imageUrls[index],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               )
             ],

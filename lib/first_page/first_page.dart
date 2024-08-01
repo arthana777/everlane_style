@@ -34,10 +34,10 @@ class FirstPage extends StatelessWidget {
                   child: Container(
                     height: 55.h,
                     width: double.infinity.w,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
-                       const Radius.circular(15).w,
+                        const Radius.circular(15).w,
                       ),
                     ),
                     child: ListTile(
@@ -64,12 +64,12 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                 SizedBox(height: 15.h),
+                SizedBox(height: 15.h),
                 Card(
                   child: Container(
                     height: 55.h,
                     width: double.infinity.w,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       color: const Color(0xFF3BBFC3),
                       borderRadius: BorderRadius.all(
                         const Radius.circular(10).w,
@@ -79,7 +79,7 @@ class FirstPage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Signup()),
+                          MaterialPageRoute(builder: (context) => Siginup()),
                         );
                       },
                       leading: const Icon(

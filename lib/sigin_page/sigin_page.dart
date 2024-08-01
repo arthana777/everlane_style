@@ -25,66 +25,74 @@ class SiginPage extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.only(top: 350).r,
+            padding: const EdgeInsets.only(top: 250).r,
             child: Container(
               height: double.infinity.h,
               width: double.infinity.w,
               decoration: BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: const BorderRadius.all(Radius.circular(25)).r),
+                  borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))
+                      .r
+                      .r),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextfield(
-                      controller: emailController,
-                      name: 'Enter Your Username',
-                      inputType: TextInputType.emailAddress,
-                      textCapitalization: TextCapitalization.words,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    CustomTextfield(
-                      controller: nameController,
-                      name: 'Enter Your Password',
-                      inputType: TextInputType.text,
-                      textCapitalization: TextCapitalization.words,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  Onboard1()),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10).r,
-                        child: Card(
-                          child: Container(
-                            height: 45.h,
-                            width: 130.w,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF3BBFC3),
-                                borderRadius: BorderRadius.all(
-                                        const Radius.circular(10).w)
-                                    .r),
-                            child: Center(
-                                child: Text(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTextfield(
+                        controller: emailController,
+                        name: 'Enter Your Username',
+                        inputType: TextInputType.emailAddress,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      CustomTextfield(
+                        controller: nameController,
+                        name: 'Enter Your Password',
+                        inputType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Onboard1()),
+                          );
+                        },
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF3BBFC3),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10).w,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Onboard1(),
+                                ),
+                              );
+                            },
+                            child: Text(
                               "Login",
                               style: CustomFont().buttontext,
-                            )),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
