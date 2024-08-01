@@ -12,6 +12,7 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 15.h,
         surfaceTintColor: Colors.white,
       ),
@@ -39,63 +40,68 @@ class ProductDetails extends StatelessWidget {
                   Positioned(
                     top: 20.h,
                       left: 20.w,
-                      child: Container(
-                        height: 30.h,
-                        width: 30.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white70,
-                          borderRadius: BorderRadius.circular(30.r)
-                        ),
-                          child: Icon(Icons.arrow_back,size: 20.sp,))),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.pop(context,);
+                        },
+                        child: Container(
+                          height: 25.h,
+                          width: 25.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(20.r)
+                          ),
+                            child: Icon(Icons.arrow_back,size: 20.sp,)),
+                      )),
                   Positioned(
                     top: 20.h,
                       right: 20.w,
                       //left: 300.w,
                       child: Container(
-                          height: 30.h,
-                          width: 30.w,
+                          height: 25.h,
+                          width: 25.w,
                           decoration: BoxDecoration(
                               color: Colors.white70,
-                              borderRadius: BorderRadius.circular(30.r)
+                              borderRadius: BorderRadius.circular(20.r)
                           ),
-                          child: Icon(Icons.favorite_border,size: 20.sp,))),
-                  Positioned(
-                    top: 70.h,
-                    left: 220.w,
-                    right: 30.w,
-                    child: Container(
-                      height: 400.h,
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: SizedBox(
-                        height: 400.h,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: 4,
-                            itemBuilder: (context,index){
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 100.h,
-                                  width: 50.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    image: DecorationImage(
-                                        image: NetworkImage("https://plus.unsplash.com/premium_photo-1667520043080-53dcca77e2aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fDB8fHww"),
-                                    fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20.r),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ),
-                  ),
-          
+                          child: Icon(Icons.shopping_bag_outlined,size: 20.sp,))),
+                  // Positioned(
+                  //   top: 70.h,
+                  //   left: 220.w,
+                  //   right: 30.w,
+                  //   child: Container(
+                  //     height: 400.h,
+                  //     width: 100.w,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.white,
+                  //     ),
+                  //     child: SizedBox(
+                  //       height: 400.h,
+                  //       child: ListView.builder(
+                  //         shrinkWrap: true,
+                  //         scrollDirection: Axis.vertical,
+                  //         itemCount: 4,
+                  //           itemBuilder: (context,index){
+                  //             return Padding(
+                  //               padding: const EdgeInsets.all(8.0),
+                  //               child: Container(
+                  //                 height: 100.h,
+                  //                 width: 50.w,
+                  //                 decoration: BoxDecoration(
+                  //                   color: Colors.black,
+                  //                   image: DecorationImage(
+                  //                       image: NetworkImage("https://plus.unsplash.com/premium_photo-1667520043080-53dcca77e2aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fDB8fHww"),
+                  //                   fit: BoxFit.cover,
+                  //                   ),
+                  //                   borderRadius: BorderRadius.circular(20.r),
+                  //                 ),
+                  //               ),
+                  //             );
+                  //           }),
+                  //     ),
+                  //   ),
+                  // ),
+
                 ],
               ),
               Padding(
