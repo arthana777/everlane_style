@@ -52,7 +52,7 @@ class FirstPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 50).r,
+                        padding: const EdgeInsets.only(left: 50, bottom: 5).r,
                         child: Text(
                           "Sign In Account",
                           style: GoogleFonts.quicksand(
@@ -87,7 +87,7 @@ class FirstPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 40).r,
+                        padding: const EdgeInsets.only(left: 40, bottom: 5).r,
                         child: Text(
                           "Sign Up Account",
                           style: GoogleFonts.quicksand(
