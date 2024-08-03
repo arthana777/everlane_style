@@ -21,11 +21,15 @@ class Onboard1 extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text(
+          "",
+          style: CustomFont().titleText,
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15).r,
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,24 +37,15 @@ class Onboard1 extends StatelessWidget {
                 "Chose Your Gender",
                 style: CustomFont().titleText,
               ),
+              SizedBox(height: 20.h),
               SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                "Health-related insights and personalized\nrecommendations are built based on\nyour gender. ",
-                style: CustomFont().subText,
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              SizedBox(
-                height: 500.h,
+                height: 300.h,
                 child: InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  Onboard2(),
+                        builder: (context) => Onboard2(),
                       ),
                     );
                   },
@@ -60,16 +55,16 @@ class Onboard1 extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding:  const EdgeInsets.only(left: 10, right: 10).r,
-                        height: 100.h,
+                        padding: const EdgeInsets.only(left: 10, right: 10).r,
+                        height: 80.h,
                         width: double.infinity.w,
                         decoration: BoxDecoration(
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.grey,
                                 spreadRadius: 0,
-                                blurRadius: 2,
-                                offset: Offset(1, 2),
+                                blurRadius: 1,
+                                offset: Offset(0, 1),
                               ),
                             ],
                             color: Colors.white,
@@ -93,7 +88,11 @@ class Onboard1 extends StatelessWidget {
                     },
                   ),
                 ),
-              )
+              ),
+              Text(
+                "Health-related insights and personalized\nrecommendations are built based on\nyour gender. ",
+                style: CustomFont().subText,
+              ),
             ],
           ),
         ),
