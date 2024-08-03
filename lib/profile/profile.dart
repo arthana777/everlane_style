@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           "Profile",
-          style: CustomFont().appBarText,
+          style: CustomFont().appbarText,
         ),
       ),
       body: Center(

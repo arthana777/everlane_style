@@ -37,8 +37,7 @@ class Siginup extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))
-                      .r
-                      .r),
+                      ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
                 child: SingleChildScrollView(

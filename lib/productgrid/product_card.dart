@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
       elevation: 0,
       child: Container(
         height: 300.h,
-        width: 200.w,
+        width: 175.w,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20.r),
@@ -39,9 +39,9 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Container(
                     height: 200.h,
-                    width: 220.w,
+                    width: 200.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(10.r),
                       image: DecorationImage(
                         image:NetworkImage('https://plus.unsplash.com/premium_photo-1668485966810-cbd0f685f58f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmFzaGluJTIwZ2lybHxlbnwwfHwwfHx8MA%3D%3D'),
                         fit: BoxFit.cover,

@@ -9,7 +9,8 @@ class CategoryUsecases {
   Future<List<CategoryEntity>> getCategoryFromDataSource() async {
     final category = await categoryRepo.getCategoryFromDataSource();
     return category;
-  } Future<List<CategoryEntity>> getSubCategoryFromDataSource(int id) async {
+  }
+  Future<List<CategoryEntity>> getSubCategoryFromDataSource(int id) async {
     final category = await categoryRepo.getSubCategoryFromDataSource(id);
     return category;
   }

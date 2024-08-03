@@ -1,11 +1,12 @@
 
-import 'package:everlane_style/categories/category_bloc.dart';
 import 'package:everlane_style/first_page/first_page.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import 'bloc/category_bloc.dart';
 
 void main() {
   runApp(MultiProvider(

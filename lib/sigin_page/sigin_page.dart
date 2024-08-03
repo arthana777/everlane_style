@@ -3,7 +3,10 @@ import 'package:everlane_style/on_board/onboard1.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
 
 class SiginPage extends StatelessWidget {
   SiginPage({super.key});
@@ -35,8 +38,7 @@ class SiginPage extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))
-                      .r
-                      .r),
+              ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
                 child: SingleChildScrollView(
@@ -64,6 +66,7 @@ class SiginPage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Onboard1()),

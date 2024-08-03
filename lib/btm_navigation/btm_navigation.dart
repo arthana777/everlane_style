@@ -2,6 +2,7 @@ import 'package:everlane_style/Home/homescreen.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class BtmNavigation extends StatelessWidget {
@@ -27,6 +28,7 @@ class BtmNavigation extends StatelessWidget {
               icon: Icon(
                 (currentScreenIndex == 0) ? Icons.home : Icons.home_outlined,
                 color: const Color(0xFF3BBFC3),
+                size: 30.sp,
               ),
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
@@ -34,6 +36,7 @@ class BtmNavigation extends StatelessWidget {
             icon: Icon(
               (currentScreenIndex == 2) ? Icons.person : Icons.person_outline,
               color: const Color(0xFF3BBFC3),
+              size: 30.sp,
             ),
           ),
           // BottomNavigationBarItem(
