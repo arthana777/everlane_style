@@ -14,8 +14,8 @@ class CustomFont {
   final TextStyle subtitleText = GoogleFonts.questrial(
       textStyle: TextStyle(
     color: Colors.black,
-    fontSize: 20.sp,
-    fontWeight: FontWeight.w400,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
   ));
   final TextStyle buttontext = GoogleFonts.poppins(
       textStyle: TextStyle(
@@ -30,6 +30,9 @@ class CustomFont {
           color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.sp));
   final TextStyle subText = GoogleFonts.questrial(
       textStyle: const TextStyle(color: Colors.black, fontSize: 15));
+  final TextStyle labeltext = GoogleFonts.questrial(
+      textStyle: TextStyle(
+          color: Colors.black, fontSize: 15.sp, fontWeight: FontWeight.w600));
 }
 
 class CustomColor {

@@ -46,6 +46,7 @@ class SiginPage extends StatelessWidget {
                     children: [
                       CustomTextfield(
                         controller: emailController,
+                        names: "Enter Your Username",
                         name: 'Enter Your Username',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
@@ -55,6 +56,7 @@ class SiginPage extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: nameController,
+                        names: "Enter Your Password",
                         name: 'Enter Your Password',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,

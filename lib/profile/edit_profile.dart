@@ -17,7 +17,9 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Scaffold(
+        backgroundColor: const Color(0xFFEFEFEF),
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           title: Text(
             "Edit Your Profile",
             style: CustomFont().titleText,
@@ -31,12 +33,12 @@ class EditProfile extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     maxRadius: 70,
-                    backgroundImage:  AssetImage(
+                    backgroundImage: const AssetImage(
                       "asset/images/tessa.jpg",
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 120, left: 60).r,
-                      child: Icon(
+                      padding: const EdgeInsets.only(top: 120, left: 60).r,
+                      child: const Icon(
                         Icons.edit_document,
                         color: Colors.white,
                         shadows: [
@@ -55,6 +57,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: nameController,
+                  names: "Change Your Firstname",
                   name: 'Change Your Firstname',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
@@ -62,6 +65,7 @@ class EditProfile extends StatelessWidget {
                 SizedBox(height: 5.h),
                 CustomTextfield(
                   controller: lastNameController,
+                  names: "Change Second name",
                   name: 'Change Second name',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
@@ -71,6 +75,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: emailController,
+                  names: "Change your Email",
                   name: 'Change your Email',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
@@ -80,6 +85,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: userNameController,
+                  names: "Change your Username",
                   name: 'Change your Username',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
@@ -89,6 +95,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: passController,
+                  names: "Change Password",
                   name: 'Change Password',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
@@ -98,6 +105,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: phoneNumberController,
+                  names: "Chane Your Phone Number",
                   name: 'Chane Your Phone Number',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,

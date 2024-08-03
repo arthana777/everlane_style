@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextfield extends StatelessWidget {
   final TextEditingController controller;
   final String name;
+  final String names;
   // final IconData prefixIcon;
   final bool obscureText;
   final TextCapitalization textCapitalization;
@@ -15,7 +16,7 @@ class CustomTextfield extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.name,
-    // required this.prefixIcon,
+    required this.names, // required this.prefixIcon,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
@@ -51,10 +52,13 @@ class CustomTextfield extends StatelessWidget {
           obscureText: obscureText,
           keyboardType: inputType,
           // textAlign: TextAlign.center,
-          style: CustomFont().buttontext,
+          style: CustomFont().subtitleText,
+
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(left: 10, top: 4).r,
             border: InputBorder.none,
+            labelText: names,
+            labelStyle: CustomFont().subtitleText,
             hintText: name,
             counterText: '',
             hintStyle: GoogleFonts.quicksand(

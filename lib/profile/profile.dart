@@ -49,8 +49,8 @@ class Profile extends StatelessWidget {
                   children: [
                     Card(
                       child: Container(
-                        height: 100.h,
-                        width: 100.w,
+                        height: 90.h,
+                        width: 90.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -65,8 +65,8 @@ class Profile extends StatelessWidget {
                     ),
                     Card(
                       child: Container(
-                        height: 100.h,
-                        width: 100.w,
+                        height: 90.h,
+                        width: 90.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -81,8 +81,8 @@ class Profile extends StatelessWidget {
                     ),
                     Card(
                       child: Container(
-                        height: 100.h,
-                        width: 100.w,
+                        height: 90.h,
+                        width: 90.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),

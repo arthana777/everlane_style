@@ -48,6 +48,7 @@ class Siginup extends StatelessWidget {
                     children: [
                       CustomTextfield(
                         controller: nameController,
+                        names: "Enter First Name",
                         name: 'Enter First Name',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
@@ -57,6 +58,7 @@ class Siginup extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: lastNameController,
+                        names: "Enter Last Name",
                         name: 'Enter Last Name',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -66,6 +68,7 @@ class Siginup extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: emailController,
+                        names: "Enter Your Email",
                         name: 'Enter Your Email',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -75,6 +78,7 @@ class Siginup extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: userNameController,
+                        names: "Enter Username",
                         name: 'Enter Username',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -84,6 +88,7 @@ class Siginup extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: passController,
+                        names: "Enter Password",
                         name: 'Enter Password',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -93,6 +98,7 @@ class Siginup extends StatelessWidget {
                       ),
                       CustomTextfield(
                         controller: phoneNumberController,
+                        names: "Enter Your Phone number",
                         name: 'Enter Your Phone number',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,

@@ -7,12 +7,10 @@ class Onboard1 extends StatelessWidget {
   final List<String> items = [
     'Male',
     'Female',
-    "Other's",
   ];
   final List<String> imageUrls = [
     "asset/images/1.jpg",
     "asset/images/2.jpg",
-    "asset/images/3.jpg",
   ];
   Onboard1({super.key});
 
@@ -39,7 +37,7 @@ class Onboard1 extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               SizedBox(
-                height: 300.h,
+                height: 200.h,
                 child: InkWell(
                   onTap: () {
                     Navigator.push(
@@ -71,7 +69,7 @@ class Onboard1 extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10).w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children:[
                             Text(
                               items[index],
                               style: CustomFont().titleText,
