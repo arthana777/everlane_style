@@ -9,6 +9,9 @@ class Siginup extends StatelessWidget {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final userNameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class Siginup extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextfield(
-                        controller: emailController,
+                        controller: nameController,
                         name: 'Enter First Name',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
@@ -52,7 +55,7 @@ class Siginup extends StatelessWidget {
                         height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: lastNameController,
                         name: 'Enter Last Name',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -61,7 +64,7 @@ class Siginup extends StatelessWidget {
                         height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: emailController,
                         name: 'Enter Your Email',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -70,7 +73,7 @@ class Siginup extends StatelessWidget {
                         height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: userNameController,
                         name: 'Enter Username',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -79,7 +82,7 @@ class Siginup extends StatelessWidget {
                         height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: passController,
                         name: 'Enter Password',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
@@ -88,7 +91,7 @@ class Siginup extends StatelessWidget {
                         height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: phoneNumberController,
                         name: 'Enter Your Phone number',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,

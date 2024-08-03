@@ -37,14 +37,10 @@ return MultiProvider(
               BlocProvider(
                 create: (BuildContext context) => CategoryBloc(),
               ),
-
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-          
-  
               home: FirstPage(),
-
             ),
           );
         });

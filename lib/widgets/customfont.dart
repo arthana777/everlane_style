@@ -21,11 +21,11 @@ class CustomFont {
       textStyle: TextStyle(color: Colors.white, fontSize: 15.sp));
   final TextStyle hintText =
       GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.white));
-  final TextStyle titleText = GoogleFonts.questrial(
+  final TextStyle titleText = GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: Colors.black, fontWeight: FontWeight.w700, fontSize: 12.sp));
+          color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.sp));
   final TextStyle subText = GoogleFonts.questrial(
-      textStyle: const TextStyle(color: Colors.black, fontSize: 18));
+      textStyle: const TextStyle(color: Colors.black, fontSize: 15));
 }
 
 
