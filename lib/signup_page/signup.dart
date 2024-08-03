@@ -2,12 +2,12 @@ import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Signup extends StatelessWidget {
-  Signup({super.key});
-
+class Siginup extends StatelessWidget {
+  Siginup({super.key});
   final nameController = TextEditingController();
-  final enailController = TextEditingController();
+  final emailController = TextEditingController();
   final passController = TextEditingController();
 
   @override
@@ -15,8 +15,8 @@ class Signup extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          height: double.infinity,
-          width: double.infinity,
+          height: double.infinity.h,
+          width: double.infinity.w,
           child: Image.asset(
             "asset/images/login.jpg",
             fit: BoxFit.cover,
@@ -25,58 +25,76 @@ class Signup extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.only(top: 250),
+            padding: const EdgeInsets.only(top: 190).r,
             child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white70,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                ),
-              ),
+              height: double.infinity.h,
+              width: double.infinity.w,
+              decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))
+                      ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 100),
+                padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextfield(
-                        controller: nameController,
-                        name: 'Enter Yor Name',
-                        inputType: TextInputType.name,
-                        textCapitalization: TextCapitalization.words,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextfield(
-                        controller: nameController,
-                        name: 'Enter Yor Phone Number',
-                        inputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextfield(
-                        controller: nameController,
-                        name: 'Enter Yor Email',
+                        controller: emailController,
+                        name: 'Enter First Name',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 10.h,
                       ),
                       CustomTextfield(
                         controller: nameController,
-                        name: 'Enter Yor Password',
+                        name: 'Enter Last Name',
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
                       ),
-                      const SizedBox(
-                        height: 15,
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextfield(
+                        controller: nameController,
+                        name: 'Enter Your Email',
+                        inputType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextfield(
+                        controller: nameController,
+                        name: 'Enter Username',
+                        inputType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextfield(
+                        controller: nameController,
+                        name: 'Enter Password',
+                        inputType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextfield(
+                        controller: nameController,
+                        name: 'Enter Your Phone number',
+                        inputType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       InkWell(
                         onTap: () {
@@ -86,19 +104,27 @@ class Signup extends StatelessWidget {
                                 builder: (context) => SiginPage()),
                           );
                         },
-                        child: Card(
-                          child: Container(
-                            height: 45,
-                            width: 130,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFF3BBFC3),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            child: Center(
-                                child: Text(
-                              "Create",
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF3BBFC3),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10).w,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SiginPage(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Confirm",
                               style: CustomFont().buttontext,
-                            )),
+                            ),
                           ),
                         ),
                       )
@@ -108,7 +134,7 @@ class Signup extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

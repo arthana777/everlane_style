@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomTextfield extends StatelessWidget {
+class ProfileFiled extends StatelessWidget {
   final TextEditingController controller;
   final String name;
-  // final IconData prefixIcon;
+  final IconData prefixIcon;
   final bool obscureText;
   final TextCapitalization textCapitalization;
   final TextInputType inputType;
 
-  const CustomTextfield({
-    Key? key,
+  const ProfileFiled({
+    super.key,
     required this.controller,
     required this.name,
-    // required this.prefixIcon,
+    required this.prefixIcon,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +51,18 @@ class CustomTextfield extends StatelessWidget {
             maxLines: 1,
             obscureText: obscureText,
             keyboardType: inputType,
-            // textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.black,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 20, top: 7).r,
+              contentPadding: const EdgeInsets.only(left: 20, top: 7).r,
               border: InputBorder.none,
               hintText: name,
               counterText: '',
-              // prefixIcon: Icon(
-              //   prefixIcon,
-              // ),
+              prefixIcon: Icon(
+                prefixIcon,
+              ),
               hintStyle:
                   GoogleFonts.quicksand(color: Colors.black87, fontSize: 15.sp),
             ),
