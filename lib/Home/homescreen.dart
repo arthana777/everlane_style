@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:everlane_style/Home/seasons/seasongridview.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
@@ -41,16 +40,31 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CategoryEntity> subcategories = [];
   int? isclicked;
 
-SharedPrefeService sp=SharedPrefeService();
+  SharedPrefeService sp = SharedPrefeService();
 
-  CustomColor customColor=CustomColor();
+  CustomColor customColor = CustomColor();
 
-  final List<Map<String,String>>seasonbanner=[
-    {'title':'winter','image':'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2ludGVyJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'},
-    {'title':'summer','image':'https://media.istockphoto.com/id/1493715911/photo/beach-walk-of-young-adult-woman-during-vacation-in-sri-lanka.jpg?s=1024x1024&w=is&k=20&c=CpKczf_6U5N1qcYfy-beRHW2SY_9Bcgr90yKZ8SnlFQ='},
-    {'title':'rainy','image':'https://plus.unsplash.com/premium_photo-1676762448146-de8a34fbfb88?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFpbnklMjBmYXNoaW9uJTIwYmFubmVyfGVufDB8fDB8fHww'},
-    {'title':'autumn','image':'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'},
-
+  final List<Map<String, String>> seasonbanner = [
+    {
+      'title': 'winter',
+      'image':
+          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2ludGVyJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
+    },
+    {
+      'title': 'summer',
+      'image':
+          'https://media.istockphoto.com/id/1493715911/photo/beach-walk-of-young-adult-woman-during-vacation-in-sri-lanka.jpg?s=1024x1024&w=is&k=20&c=CpKczf_6U5N1qcYfy-beRHW2SY_9Bcgr90yKZ8SnlFQ='
+    },
+    {
+      'title': 'rainy',
+      'image':
+          'https://plus.unsplash.com/premium_photo-1676762448146-de8a34fbfb88?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFpbnklMjBmYXNoaW9uJTIwYmFubmVyfGVufDB8fDB8fHww'
+    },
+    {
+      'title': 'autumn',
+      'image':
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
+    },
   ];
 
   @override
@@ -62,15 +76,17 @@ SharedPrefeService sp=SharedPrefeService();
 
     sp.getToken();
 
-   //BlocProvider.of<ProductBloc>(context).add(LoadSeasons(seasonbanner[1]['title']??""));
+    //BlocProvider.of<ProductBloc>(context).add(LoadSeasons(seasonbanner[1]['title']??""));
     // context.read<CategoryBloc>().add(
     //     LoadBanners()
     super.initState();
   }
+
   void tappingfun(int index) {
     isclicked = index;
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,8 +149,8 @@ SharedPrefeService sp=SharedPrefeService();
                 if (state is CategoryLoaded) {
                   categories = state.categories;
                   context.read<CategoryBloc>().add(
-                    LoadSubCategories(categories[0].id ?? 0),
-                  );
+                        LoadSubCategories(categories[0].id ?? 0),
+                      );
                   //context.read<ProductBloc>().add(LoadProducts());
                   // context.read<CategoryBloc>().add(
                   //   LoadBanners(categories[0].id ?? 0),
@@ -143,82 +159,65 @@ SharedPrefeService sp=SharedPrefeService();
                 }
                 if (state is BannerLoaded) {
                   banners = state.banners;
-                  setState(() {
-
-                  });
+                  setState(() {});
                 }
-                if(state is SubCategoryLoaded){
-                  subcategories=state.subcategories;
-                  setState(() {
-
-                  });
+                if (state is SubCategoryLoaded) {
+                  subcategories = state.subcategories;
+                  setState(() {});
                 }
-                 if (state is SubCategoryLoading) {
-
-                 }
+                if (state is SubCategoryLoading) {}
               },
             ),
-
-
             BlocListener<ProductBloc, ProductState>(
               listener: (context, state) {
                 print(state);
                 if (state is ProductLoaded) {
                   products = state.products;
-                  setState(() {
-
-                  });
-                }
-                else if (state is SeasonsLoaded) {
+                  setState(() {});
+                } else if (state is SeasonsLoaded) {
                   seasons = state.seasons;
-                  setState(() {
-
-                  });
-                }
-                else if (state is filtercategoryLoaded) {
+                  setState(() {});
+                } else if (state is filtercategoryLoaded) {
                   filtercategories = state.filtercategories;
-                  setState(() {
-
-                  });
+                  setState(() {});
                 }
               },
             ),
             BlocListener<WhishlistBloc, WishlistState>(
-              listener: (context, state) {
-                print(state);
-                if (state is addtoWishlistLoading) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) =>
-                        Center(child: CircularProgressIndicator()),
-                  );
-                } else if (state is addtoWishlistSuccess) {
-                  print("adding to whislisttt");
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(
-                        'Product added to wishlist successfully!')),
-                  );
-                } else if (state is addtoWishlistFailure) {
-                  // Dismiss loading indicator and show error message
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.error)),
-                  );
-                }
+                listener: (context, state) {
+              print(state);
+              if (state is addtoWishlistLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) =>
+                      Center(child: CircularProgressIndicator()),
+                );
+              } else if (state is addtoWishlistSuccess) {
+                print("adding to whislisttt");
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text('Product added to wishlist successfully!')),
+                );
+              } else if (state is addtoWishlistFailure) {
+                // Dismiss loading indicator and show error message
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
               }
-            ),
+            }),
           ],
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(
                 height: 50.h,
                 width: 400.w,
                 child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 18,vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -232,27 +231,30 @@ SharedPrefeService sp=SharedPrefeService();
                           LoadSubCategories(categories[index].id??0),
                         );
                         context.read<CategoryBloc>().add(
-                          LoadBanners(categories[index].id??0),
-                        );
-
+                              LoadBanners(categories[index].id ?? 0),
+                            );
                       });
-
                     },
                     child: Container(
                       // height: 40.h,
-                      width: 360.w/2,
+                      width: 360.w / 2,
                       decoration: BoxDecoration(
-                          color: isclicked == index ? Color(0xFF973d93) : Colors.black12,
+                          color: isclicked == index
+                              ? Color(0xFF973d93)
+                              : Colors.black12,
                           borderRadius: BorderRadius.circular(5.r)),
                       child: Center(
                           child: Text(
-                            categories[index].name ?? 'text',
-                            style: CustomFont().buttontext,
-                          )),
+                        categories[index].name ?? 'text',
+                        style: CustomFont().buttontext,
+                      )),
                     ),
-                  ), separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 5.w,);
-                },
+                  ),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: 5.w,
+                    );
+                  },
                 ),
               ),
 
@@ -278,12 +280,13 @@ SharedPrefeService sp=SharedPrefeService();
                           children: [
                             InkWell(
                               onTap: () {
-                                context.read<ProductBloc>().add(Loadfiltercategories(subcategories[index].id??0));
+                                context.read<ProductBloc>().add(
+                                    Loadfiltercategories(
+                                        subcategories[index].id ?? 0));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        CategoryGridview(),
+                                    builder: (context) => CategoryGridview(),
                                   ),
                                 );
 
@@ -295,9 +298,10 @@ SharedPrefeService sp=SharedPrefeService();
                                 decoration: BoxDecoration(
                                   color: Colors.black12,
                                   image: DecorationImage(
-                                      image: NetworkImage(
-                                          subcategories[index].image ??
-                                          'https://media.istockphoto.com/id/1176789549/photo/handsome-gentleman-downtown.jpg?s=1024x1024&w=is&k=20&c=psf6n8f2mWlkiCxZKh4LHJeEjda-4dv4H734xm8MBiA='),                                       fit: BoxFit.cover),
+                                      image: NetworkImage(subcategories[index]
+                                              .image ??
+                                          'https://media.istockphoto.com/id/1176789549/photo/handsome-gentleman-downtown.jpg?s=1024x1024&w=is&k=20&c=psf6n8f2mWlkiCxZKh4LHJeEjda-4dv4H734xm8MBiA='),
+                                      fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                               ),
@@ -305,13 +309,17 @@ SharedPrefeService sp=SharedPrefeService();
                             SizedBox(
                                 height: 15.h,
                                 child: Text(
-                                  subcategories[index].name ?? "",style: CustomFont().bodyText,)),
+                                  subcategories[index].name ?? "",
+                                  style: CustomFont().bodyText,
+                                )),
                           ],
                         ),
                       );
                     }),
               ),
-            SizedBox(height: 30.h,),
+              SizedBox(
+                height: 30.h,
+              ),
               CarouselSlider(
                 options: CarouselOptions(
                     height: 600.0.h,
@@ -322,13 +330,13 @@ SharedPrefeService sp=SharedPrefeService();
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(
-                              color: Colors.amber,
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(
+                            color: Colors.amber,
                             image: DecorationImage(
-                                image: NetworkImage(i.image??''),fit: BoxFit.cover)
-                          ),
+                                image: NetworkImage(i.image ?? ''),
+                                fit: BoxFit.cover)),
                       );
                     },
                   );
@@ -356,19 +364,23 @@ SharedPrefeService sp=SharedPrefeService();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProductDetails(productdetails: products[index],),
+                              builder: (context) => ProductDetails(
+                                productdetails: products[index],
+                              ),
                             ),
                           );
                         },
                         child: ProductCard(
-                          ontap: (){
-                            BlocProvider.of<WhishlistBloc>(context).add(AddToWishlist(products[index]?.id??0));
-                            print(products[index]?.id??0);
-                          },
-                          title: products[index].name??'',
-                          subtitle: products[index].description??'',
-                          image: products[index].image??'https://plus.unsplash.com/premium_photo-1706727290668-f6b805ea48da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8',
-                          price: products[index].price??"")),
+                            ontap: () {
+                              BlocProvider.of<WhishlistBloc>(context)
+                                  .add(AddToWishlist(products[index]?.id ?? 0));
+                              print(products[index]?.id ?? 0);
+                            },
+                            title: products[index].name ?? '',
+                            subtitle: products[index].description ?? '',
+                            image: products[index].image ??
+                                'https://plus.unsplash.com/premium_photo-1706727290668-f6b805ea48da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8',
+                            price: products[index].price ?? "")),
                   ),
                 ),
               ),
@@ -389,25 +401,27 @@ SharedPrefeService sp=SharedPrefeService();
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: seasonbanner.length,
                     itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 4, bottom: 4),
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Seasongridview(),
-                            ),
-                          );
-                          context.read<ProductBloc>().add(
-                            LoadSeasons(seasonbanner[index]['title']??''),
-                          );
-                          // context.read<ProductBloc>().add(LoadProducts());
-                        },
-                          child: CategoryBanner(
-                            title: seasonbanner[index]['title'],
-                          image: seasonbanner[index]['image'],)),
-                    )),
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 4, bottom: 4),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Seasongridview(),
+                                  ),
+                                );
+                                context.read<ProductBloc>().add(
+                                      LoadSeasons(
+                                          seasonbanner[index]['title'] ?? ''),
+                                    );
+                                // context.read<ProductBloc>().add(LoadProducts());
+                              },
+                              child: CategoryBanner(
+                                title: seasonbanner[index]['title'],
+                                image: seasonbanner[index]['image'],
+                              )),
+                        )),
               ),
 
               // Padding(

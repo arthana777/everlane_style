@@ -7,28 +7,27 @@ import '../widgets/custom_textbutton.dart';
 import '../widgets/customfont.dart';
 
 class CartItem extends StatefulWidget {
-   CartItem({super.key, this.ontap});
+  CartItem({super.key, this.ontap});
 
-   final VoidCallback? ontap;
+  final VoidCallback? ontap;
 
   @override
   State<CartItem> createState() => _CartItemState();
 }
 
 class _CartItemState extends State<CartItem> {
-   final List<String> item1 = [
-     "1",
-     '2',
-     '3',
-     '4',
-     '5',
-
-   ];
-   String dropedownvalue1 = '1';
+  final List<String> item1 = [
+    "1",
+    '2',
+    '3',
+    '4',
+    '5',
+  ];
+  String dropedownvalue1 = '1';
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: 200.w,
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
@@ -47,30 +46,44 @@ class _CartItemState extends State<CartItem> {
                   height: 80.h,
                   width: 80.w,
                   decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(5.r),
-                      image: DecorationImage(
-                          image: NetworkImage("https://plus.unsplash.com/premium_photo-1658506787944-7939ed84aaf8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"),
-                          fit: BoxFit.cover
-                      ),
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(5.r),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://plus.unsplash.com/premium_photo-1658506787944-7939ed84aaf8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"),
+                        fit: BoxFit.cover),
                   ),
                 ),
-                SizedBox(width: 15.w,),
+                SizedBox(
+                  width: 15.w,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Apple fifteen pro max",style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.sp)),),
+                    Text(
+                      "Apple fifteen pro max",
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp)),
+                    ),
                     Row(
                       children: [
                         Icon(Icons.currency_rupee),
-                        Text("700",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.sp)),),
+                        Text(
+                          "700",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.sp)),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 5.h,),
+                    SizedBox(
+                      height: 5.h,
+                    ),
                     Container(
                       height: 20.h,
                       decoration: BoxDecoration(
@@ -81,7 +94,7 @@ class _CartItemState extends State<CartItem> {
                         value: dropedownvalue1,
                         dropdownColor: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                       underline: SizedBox(),
+                        underline: SizedBox(),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: item1.map((String item) {
                           return DropdownMenuItem(
@@ -96,8 +109,6 @@ class _CartItemState extends State<CartItem> {
                         },
                       ),
                     ),
-
-
                   ],
                 ),
               ],
@@ -107,10 +118,12 @@ class _CartItemState extends State<CartItem> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomTextButton(text: "Save for later",),
-              CustomTextButton(text: "Remove",),
-
-
+              CustomTextButton(
+                text: "Save for later",
+              ),
+              CustomTextButton(
+                text: "Remove",
+              ),
             ],
           ),
         ],

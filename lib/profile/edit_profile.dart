@@ -1,5 +1,6 @@
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +18,9 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Scaffold(
+        backgroundColor: const Color(0xFFEFEFEF),
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           title: Text(
             "Edit Your Profile",
             style: CustomFont().titleText,
@@ -31,12 +34,12 @@ class EditProfile extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     maxRadius: 70,
-                    backgroundImage:  AssetImage(
+                    backgroundImage: const AssetImage(
                       "asset/images/tessa.jpg",
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 120, left: 60).r,
-                      child: Icon(
+                      padding: const EdgeInsets.only(top: 120, left: 60).r,
+                      child: const Icon(
                         Icons.edit_document,
                         color: Colors.white,
                         shadows: [
@@ -55,6 +58,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: nameController,
+                  names: "Change Your Firstname",
                   name: 'Change Your Firstname',
                   inputType: TextInputType.emailAddress,
                   //textCapitalization: TextCapitalization.words,
@@ -62,6 +66,7 @@ class EditProfile extends StatelessWidget {
                 SizedBox(height: 5.h),
                 CustomTextfield(
                   controller: lastNameController,
+                  names: "Change Second name",
                   name: 'Change Second name',
                   inputType: TextInputType.emailAddress,
                   //textCapitalization: TextCapitalization.words,
@@ -71,6 +76,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: emailController,
+                  names: "Change your Email",
                   name: 'Change your Email',
                   inputType: TextInputType.emailAddress,
                   //textCapitalization: TextCapitalization.words,
@@ -80,8 +86,11 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: userNameController,
+                  names: "Change your Username",
                   name: 'Change your Username',
                   inputType: TextInputType.emailAddress,
+                  textCapitalization: TextCapitalization.words,
+
                   //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
@@ -89,15 +98,17 @@ class EditProfile extends StatelessWidget {
                 ),
                 CustomTextfield(
                   controller: passController,
+                  names: "Change Password",
                   name: 'Change Password',
                   inputType: TextInputType.emailAddress,
-                 // textCapitalization: TextCapitalization.words,
+                  // textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
                 ),
                 CustomTextfield(
                   controller: phoneNumberController,
+                  names: "Chane Your Phone Number",
                   name: 'Chane Your Phone Number',
                   inputType: TextInputType.emailAddress,
                   //textCapitalization: TextCapitalization.words,
@@ -107,7 +118,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3BBFC3),
+                    backgroundColor: CustomColor.primaryColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10).w,
