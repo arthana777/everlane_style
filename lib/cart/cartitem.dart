@@ -39,7 +39,7 @@ class _CartItemState extends State<CartItem> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+            padding:  EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

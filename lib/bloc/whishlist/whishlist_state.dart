@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:everlane_style/data/models/whishlistmodel.dart';
 import 'package:everlane_style/domain/entities/product_entity.dart';
 
 import '../../data/models/product_model.dart';
@@ -32,7 +33,7 @@ class WishlistInitial extends WishlistState {}
 class WishlistLoading extends WishlistState {}
 
 class WishlistSuccess extends WishlistState {
-   final List <Product>whishlists;
+   final List <WhislistProduct>whishlists;
   WishlistSuccess( this.whishlists);
 }
 

@@ -120,7 +120,7 @@ class WhishlistDatasource {
 
         final List<WhislistProduct> wishlist = dataList.map((json) =>
             WhislistProduct.fromJson(json)).toList();
-        print("Wishlist: $wishlist");
+        print(wishlist.length);
         return wishlist;
       } else {
         print("Failed with status code: ${response.statusCode}");

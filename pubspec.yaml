@@ -47,6 +47,7 @@ dependencies:
   carousel_slider: ^4.2.1
   shared_preferences: ^2.3.1
   linear_progress_bar: ^1.1.2
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
