@@ -16,15 +16,8 @@ class WhishlistItem extends StatefulWidget {
 }
 
 class _WhishlistItemState extends State<WhishlistItem> {
-  final List<String> item1 = [
-    "1",
-    '2',
-    '3',
-    '4',
-    '5',
 
-  ];
-  String dropedownvalue1 = '1';
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +55,12 @@ class _WhishlistItemState extends State<WhishlistItem> {
                     Text("Apple fifteen pro max",style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.sp)),),
-                    Row(
+                    Text("Apple fifteen pro max",style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 10.sp)),),
+                    SizedBox(height: 20.h,), Row(
                       children: [
+
                         Icon(Icons.currency_rupee),
                         Text("700",style: GoogleFonts.poppins(
                             textStyle: TextStyle(
@@ -71,31 +68,6 @@ class _WhishlistItemState extends State<WhishlistItem> {
                       ],
                     ),
                     SizedBox(height: 5.h,),
-                    Container(
-                      height: 20.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black26),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: DropdownButton(
-                        value: dropedownvalue1,
-                        dropdownColor: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        underline: SizedBox(),
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: item1.map((String item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropedownvalue1 = newValue!;
-                          });
-                        },
-                      ),
-                    ),
 
 
                   ],

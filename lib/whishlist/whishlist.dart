@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/whishlist/whishlist_bloc.dart';
+import '../bloc/whishlist/whishlist_event.dart';
 import '../bloc/whishlist/whishlist_state.dart';
 import '../data/models/product_model.dart';
 import '../domain/entities/product_entity.dart';
@@ -21,56 +22,41 @@ class Whishlist extends StatefulWidget {
 }
 
 class _WhishlistState extends State<Whishlist> {
+  List<dynamic>whishlist = [];
+  @override
+  void initState() {
+    BlocProvider.of<WhishlistBloc>(context).add(RetrieveWhishlist());
+    super.initState();
+  }
+  bool loading=true;
   @override
   Widget build(BuildContext context) {
-    List<dynamic>whishlist = [];
-    print("mkmkmk${whishlist}");
+
     return Scaffold(
         backgroundColor: Color(0xFFEFEFEF),
-        floatingActionButton: FloatingActionButton.extended(
-          elevation: 0,
-          backgroundColor: CustomColor.primaryColor,
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddressScreen()));
-          },
-          label: Container(
-            height: 30.h,
-            width: 150.w,
-            decoration: BoxDecoration(
-              color: CustomColor.primaryColor,
-            ),
-            child: Center(
-              child: Text("Checkout", style: CustomFont().subtitleText),
-            ),
-          ),
-          icon: Icon(
-            Icons.shopping_bag_outlined,
-            size: 20.sp,
-            color: CustomColor.buttonColor,
-          ),
-        ),
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(80),
             child: CustomAppBar(
-              text: 'You Shopping Cart',
+              text: 'You Whishlist',
             )),
         body: MultiBlocListener(
           listeners: [
             BlocListener<WhishlistBloc, WishlistState>(
                 listener: (context, state) {
-              print(state);
+              print("pppppppppp$state");
               if (state is WishlistLoading) {
+                loading=true;
+                setState(() {
+
+                });
                 // Show loading indicator
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) =>
-                      Center(child: CircularProgressIndicator()),
-                );
+
               } else if (state is WishlistSuccess) {
+                loading=false;
                 // Dismiss loading indicator and show success message
                 whishlist = state.whishlists;
+                print(whishlist.length);
+                print("oooooooooooooooo");
                 setState(() {
 
                 });
@@ -88,7 +74,7 @@ class _WhishlistState extends State<Whishlist> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                SizedBox(
+                loading==true?Center(child: CircularProgressIndicator()):SizedBox(
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

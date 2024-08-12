@@ -228,8 +228,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         tappingfun(index);
 
                         context.read<CategoryBloc>().add(
-                              LoadSubCategories(categories[index].id ?? 0),
-                            );
+                          LoadSubCategories(categories[index].id??0),
+                        );
                         context.read<CategoryBloc>().add(
                               LoadBanners(categories[index].id ?? 0),
                             );

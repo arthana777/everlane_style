@@ -5,6 +5,7 @@ import 'package:everlane_style/bloc/whishlist/whishlist_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/datasources/whislist_datasource.dart';
+import '../../data/models/whishlistmodel.dart';
 
 class WhishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   WhishlistBloc() : super(WishlistInitial()) {
@@ -24,15 +25,22 @@ class WhishlistBloc extends Bloc<WishlistEvent, WishlistState> {
         emit(addtoWishlistFailure(e.toString()));
       }
     });
+
+
    on<RetrieveWhishlist>((event, emit) async {
+     List<WhislistProduct> list=[];
      emit(WishlistLoading());
+     print("mnbvcxx");
      try {
        final result = await wishlistdatasource.getWhishlist();
-           print("resultttt${result}");
-           if(result=="success"){
-             emit(WishlistSuccess(result));
+
+       list=result;
+       print("QQQQQQQQQQQ${list.length}");
+           if(list.isNotEmpty){
+             emit(WishlistSuccess(list));
            }
      } catch (e) {
+       print("@@@@@@@@@@@@@@@@@@");
        emit(WishlistFailure());
      }
    });
