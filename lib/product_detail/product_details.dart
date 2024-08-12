@@ -1,21 +1,45 @@
 
+import 'package:everlane_style/checkout/address_creation.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../widgets/customcolor.dart';
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 15.h,
-        surfaceTintColor: Colors.white,
+      floatingActionButton: FloatingActionButton.extended(
+        elevation: 0,
+        backgroundColor: CustomColor.primaryColor,
+        onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddressScreen(),
+          )
+        );
+        },
+        label: Container(
+          height: 30.h,
+          width: 150.w,
+          decoration: BoxDecoration(
+            color: CustomColor.primaryColor,
+          ),
+          child: Center(
+            child: Text("Proceed to Buy", style: CustomFont().buttontext),
+          ),
+        ),
+        icon: Icon(
+          Icons.shopping_bag_outlined,
+          size: 20.sp,
+          color: Colors.white,
+        ),
       ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(50),
+          child: CustomAppBar(
+         )),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
@@ -110,7 +134,12 @@ class ProductDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Dress title",style: CustomFont().subtitleText,),
-                    Text("${600}",style: CustomFont().subtitleText,),
+                    Row(
+                      children: [
+                        Icon(Icons.currency_rupee),
+                        Text("${600}",style: CustomFont().subtitleText,),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -147,7 +176,9 @@ class ProductDetails extends StatelessWidget {
               SizedBox(
                 height: 50.h,
                   width: 550.w,
-                  child: Text("dfhjaskdaslcm ckvmeiocj dnkdnsv m kmf lfkc,mcv kfmn fhjaskdaslcm ckvmeiocj dnkdnsv m kmf lfkc,mcv k "))
+                  child: Text("dfhjaskdaslcm ckvmeiocj dnkdnsv m kmf lfkc,mcv kfmn fhjaskdaslcm ckvmeiocj dnkdnsv m kmf lfkc,mcv k "),
+              ),
+
 
           
             ],

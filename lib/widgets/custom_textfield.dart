@@ -1,27 +1,33 @@
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class CustomTextfield extends StatelessWidget {
+class CustomTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String name;
+
   final String names;
-  // final IconData prefixIcon;
+  final GestureDetector? Icon;
   final bool obscureText;
   final TextCapitalization textCapitalization;
   final TextInputType inputType;
 
-  const CustomTextfield({
+  CustomTextfield({
     Key? key,
+    this.Icon,
     required this.controller,
     required this.name,
-    required this.names, // required this.prefixIcon,
+    required this.names,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
   }) : super(key: key);
 
+  @override
+  State<CustomTextfield> createState() => _CustomTextfieldState();
+}
+
+class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -43,26 +49,29 @@ class CustomTextfield extends StatelessWidget {
           ),
         ),
         margin: const EdgeInsets.only(),
-        child: TextField(
+        child: TextFormField(
           enabled: true,
-          controller: controller,
-          textCapitalization: textCapitalization,
+          controller: widget.controller,
+          textCapitalization: widget.textCapitalization,
           maxLength: 32,
           maxLines: 1,
-          obscureText: obscureText,
-          keyboardType: inputType,
+          obscureText: widget.obscureText,
+          keyboardType: widget.inputType,
+
           // textAlign: TextAlign.center,
-          style: CustomFont().subtitleText,
+          style: TextStyle(
+              color: widget.obscureText ? Colors.black : Colors.black),
 
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(left: 10, top: 4).r,
             border: InputBorder.none,
-            labelText: names,
-            labelStyle: CustomFont().subtitleText,
-            hintText: name,
+            labelText: widget.names,
+            labelStyle: CustomFont().hintText,
+            fillColor: Colors.red,
+            hintText: widget.name,
+            suffixIcon: widget.Icon,
             counterText: '',
-            hintStyle: GoogleFonts.quicksand(
-                color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+            hintStyle: CustomFont().hintText,
           ),
         ),
       ),

@@ -89,6 +89,7 @@ class EditProfile extends StatelessWidget {
                   name: 'Change your Username',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
+                  
                 ),
                 SizedBox(
                   height: 5.h,

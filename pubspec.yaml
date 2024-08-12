@@ -43,6 +43,9 @@ dependencies:
   equatable: ^2.0.5
   http: ^1.2.2
   flutter_bloc: ^8.1.6
+  shimmer: ^3.0.0
+  flutter_pw_validator: ^1.6.0
+
 
 dev_dependencies:
   flutter_test:
@@ -75,8 +78,14 @@ flutter:
     - asset/images/1.jpg
     - asset/images/2.jpg
     - asset/images/3.jpg
-    - asset/images/tessa.jpg
+    - asset/images/images (2).jpg
     - asset/images/hr pst.jpg
+    - asset/images/images (1).jpg
+    - asset/images/bnr1.jpg
+    - asset/images/height1.jpg
+    - asset/images/skin1.jpg
+    - asset/images/weather.jpg
+    - asset/images/drsstype.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

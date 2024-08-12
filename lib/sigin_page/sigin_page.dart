@@ -1,13 +1,13 @@
-
-import 'package:everlane_style/on_board/onboard1.dart';
+import 'package:everlane_style/on_board/onboard2.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SiginPage extends StatelessWidget {
   SiginPage({super.key});
-  final nameController = TextEditingController();
+
   final emailController = TextEditingController();
   final passController = TextEditingController();
 
@@ -30,13 +30,11 @@ class SiginPage extends StatelessWidget {
             child: Container(
               height: double.infinity.h,
               width: double.infinity.w,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))
-                      .r
-                      .r),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
                 child: SingleChildScrollView(
@@ -47,28 +45,30 @@ class SiginPage extends StatelessWidget {
                       CustomTextfield(
                         controller: emailController,
                         names: "Enter Your Username",
-                        name: 'Enter Your Username',
+                        name: '',
                         inputType: TextInputType.emailAddress,
                         textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 10.h,
                       ),
                       CustomTextfield(
-                        controller: nameController,
+                        controller: passController,
                         names: "Enter Your Password",
-                        name: 'Enter Your Password',
+                        name: "",
                         inputType: TextInputType.text,
                         textCapitalization: TextCapitalization.words,
+                        
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 10.h,
                       ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Onboard1()),
+                            MaterialPageRoute(
+                                builder: (context) => const Onboard2()),
                           );
                         },
                         child: Center(
@@ -83,7 +83,7 @@ class SiginPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Onboard1(),
+                                  builder: (context) => const Onboard2(),
                                 ),
                               );
                             },

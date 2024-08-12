@@ -4,7 +4,7 @@ class CategoryEntity extends Equatable {
   final String? name;
   final int? id;
   final int? category;
-  final String? image;// `final` keyword for immutability
+  final String? image;
 
   CategoryEntity( { this.name,  this.id,  this.image,this.category, });
 

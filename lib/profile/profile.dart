@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           "Profile",
-          style: CustomFont().appBarText,
+          style: CustomFont().appbarText,
         ),
       ),
       body: Center(
@@ -28,7 +28,7 @@ class Profile extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: const AssetImage(
-                    "asset/images/tessa.jpg",
+                    "asset/images/images (2).jpg",
                   ),
                   backgroundColor: Colors.white,
                   maxRadius: 60.r,
@@ -37,7 +37,7 @@ class Profile extends StatelessWidget {
                   height: 10.h,
                 ),
                 Text(
-                  "Tessa Young",
+                  "user",
                   style: CustomFont().titleText,
                 ),
                 SizedBox(

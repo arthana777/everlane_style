@@ -8,23 +8,19 @@ class CustomFont {
   CustomFont();
   final TextStyle appbarText = GoogleFonts.questrial(
       textStyle: TextStyle(
-          color: Colors.black, fontSize: 25.sp, fontWeight: FontWeight.w600));
+          color: Colors.black, fontSize: 26.sp, fontWeight: FontWeight.w600));
   final TextStyle bodyText = GoogleFonts.questrial(
-      textStyle: TextStyle(color: Colors.black, fontSize: 16.sp));
+      textStyle: TextStyle(color: Colors.black, fontSize: 12.sp));
   final TextStyle subtitleText = GoogleFonts.questrial(
       textStyle: TextStyle(
     color: Colors.black,
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
   ));
   final TextStyle buttontext = GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w500));
-  final TextStyle appBarText = GoogleFonts.poppins(
-      textStyle: TextStyle(
-          color: Colors.black, fontWeight: FontWeight.w400, fontSize: 25.sp));
-  final TextStyle hintText =
-      GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.white));
+          color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w600));
+  final TextStyle hintText = GoogleFonts.poppins(textStyle: const TextStyle());
   final TextStyle titleText = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.sp));
@@ -33,12 +29,6 @@ class CustomFont {
   final TextStyle labeltext = GoogleFonts.questrial(
       textStyle: TextStyle(
           color: Colors.black, fontSize: 15.sp, fontWeight: FontWeight.w600));
-}
-
-class CustomColor {
-  CustomColor();
-  static final Color iconColor = Colors.black;
-  static final Color buttonColor = Colors.black;
 }
 
 class CustomSize {

@@ -1,29 +1,31 @@
-
-import 'package:everlane_style/categories/category_bloc.dart';
+import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
 import 'package:everlane_style/first_page/first_page.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
+import 'package:everlane_style/on_board/question_bloc/bloc/question_bloc.dart';
+import 'package:everlane_style/on_board/question_bloc/bloc/question_event.dart';
+import 'package:everlane_style/on_board/questionnaire_service/qst_service.dart';
+import 'package:everlane_style/signup_page/signup_repo/signuprepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'bloc/category_bloc.dart';
+
 void main() {
-  runApp(MultiProvider(
+  runApp(
+    MultiProvider(
       providers: [
-      
-         ChangeNotifierProvider(create:(_)=> NavigationProvider()),
-         
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
       ],
       child: const MyApp(),
     ),
   );
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
- 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -31,8 +33,15 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-return MultiProvider(
+          return MultiProvider(
             providers: [
+              BlocProvider(
+                create: (context) => RegistrationBloc(SignupRepository()),
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    QuestionBloc(QstService())..add(FetchQuestionnaire()),
+              ),
               BlocProvider(
                 create: (BuildContext context) => CategoryBloc(),
               ),
