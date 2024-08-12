@@ -230,7 +230,6 @@ SharedPrefeService sp=SharedPrefeService();
 
                         context.read<CategoryBloc>().add(
                           LoadSubCategories(categories[index].id??0),
-
                         );
                         context.read<CategoryBloc>().add(
                           LoadBanners(categories[index].id??0),
