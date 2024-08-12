@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomColor {
   CustomColor();
-  static final Color primaryColor = Color(0xFF3BBFC3);
+  static const Color primaryColor = Color(0xFF973d93);
   static final Color iconColor = Colors.black;
   static final Color buttonColor = Colors.black;
 }

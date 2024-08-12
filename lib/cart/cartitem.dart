@@ -1,14 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/custom_textbutton.dart';
 import '../widgets/customfont.dart';
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
    CartItem({super.key, this.ontap});
 
    final VoidCallback? ontap;
+
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+   final List<String> item1 = [
+     "1",
+     '2',
+     '3',
+     '4',
+     '5',
+
+   ];
+   String dropedownvalue1 = '1';
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +59,41 @@ class CartItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Apple fifteen pro max",style: CustomFont().titleText,),
-
+                    Text("Apple fifteen pro max",style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.sp)),),
                     Row(
                       children: [
                         Icon(Icons.currency_rupee),
-                        Text("700",style: CustomFont().subtitleText,),
+                        Text("700",style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.sp)),),
                       ],
                     ),
+                    SizedBox(height: 5.h,),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10,),
+                      height: 20.h,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black26),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Row(
-                        children: [
-                          Text("1",style: CustomFont().bodyText,),
-                          Icon(Icons.arrow_drop_down)
-                        ],
+                      child: DropdownButton(
+                        value: dropedownvalue1,
+                        dropdownColor: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                       underline: SizedBox(),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: item1.map((String item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(item),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropedownvalue1 = newValue!;
+                          });
+                        },
                       ),
                     ),
 

@@ -13,4 +13,18 @@ class ProductUsecases {
     final product = await productRepo.getProductFromDataSource();
     return product;
   }
+  Future<List<ProductEntity>> getSeasonsfromDatasource(String seasons) async {
+    final season = await productRepo.getSeasonsfromDatasource(seasons);
+    return season;
+  }
+  Future<List<ProductEntity>> getfiltercategoryDatasource(int subcategory) async {
+    final filtercategories = await productRepo.getfiltercategoryDatasource(subcategory);
+    return filtercategories;
+  }
+
+
+  Future<List<ProductEntity>> getDetailsProductDatasource(int id) async {
+    final productdetails = await productRepo.getDetailsProductDatasource(id);
+    return productdetails;
+  }
 }

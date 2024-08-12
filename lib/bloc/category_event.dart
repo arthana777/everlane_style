@@ -15,3 +15,9 @@ class LoadSubCategories extends CategoryEvent {
   LoadSubCategories(this.id);
 
 }
+
+class LoadBanners extends CategoryEvent{
+  final int id;
+  LoadBanners(this.id);
+
+}
