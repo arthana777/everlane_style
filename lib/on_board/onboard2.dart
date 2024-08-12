@@ -1,3 +1,4 @@
+import 'package:everlane_style/btm_navigation/btm_navigation.dart';
 import 'package:everlane_style/on_board/question%20model/question%20model.dart';
 import 'package:everlane_style/on_board/questionnaire_service/qst_service.dart';
 import 'package:everlane_style/widgets/customfont.dart';
@@ -16,9 +17,9 @@ class _Onboard2State extends State<Onboard2> {
   String dropdownValue2 = 'dark';
   String dropdownValue3 = 'Summer';
   String dropdownValue4 = "Casual";
-  String dropdownValue5 = "M";
+  String dropdownValue5 = "Male";
 
-  final List<String> item5 = ["M", "F"];
+  final List<String> item5 = ["Male", "Female"];
   final List<String> item1 = ["Short", 'Medium', 'High'];
   final List<String> item2 = ["dark", "black", "White"];
   final List<String> item3 = ['Summer', 'Winter', 'Monsoon'];
@@ -59,6 +60,11 @@ class _Onboard2State extends State<Onboard2> {
 
     try {
       await qstService.updateQuestionnaire(data);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BtmNavigation(),
+          ));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Data updated successfully!')),
       );

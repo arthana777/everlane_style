@@ -1,5 +1,6 @@
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,7 @@ class EditProfile extends StatelessWidget {
                   names: "Change Your Firstname",
                   name: 'Change Your Firstname',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(height: 5.h),
                 CustomTextfield(
@@ -68,7 +69,7 @@ class EditProfile extends StatelessWidget {
                   names: "Change Second name",
                   name: 'Change Second name',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -78,7 +79,7 @@ class EditProfile extends StatelessWidget {
                   names: "Change your Email",
                   name: 'Change your Email',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -89,7 +90,8 @@ class EditProfile extends StatelessWidget {
                   name: 'Change your Username',
                   inputType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.words,
-                  
+
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -99,7 +101,7 @@ class EditProfile extends StatelessWidget {
                   names: "Change Password",
                   name: 'Change Password',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  // textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -109,14 +111,14 @@ class EditProfile extends StatelessWidget {
                   names: "Chane Your Phone Number",
                   name: 'Chane Your Phone Number',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3BBFC3),
+                    backgroundColor: CustomColor.primaryColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10).w,

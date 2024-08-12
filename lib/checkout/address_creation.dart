@@ -1,10 +1,11 @@
 import 'package:everlane_style/cart/cartscreen.dart';
+import 'package:everlane_style/checkout/payment.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import '../widgets/customcolor.dart';
 import '../widgets/cutsofield_address.dart';
@@ -20,7 +21,7 @@ class AddressScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen() ,
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen() ,
           )
           );
         },

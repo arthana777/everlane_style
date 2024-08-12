@@ -1,5 +1,6 @@
 import 'package:everlane_style/profile/edit_profile.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:everlane_style/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEF),
+      backgroundColor: Color(0xFFF7F7F7),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
@@ -49,8 +50,8 @@ class Profile extends StatelessWidget {
                   children: [
                     Card(
                       child: Container(
-                        height: 90.h,
-                        width: 90.w,
+                        height: 110.h,
+                        width: 110.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -58,15 +59,15 @@ class Profile extends StatelessWidget {
                             onPressed: () {},
                             icon: const Icon(
                               Icons.shopify_rounded,
-                              color: Color(0xFF3BBFC3),
+                              color: CustomColor.primaryColor,
                               size: 30,
                             )),
                       ),
                     ),
                     Card(
                       child: Container(
-                        height: 90.h,
-                        width: 90.w,
+                        height: 110.h,
+                        width: 110.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -74,15 +75,15 @@ class Profile extends StatelessWidget {
                             onPressed: () {},
                             icon: const Icon(
                               Icons.favorite,
-                              color: Color(0xFF3BBFC3),
+                              color: CustomColor.primaryColor,
                               size: 30,
                             )),
                       ),
                     ),
                     Card(
                       child: Container(
-                        height: 90.h,
-                        width: 90.w,
+                        height: 110.h,
+                        width: 110.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -90,7 +91,7 @@ class Profile extends StatelessWidget {
                           onPressed: () {},
                           icon: const Icon(
                             Icons.attach_money_rounded,
-                            color: Color(0xFF3BBFC3),
+                            color: CustomColor.primaryColor,
                             size: 30,
                           ),
                         ),
@@ -132,7 +133,7 @@ class Profile extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3BBFC3),
+                    backgroundColor: CustomColor.primaryColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10).w,

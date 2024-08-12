@@ -1,3 +1,4 @@
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,14 +37,17 @@ class ProfileTextfield extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, color: const Color(0xFF3BBFC3)),
+                Icon(
+                  icon,
+                  color: CustomColor.primaryColor,
+                ),
                 SizedBox(width: 16.w),
                 Text(title, style: CustomFont().subtitleText),
               ],
             ),
             const Icon(
               Icons.arrow_forward_ios,
-              color: Color(0xFF3BBFC3),
+              color: CustomColor.primaryColor,
             ),
           ],
         ),

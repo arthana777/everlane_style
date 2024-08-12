@@ -99,7 +99,7 @@ class _SiginupState extends State<Siginup> {
                         names: "firstName",
                         name: 'Enter First Name',
                         inputType: TextInputType.emailAddress,
-                        textCapitalization: TextCapitalization.words,
+                        //textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
                         height: 5.h,
@@ -109,7 +109,7 @@ class _SiginupState extends State<Siginup> {
                         names: "lastName",
                         name: 'Enter Last Name',
                         inputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
+                        //textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
                         height: 5.h,
@@ -119,7 +119,7 @@ class _SiginupState extends State<Siginup> {
                         names: " email",
                         name: 'Enter Your Email',
                         inputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
+                       // textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
                         height: 5.h,

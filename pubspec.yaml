@@ -46,6 +46,9 @@ dependencies:
   shimmer: ^3.0.0
   flutter_pw_validator: ^1.6.0
 
+  carousel_slider: ^4.2.1
+  shared_preferences: ^2.3.1
+  linear_progress_bar: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +89,10 @@ flutter:
     - asset/images/skin1.jpg
     - asset/images/weather.jpg
     - asset/images/drsstype.jpg
+    - asset/images/tessa.jpg
+    - asset/images/th (1).jpg
+    - asset/images/disasterback.jpg
+    - asset/images/th (2).jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

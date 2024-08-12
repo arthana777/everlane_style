@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:everlane_style/on_board/question_bloc/bloc/question_event.dart';
-import 'package:everlane_style/on_board/question_bloc/bloc/question_state.dart';
+import 'package:everlane_style/bloc/question_bloc/bloc/question_event.dart';
+import 'package:everlane_style/bloc/question_bloc/bloc/question_state.dart';
 import 'package:everlane_style/on_board/questionnaire_service/qst_service.dart';
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {

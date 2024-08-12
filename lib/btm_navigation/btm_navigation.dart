@@ -1,7 +1,9 @@
 import 'package:everlane_style/Home/homescreen.dart';
 import 'package:everlane_style/cart/cartitem.dart';
+import 'package:everlane_style/cart/cartscreen.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/profile/profile.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,7 @@ class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
     const HomeScreen(),
     const Profile(),
-    CartItem(),
+    CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class BtmNavigation extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFFF7F7F7),
         showSelectedLabels: false,
         elevation: 1.5,
         currentIndex: currentScreenIndex,
@@ -28,7 +31,7 @@ class BtmNavigation extends StatelessWidget {
               label: '',
               icon: Icon(
                 (currentScreenIndex == 0) ? Icons.home : Icons.home_outlined,
-                color: const Color(0xFF3BBFC3),
+                color: CustomColor.primaryColor,
                 size: 30.sp,
               ),
               backgroundColor: Colors.white),
@@ -36,7 +39,7 @@ class BtmNavigation extends StatelessWidget {
             label: '',
             icon: Icon(
               (currentScreenIndex == 2) ? Icons.person : Icons.person_outline,
-              color: const Color(0xFF3BBFC3),
+              color: CustomColor.primaryColor,
               size: 30.sp,
             ),
           ),
@@ -46,7 +49,7 @@ class BtmNavigation extends StatelessWidget {
               (currentScreenIndex == 3)
                   ? Icons.shopping_cart
                   : Icons.shopping_cart,
-              color: const Color(0xFF3BBFC3),
+              color: CustomColor.primaryColor,
             ),
           ),
         ],

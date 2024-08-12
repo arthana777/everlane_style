@@ -14,7 +14,7 @@ class CustomFont {
   final TextStyle subtitleText = GoogleFonts.questrial(
       textStyle: TextStyle(
     color: Colors.black,
-    fontSize: 16.sp,
+    fontSize: 12.sp,
     fontWeight: FontWeight.bold,
   ));
   final TextStyle buttontext = GoogleFonts.poppins(
