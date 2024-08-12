@@ -23,4 +23,15 @@ class CategoryRepoImplementation implements CategoryRepo {
       rethrow;
     }
   }
+
+
+  @override
+  Future<List<CategoryEntity>> getBannersFromDatasource(int id)async {
+    try {
+      final banners = await remoteDataSource.getBanner(id);
+      return banners.map((model) => CategoryEntity(name: model.name, id: model.id,image: model.image)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

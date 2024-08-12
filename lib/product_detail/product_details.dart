@@ -1,17 +1,30 @@
 
+import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../domain/entities/product_entity.dart';
 import '../widgets/customcolor.dart';
-class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+class ProductDetails extends StatefulWidget {
+   ProductDetails({super.key, this.productdetails});
+  final ProductEntity? productdetails;
+
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+//List<ProductEntity>productdetails=[];
 
   @override
   Widget build(BuildContext context) {
+    final productdetails = widget.productdetails;
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         elevation: 0,
@@ -40,7 +53,27 @@ class ProductDetails extends StatelessWidget {
       appBar: PreferredSize(preferredSize: Size.fromHeight(50),
           child: CustomAppBar(
          )),
-      body: Padding(
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ProductBloc, ProductState>(
+            listener: (context, state) {
+              print(state);
+              if (state is DetailsLoaded) {
+
+                setState(() {
+
+                });
+              }
+              else {
+                Center(
+                  child: Text("Unknown state"),
+                );
+              }
+            },
+          )
+        ],
+    child:
+      Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -56,9 +89,9 @@ class ProductDetails extends StatelessWidget {
                       borderRadius: BorderRadius.only(topRight: Radius.circular(30.r),topLeft: Radius.circular(30.r),
                       ),
                       image: DecorationImage(
-                        image: NetworkImage("https://plus.unsplash.com/premium_photo-1668485966810-cbd0f685f58f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbiUyMGdpcmx8ZW58MHx8MHx8fDA%3D"),
+                        image: NetworkImage(productdetails?.image??"https://plus.unsplash.com/premium_photo-1668485966810-cbd0f685f58f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbiUyMGdpcmx8ZW58MHx8MHx8fDA%3D"),
                         fit: BoxFit.cover,
-                      )
+                      ),
                     ),
                   ),
                   Positioned(
@@ -89,43 +122,6 @@ class ProductDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.r)
                           ),
                           child: Icon(Icons.shopping_bag_outlined,size: 20.sp,))),
-                  // Positioned(
-                  //   top: 70.h,
-                  //   left: 220.w,
-                  //   right: 30.w,
-                  //   child: Container(
-                  //     height: 400.h,
-                  //     width: 100.w,
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.white,
-                  //     ),
-                  //     child: SizedBox(
-                  //       height: 400.h,
-                  //       child: ListView.builder(
-                  //         shrinkWrap: true,
-                  //         scrollDirection: Axis.vertical,
-                  //         itemCount: 4,
-                  //           itemBuilder: (context,index){
-                  //             return Padding(
-                  //               padding: const EdgeInsets.all(8.0),
-                  //               child: Container(
-                  //                 height: 100.h,
-                  //                 width: 50.w,
-                  //                 decoration: BoxDecoration(
-                  //                   color: Colors.black,
-                  //                   image: DecorationImage(
-                  //                       image: NetworkImage("https://plus.unsplash.com/premium_photo-1667520043080-53dcca77e2aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fDB8fHww"),
-                  //                   fit: BoxFit.cover,
-                  //                   ),
-                  //                   borderRadius: BorderRadius.circular(20.r),
-                  //                 ),
-                  //               ),
-                  //             );
-                  //           }),
-                  //     ),
-                  //   ),
-                  // ),
-
                 ],
               ),
               Padding(
@@ -133,11 +129,11 @@ class ProductDetails extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Dress title",style: CustomFont().subtitleText,),
+                    Text(productdetails?.name??'',style: CustomFont().subtitleText,),
                     Row(
                       children: [
                         Icon(Icons.currency_rupee),
-                        Text("${600}",style: CustomFont().subtitleText,),
+                        Text(productdetails?.price??'',style: CustomFont().subtitleText,),
                       ],
                     ),
                   ],
@@ -171,7 +167,7 @@ class ProductDetails extends StatelessWidget {
 
               SizedBox(height: 20.h,),
 
-              Text("Description",style: CustomFont().subtitleText,),
+              Text(productdetails?.description??'',style: CustomFont().subtitleText,),
               SizedBox(height: 10.h,),
               SizedBox(
                 height: 50.h,
@@ -184,6 +180,7 @@ class ProductDetails extends StatelessWidget {
             ],
           ),
         ),
+      )
       )
     );
   }

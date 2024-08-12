@@ -1,0 +1,43 @@
+import 'package:equatable/equatable.dart';
+import 'package:everlane_style/domain/entities/product_entity.dart';
+
+import '../../data/models/product_model.dart';
+
+abstract class WishlistState extends Equatable {
+  const WishlistState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class addtoWishlistInitial extends WishlistState {}
+
+class addtoWishlistLoading extends WishlistState {}
+
+class addtoWishlistSuccess extends WishlistState {
+  // late final List whishlists;
+  // addtoWishlistSuccess( this.whishlists);
+}
+
+class addtoWishlistFailure extends WishlistState {
+  final String error;
+  addtoWishlistFailure(this.error);
+  @override
+  List<Object> get props => [];
+}
+
+
+class WishlistInitial extends WishlistState {}
+
+class WishlistLoading extends WishlistState {}
+
+class WishlistSuccess extends WishlistState {
+   final List <Product>whishlists;
+  WishlistSuccess( this.whishlists);
+}
+
+class WishlistFailure extends WishlistState {
+
+  @override
+  List<Object> get props => [];
+}

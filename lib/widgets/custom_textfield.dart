@@ -4,20 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextfield extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String name;
   // final IconData prefixIcon;
   final bool obscureText;
-  final TextCapitalization textCapitalization;
+  //final TextCapitalization textCapitalization;
   final TextInputType inputType;
 
   const CustomTextfield({
     Key? key,
-    required this.controller,
+     this.controller,
     required this.name,
     // required this.prefixIcon,
     this.obscureText = false,
-    this.textCapitalization = TextCapitalization.none,
+   // this.textCapitalization = TextCapitalization.none,
     required this.inputType,
   }) : super(key: key);
 
@@ -45,18 +45,19 @@ class CustomTextfield extends StatelessWidget {
         child: TextField(
           enabled: true,
           controller: controller,
-          textCapitalization: textCapitalization,
+          //textCapitalization: textCapitalization,
           maxLength: 32,
           maxLines: 1,
           obscureText: obscureText,
           keyboardType: inputType,
           // textAlign: TextAlign.center,
-          style: CustomFont().buttontext,
+          //style: CustomFont().buttontext,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(left: 10, top: 4).r,
             border: InputBorder.none,
+
             hintText: name,
-            counterText: '',
+            //counterText: '',
             hintStyle: GoogleFonts.quicksand(
                 color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
           ),

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
-    const HomeScreen(),
+     HomeScreen(),
     Profile(),
     // const Profile(),
   ];

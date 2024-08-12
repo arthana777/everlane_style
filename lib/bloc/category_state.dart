@@ -21,6 +21,7 @@ class CategoryError extends CategoryState {
   final String message;
   const CategoryError(this.message);
 }
+//subcategories
 class SubCategoryInitial extends CategoryState {}
 
 class SubCategoryLoading extends CategoryState {
@@ -36,4 +37,16 @@ class SubCategoryLoaded extends CategoryState {
 class SubCategoryError extends CategoryState {
   final String message;
   const SubCategoryError(this.message);
+}
+
+class BannerLoading extends CategoryState{}
+
+class BannerLoaded extends CategoryState{
+  final List<CategoryEntity> banners;
+  const BannerLoaded( this.banners);
+}
+
+class BannerError extends CategoryState{
+  final String message;
+  const BannerError(this.message);
 }

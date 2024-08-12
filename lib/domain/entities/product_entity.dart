@@ -1,30 +1,46 @@
 import 'package:equatable/equatable.dart';
 
-class ProductEntity extends Equatable{
-  @override
+import '../../data/models/product_model.dart';
+
+class ProductEntity extends Equatable {
   final int? id;
-  final String? name;
-  final String? description;
-  final String? price;
-  final int? subcategory;
-  final String? image;
+  final String name;
+  final String description;
+  final String price;
+  final String brand;
+  final int subcategory;
+  final String image;
+  final DateTime createdOn;
+  final bool isDeleted;
   final bool isTrending;
-  final bool summer;
-  final bool winter;
-  final bool rainy;
-  final bool autumn;
-  ProductEntity({this.id,
-      this.name,
-      this.description,
-      this.price,
-      this.subcategory,
-      this.image,
-      required this.isTrending,
-      required this.summer,
-      required this.winter,
-      required this.rainy,
-      required this.autumn});
+  final List<Item> items;
 
-  List<Object?> get props => [name,id,image,description];
+  ProductEntity({
+    this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.brand,
+    required this.subcategory,
+    required this.image,
+    required this.createdOn,
+    required this.isDeleted,
+    required this.isTrending,
+    required this.items,
+  });
 
+  @override
+  List<Object?> get props => [
+    id,
+    name,
+    description,
+    price,
+    brand,
+    subcategory,
+    image,
+    createdOn,
+    isDeleted,
+    isTrending,
+    items,
+  ];
 }

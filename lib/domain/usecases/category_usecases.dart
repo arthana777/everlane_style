@@ -15,5 +15,10 @@ class CategoryUsecases {
     return category;
   }
 
+  Future<List<CategoryEntity>> getBannersFromDatasource(int id) async {
+    final category = await categoryRepo.getBannersFromDatasource(id);
+    return category;
+  }
+
 
 }

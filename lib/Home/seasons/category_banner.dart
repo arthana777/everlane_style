@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryBanner extends StatelessWidget {
-  const CategoryBanner({super.key});
+   CategoryBanner({super.key, this.image, this.title});
+  final String? image;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CategoryBanner extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                  image: NetworkImage("https://images.unsplash.com/photo-1628573543788-0c745a2b93e8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                  image: NetworkImage(image??""),
               fit: BoxFit.cover,
               )
             ),
@@ -35,12 +37,11 @@ class CategoryBanner extends StatelessWidget {
               //crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Text("Summer",style: CustomFont().appbarText,),
+              Text(title??"",style: CustomFont().appbarText,),
 
             ],),
           ),
-        )
-
+        ),
       ],
     );
   }

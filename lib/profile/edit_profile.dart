@@ -57,14 +57,14 @@ class EditProfile extends StatelessWidget {
                   controller: nameController,
                   name: 'Change Your Firstname',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(height: 5.h),
                 CustomTextfield(
                   controller: lastNameController,
                   name: 'Change Second name',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -73,7 +73,7 @@ class EditProfile extends StatelessWidget {
                   controller: emailController,
                   name: 'Change your Email',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -82,7 +82,7 @@ class EditProfile extends StatelessWidget {
                   controller: userNameController,
                   name: 'Change your Username',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -91,7 +91,7 @@ class EditProfile extends StatelessWidget {
                   controller: passController,
                   name: 'Change Password',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                 // textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 5.h,
@@ -100,7 +100,7 @@ class EditProfile extends StatelessWidget {
                   controller: phoneNumberController,
                   name: 'Chane Your Phone Number',
                   inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+                  //textCapitalization: TextCapitalization.words,
                 ),
                 SizedBox(
                   height: 15.h,

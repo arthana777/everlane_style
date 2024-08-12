@@ -29,5 +29,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
          emit(SubCategoryError(e.toString()));
        }
      });
+     on<LoadBanners>((event,emit)async{
+       emit(BannerLoading());
+       try {
+         final banners = await categoryUsecases.getBannersFromDatasource(event.id);
+         emit(BannerLoaded(banners));
+       } catch (e) {
+         emit(BannerError(e.toString()));
+       }
+     });
   }
 }
