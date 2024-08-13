@@ -6,6 +6,7 @@ import 'package:everlane_style/domain/entities/product_entity.dart';
 import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:everlane_style/sharedprefrence/sharedprefs_login.dart';
 import 'package:everlane_style/whishlist/whishlist.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -91,57 +92,31 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          automaticallyImplyLeading: false,
-          surfaceTintColor: Colors.white,
-          toolbarHeight: 70.h,
-          title: Text("EverlaneStyle", style: CustomFont().appbarText),
-          actions: [
+        appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+          text: "Everlanestyle",
+          action: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.search_rounded,
-                    size: 30.sp,
-                  ),
-                  SizedBox(
-                    width: 30.w,
-                  ),
                   InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Whishlist(),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.shopping_bag_outlined,
-                        size: 30.sp,
-                      )),
+                    onTap: (){},
+                      child: Icon(Icons.search_rounded,size: 30.sp,)),
+                  SizedBox(width: 10.w,),
                   InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DonationHomeScreen(),
-                          ),
-                        );
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => DonationHomeScreen(),
+                        ),);
                       },
-                      child: Icon(
-                        Icons.ios_share_rounded,
-                        size: 30.sp,
-                      )),
+                      child: Icon(Icons.drag_handle_outlined,size: 25.sp,))
                 ],
               ),
-            ),
+            )
+
           ],
-        ),
+        )),
         body: MultiBlocListener(
           listeners: [
             BlocListener<CategoryBloc, CategoryState>(
@@ -333,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                            color: Colors.amber,
+                            color: Colors.black26,
                             image: DecorationImage(
                                 image: NetworkImage(i.image ?? ''),
                                 fit: BoxFit.cover)),

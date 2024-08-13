@@ -1,25 +1,29 @@
 import 'package:everlane_style/profile/edit_profile.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
+import 'package:everlane_style/whishlist/whishlist.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:everlane_style/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> removeToken() async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('auth_token');
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFF7F7F7),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(
-          "Profile",
-          style: CustomFont().appbarText,
-        ),
-      ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+        text: "Profile",
+      )),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10).r,
@@ -72,7 +76,14 @@ class Profile extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Whishlist(),
+                                ),
+                              );
+                            },
                             icon: const Icon(
                               Icons.favorite,
                               color: CustomColor.primaryColor,
@@ -117,8 +128,8 @@ class Profile extends StatelessWidget {
                   onTap: () {},
                 ),
                 ProfileTextfield(
-                  icon: Icons.assignment_return,
-                  title: "Return & Exchanges",
+                  icon: Icons.delete_sweep,
+                  title: "Delete Account",
                   onTap: () {},
                 ),
                 ProfileTextfield(
@@ -140,6 +151,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    removeToken();
                     Navigator.push(
                       context,
                       MaterialPageRoute(

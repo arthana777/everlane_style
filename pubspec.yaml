@@ -50,6 +50,7 @@ dependencies:
   shared_preferences: ^2.3.1
   linear_progress_bar: ^1.1.2
   image_picker: ^1.1.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -74,25 +75,21 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asset/icons/applogo.png"
+  min_sdk_android: 21
   # To add assets to your application, add an assets section, like this:
   assets:
-    - asset/images/womencover.jpg
-    - asset/images/mencover.jpg
+    - asset/icons/applogo.png
+    - asset/images/applogo.png
     - asset/images/login.jpg
-    - asset/images/1.jpg
-    - asset/images/2.jpg
-    - asset/images/3.jpg
     - asset/images/images (2).jpg
     - asset/images/hr pst.jpg
     - asset/images/images (1).jpg
     - asset/images/bnr1.jpg
-    - asset/images/height1.jpg
-    - asset/images/skin1.jpg
-    - asset/images/weather.jpg
-    - asset/images/drsstype.jpg
-    - asset/images/tessa.jpg
-    - asset/images/th (1).jpg
-    - asset/images/disasterback.jpg
     - asset/images/th (2).jpg
   #   - images/a_dot_ham.jpeg
 
