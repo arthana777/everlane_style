@@ -28,13 +28,13 @@ class CartScreen extends StatelessWidget {
             color: CustomColor.primaryColor,
           ),
           child: Center(
-            child: Text("Checkout", style: CustomFont().subtitleText),
+            child: Text("Checkout", style: CustomFont().buttontext),
           ),
         ),
         icon: Icon(
-          Icons.shopping_bag_outlined,
+          Icons.shopping_cart_outlined,
           size: 20.sp,
-          color: CustomColor.buttonColor,
+          color: CustomColor.buttoniconColor,
         ),
       ),
       appBar: PreferredSize(preferredSize: Size.fromHeight(80), child: CustomAppBar(text: 'You Shopping Cart',)),

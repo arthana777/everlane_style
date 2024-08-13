@@ -10,12 +10,7 @@ abstract class WishlistEvent extends Equatable {
 
 class AddToWishlist extends WishlistEvent {
   final int productId;
-  // final String token;
-
   const AddToWishlist(this.productId);
-
-
-
 
   @override
   List<Object> get props => [productId];
@@ -23,6 +18,15 @@ class AddToWishlist extends WishlistEvent {
 
 
 class RetrieveWhishlist extends WishlistEvent{
+  @override
+  List<Object> get props => [];
+}
+
+class Removefromwishlist extends WishlistEvent{
+
+  final int productId;
+  Removefromwishlist(this.productId);
+
   @override
   List<Object> get props => [];
 }

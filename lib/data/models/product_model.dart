@@ -3,6 +3,7 @@ class Product {
   String name;
   String description;
   String price;
+  //final int product;
   String brand;
   int subcategory;
   String image;
@@ -21,6 +22,7 @@ class Product {
     required this.brand,
     required this.subcategory,
     required this.image,
+    //required this.product,
     required this.createdOn,
     required this.isDeleted,
     required this.isTrending,
@@ -35,6 +37,7 @@ class Product {
       description: json['description'] ?? '',
       price: json['price'] ?? '',
       brand: json['brand'] ?? '',
+      //product: json['product']??'',
       subcategory: json['subcategory'] ?? 0,
       image: json['image'] ?? '',
       createdOn: DateTime.tryParse(json['created_on'] ?? '') ?? DateTime.now(),
@@ -56,6 +59,7 @@ class Product {
       'brand': brand,
       'subcategory': subcategory,
       'image': image,
+
       'created_on': createdOn.toIso8601String(),
       'is_deleted': isDeleted,
       'is_trending': isTrending,

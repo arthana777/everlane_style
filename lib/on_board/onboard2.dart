@@ -37,8 +37,8 @@ class _Onboard2State extends State<Onboard2> {
     try {
       QuestionModel questionModel = await qstService.fetchQuestionnaire();
       setState(() {
-        dropdownValue1 = questionModel.data?.height ?? 'Height';
-        dropdownValue2 = questionModel.data?.skin_color ?? 'Black';
+        dropdownValue1 = questionModel.data?.height ?? 'Short';
+        dropdownValue2 = questionModel.data?.skin_color ?? 'dark';
         dropdownValue3 = questionModel.data?.preferred_season ?? 'Summer';
         dropdownValue4 = questionModel.data?.usage_of_dress ?? "Casual";
         dropdownValue5 = questionModel.data?.gender ?? "Male";

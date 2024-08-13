@@ -1,7 +1,7 @@
-import 'dart:math';
 
 import 'package:everlane_style/bloc/whishlist/whishlist_event.dart';
 import 'package:everlane_style/bloc/whishlist/whishlist_state.dart';
+import 'package:everlane_style/data/models/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/datasources/whislist_datasource.dart';
@@ -37,28 +37,28 @@ class WhishlistBloc extends Bloc<WishlistEvent, WishlistState> {
        list=result;
        print("QQQQQQQQQQQ${list.length}");
            if(list.isNotEmpty){
-             emit(WishlistSuccess(list));
+             emit(WishlistSuccess(result));
            }
      } catch (e) {
        print("@@@@@@@@@@@@@@@@@@");
-       emit(WishlistFailure());
+       emit(WishlistFailure(e.toString()));
      }
    });
-   // on<RetrieveWhishlist>((event, emit) async {
-   //   emit(WishlistLoading());
-   //   try {
-   //     final result = await wishlistdatasource.getWhishlist();
-   //     print("resultttt${result}");
-   //     if(result=="success"){
-   //       emit(WishlistSuccess(result));
-   //     }
-   //     else{
-   //       emit(WishlistFailure());
-   //     }
-   //   } catch (e) {
-   //     emit(WishlistFailure());
-   //   }
-   // });
 
+   on<Removefromwishlist>((event, emit) async {
+     emit(RemoviewishlistLoading());
+     try {
+       final deleteditems = await wishlistdatasource.RemoveWishlist(event.productId);
+       print("deleteditems: $deleteditems");
+
+       if (deleteditems == "success") {
+         emit(RemoveWishlistSuccess());  // Simplified success state
+       } else {
+         emit(RemoveWishlistFailure(deleteditems));  // Emitting the failure with the message
+       }
+     } catch (e) {
+       emit(RemoveWishlistFailure(e.toString()));
+     }
+   });
   }
 }

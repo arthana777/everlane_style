@@ -12,6 +12,7 @@ import '../bloc/whishlist/whishlist_bloc.dart';
 import '../bloc/whishlist/whishlist_event.dart';
 import '../bloc/whishlist/whishlist_state.dart';
 import '../data/models/product_model.dart';
+import '../data/models/whishlistmodel.dart';
 import '../domain/entities/product_entity.dart';
 
 class Whishlist extends StatefulWidget {
@@ -22,7 +23,9 @@ class Whishlist extends StatefulWidget {
 }
 
 class _WhishlistState extends State<Whishlist> {
-  List<dynamic>whishlist = [];
+  List<WhislistProduct>whishlist = [];
+
+
   @override
   void initState() {
     BlocProvider.of<WhishlistBloc>(context).add(RetrieveWhishlist());
@@ -37,7 +40,7 @@ class _WhishlistState extends State<Whishlist> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(80),
             child: CustomAppBar(
-              text: 'You Whishlist',
+              text: 'Your Whishlist',
             )),
         body: MultiBlocListener(
           listeners: [
@@ -53,35 +56,50 @@ class _WhishlistState extends State<Whishlist> {
 
               } else if (state is WishlistSuccess) {
                 loading=false;
-                // Dismiss loading indicator and show success message
                 whishlist = state.whishlists;
                 print(whishlist.length);
+                print(whishlist[0]);
                 print("oooooooooooooooo");
                 setState(() {
 
                 });
 
               } else if (state is WishlistFailure) {
-                // Dismiss loading indicator and show error message
-                Navigator.pop(context);
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   SnackBar(content: Text(state.error)),
-                // );
+
+               Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
               }
-            }),
+               if(state is RemoveWishlistSuccess){
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   SnackBar(content: Text('Item deleted successfully')),
+                 );
+              }
+              }),
           ],
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                loading==true?Center(child: CircularProgressIndicator()):SizedBox(
+              loading==true?Center(child: CircularProgressIndicator()):SizedBox(
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: whishlist.length,
                     itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: WhishlistItem(),
+                      child: WhishlistItem(removeonTap: (){
+                        BlocProvider.of<WhishlistBloc>(context)
+                               .add(Removefromwishlist(whishlist[index].product),
+                        );
+                      },
+                        text: whishlist[index].name,
+                        image: whishlist[index].image,
+                        price: whishlist[index].price,
+                        description: whishlist[index].description,
+
+                      ),
                     ),
                   ),
                 ),

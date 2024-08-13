@@ -47,7 +47,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         icon: Icon(
           Icons.shopping_bag_outlined,
           size: 20.sp,
-          color: CustomColor.buttonColor,
+          color: CustomColor.buttoniconColor,
         ),
       ),
       backgroundColor:  Color(0xFFEFEFEF),

@@ -12,17 +12,9 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox(
-        height: double.infinity.h,
-        width: double.infinity.w,
-        child: Image.asset(
-          "asset/images/login.jpg",
-          fit: BoxFit.cover,
-        ),
-      ),
+    return
       Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 500, left: 20, right: 20).r,
@@ -103,7 +95,7 @@ class FirstPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    ]);
+      );
+
   }
 }
