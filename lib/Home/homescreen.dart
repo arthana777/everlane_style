@@ -92,12 +92,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Image.asset(
+              "asset/images/logo1.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
+          leadingWidth: 130,
           backgroundColor: Colors.white,
           elevation: 0.0,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           surfaceTintColor: Colors.white,
           toolbarHeight: 70.h,
-          title: Text("EverlaneStyle", style: CustomFont().appbarText),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -228,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         tappingfun(index);
 
                         context.read<CategoryBloc>().add(
-                          LoadSubCategories(categories[index].id??0),
-                        );
+                              LoadSubCategories(categories[index].id ?? 0),
+                            );
                         context.read<CategoryBloc>().add(
                               LoadBanners(categories[index].id ?? 0),
                             );

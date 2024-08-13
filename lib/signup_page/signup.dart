@@ -5,6 +5,7 @@ import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/signup_page/signup_repo/signuprepository.dart';
 import 'package:everlane_style/signup_page/user_reg_model/userregistration.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,14 +72,14 @@ class _SiginupState extends State<Siginup> {
           height: double.infinity.h,
           width: double.infinity.w,
           child: Image.asset(
-            "asset/images/login.jpg",
+            "asset/images/bg0.jpg",
             fit: BoxFit.cover,
           ),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.only(top: 100).r,
+            padding: const EdgeInsets.only(top: 90).r,
             child: Container(
               height: double.infinity.h,
               width: double.infinity.w,
@@ -119,7 +120,7 @@ class _SiginupState extends State<Siginup> {
                         names: " email",
                         name: 'Enter Your Email',
                         inputType: TextInputType.text,
-                       // textCapitalization: TextCapitalization.words,
+                        // textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
                         height: 5.h,
@@ -204,7 +205,7 @@ class _SiginupState extends State<Siginup> {
                         textCapitalization: TextCapitalization.words,
                       ),
                       SizedBox(
-                        height: 2.h,
+                        height: 10.h,
                       ),
                       BlocConsumer<RegistrationBloc, SignupState>(
                           listener: (context, state) {
@@ -234,31 +235,35 @@ class _SiginupState extends State<Siginup> {
                           return const CircularProgressIndicator();
                         }
                         return Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF3BBFC3),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10).w,
-                              ),
-                            ),
-                            onPressed: () {
-                              BlocProvider.of<RegistrationBloc>(context).add(
-                                RegisterUser(
-                                  Userregistration(
-                                    username: userNameController.text,
-                                    confirmPassword: passController.text,
-                                    email: emailController.text,
-                                    mobile: _mobileController.hashCode,
-                                    password: passController.text,
-                                    firstName: nameController.text,
-                                    lastName: lastNameController.text,
-                                  ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5).r,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                fixedSize: Size(350, 48),
+                                backgroundColor: CustomColor.primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10).w,
                                 ),
-                              );
-                            },
-                            child: Text(
-                              "Confirm",
-                              style: CustomFont().buttontext,
+                              ),
+                              onPressed: () {
+                                BlocProvider.of<RegistrationBloc>(context).add(
+                                  RegisterUser(
+                                    Userregistration(
+                                      username: userNameController.text,
+                                      confirmPassword: passController.text,
+                                      email: emailController.text,
+                                      mobile: _mobileController.hashCode,
+                                      password: passController.text,
+                                      firstName: nameController.text,
+                                      lastName: lastNameController.text,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Confirm",
+                                style: CustomFont().buttontext,
+                              ),
                             ),
                           ),
                         );

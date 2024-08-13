@@ -14,17 +14,18 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFEFEF),
+      backgroundColor: const Color(0xFFEFEFEF),
       floatingActionButton: FloatingActionButton.extended(
         elevation: 0,
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddressScreen()));
         },
         label: Container(
           height: 30.h,
-          width: 150.w,
-          decoration: BoxDecoration(
+          width: 130.w,
+          decoration: const BoxDecoration(
             color: CustomColor.primaryColor,
           ),
           child: Center(
@@ -37,14 +38,18 @@ class CartScreen extends StatelessWidget {
           color: CustomColor.buttonColor,
         ),
       ),
-      appBar: PreferredSize(preferredSize: Size.fromHeight(80), child: CustomAppBar(text: 'You Shopping Cart',)),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: CustomAppBar(
+            text: 'You Shopping Cart',
+          )),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             SizedBox(
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) => Padding(
@@ -83,8 +88,6 @@ class CartScreen extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget _buildRow(BuildContext context, String label, String value) {
     return Row(

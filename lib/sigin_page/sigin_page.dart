@@ -1,15 +1,13 @@
 import 'package:everlane_style/bloc/loginn/loginn_bloc.dart';
 import 'package:everlane_style/on_board/onboard2.dart';
+import 'package:everlane_style/signup_page/signup.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../sharedprefrence/sharedprefs_login.dart';
-import '../widgets/custom_textfield.dart';
-import '../widgets/customfont.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SiginPage extends StatefulWidget {
   SiginPage({super.key});
@@ -30,13 +28,14 @@ class _SiginPageState extends State<SiginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color colorWithOpacity;
     return Stack(
       children: [
         SizedBox(
           height: double.infinity.h,
           width: double.infinity.w,
           child: Image.asset(
-            "asset/images/login.jpg",
+            "asset/images/bg0.jpg",
             fit: BoxFit.cover,
           ),
         ),
@@ -68,9 +67,10 @@ class _SiginPageState extends State<SiginPage> {
               child: Container(
                 height: double.infinity.h,
                 width: double.infinity.w,
-                decoration: const BoxDecoration(
-                  color: Colors.white70,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: colorWithOpacity =
+                      const Color(0xFFF7F7F7).withOpacity(0.7),
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
@@ -98,8 +98,29 @@ class _SiginPageState extends State<SiginPage> {
                           name: 'Enter Your Password',
                           inputType: TextInputType.text,
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Siginup()),
+                                );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red,
+                                    fontSize: 13.sp),
+                              ),
+                            )
+                          ],
+                        ),
                         SizedBox(
-                          height: 15.h,
+                          height: 45.h,
                         ),
                         InkWell(
                           onTap: () {
@@ -110,24 +131,28 @@ class _SiginPageState extends State<SiginPage> {
                             );
                           },
                           child: Center(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomColor.primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10).w,
-                                ),
-                              ),
-                              onPressed: () {
-                                BlocProvider.of<LoginnBloc>(context).add(
-                                  LoginButtonEvent(
-                                    username: _usernameController.text,
-                                    password: _passwordController.text,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5, right: 5),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: const Size(350, 48),
+                                  backgroundColor: CustomColor.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10).w,
                                   ),
-                                );
-                              },
-                              child: Text(
-                                "Login",
-                                style: CustomFont().buttontext,
+                                ),
+                                onPressed: () {
+                                  BlocProvider.of<LoginnBloc>(context).add(
+                                    LoginButtonEvent(
+                                      username: _usernameController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Login",
+                                  style: CustomFont().buttontext,
+                                ),
                               ),
                             ),
                           ),

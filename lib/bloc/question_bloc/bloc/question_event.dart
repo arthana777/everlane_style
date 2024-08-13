@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:everlane_style/on_board/question%20model/question%20model.dart';
 
 abstract class QuestionEvent extends Equatable {
+    QuestionEvent();
   @override
   List<Object?> get props => [];
 }

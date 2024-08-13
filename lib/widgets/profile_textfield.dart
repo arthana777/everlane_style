@@ -42,7 +42,7 @@ class ProfileTextfield extends StatelessWidget {
                   color: CustomColor.primaryColor,
                 ),
                 SizedBox(width: 16.w),
-                Text(title, style: CustomFont().subtitleText),
+                Text(title, style: CustomFont().hintText),
               ],
             ),
             const Icon(

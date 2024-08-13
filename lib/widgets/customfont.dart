@@ -8,7 +8,7 @@ class CustomFont {
   CustomFont();
   final TextStyle appbarText = GoogleFonts.questrial(
       textStyle: TextStyle(
-          color: Colors.black, fontSize: 26.sp, fontWeight: FontWeight.w600));
+          color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.w600));
   final TextStyle bodyText = GoogleFonts.questrial(
       textStyle: TextStyle(color: Colors.black, fontSize: 12.sp));
   final TextStyle subtitleText = GoogleFonts.questrial(

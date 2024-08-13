@@ -1,5 +1,6 @@
 import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/signup_page/signup.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,14 +14,13 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      SizedBox(
-        height: double.infinity.h,
-        width: double.infinity.w,
+      Positioned.fill(
         child: Image.asset(
-          "asset/images/login.jpg",
+          "asset/images/bg0.jpg",
           fit: BoxFit.cover,
         ),
       ),
+
       Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
@@ -70,7 +70,7 @@ class FirstPage extends StatelessWidget {
                     height: 55.h,
                     width: double.infinity.w,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF3BBFC3),
+                      color: CustomColor.primaryColor,
                       borderRadius: BorderRadius.all(
                         const Radius.circular(10).w,
                       ),

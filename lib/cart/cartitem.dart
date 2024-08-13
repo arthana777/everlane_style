@@ -38,7 +38,7 @@ class _CartItemState extends State<CartItem> {
       child: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,7 +55,7 @@ class _CartItemState extends State<CartItem> {
                   ),
                 ),
                 SizedBox(
-                  width: 15.w,
+                  width: 10.w,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,10 @@ class _CartItemState extends State<CartItem> {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.currency_rupee),
+                        Icon(
+                          Icons.currency_rupee,
+                          size: 14,
+                        ),
                         Text(
                           "700",
                           style: GoogleFonts.poppins(
@@ -93,7 +96,7 @@ class _CartItemState extends State<CartItem> {
                       child: DropdownButton(
                         value: dropedownvalue1,
                         dropdownColor: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(3),
                         underline: SizedBox(),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: item1.map((String item) {
@@ -116,7 +119,7 @@ class _CartItemState extends State<CartItem> {
           ),
           Divider(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomTextButton(
                 text: "Save for later",

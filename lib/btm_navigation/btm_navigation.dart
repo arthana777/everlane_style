@@ -12,7 +12,7 @@ class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
     const HomeScreen(),
     const Profile(),
-    CartScreen(),
+    const CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class BtmNavigation extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFFF7F7F7),
-        showSelectedLabels: false,
+        backgroundColor: const Color(0xFFF7F7F7),
+        // showSelectedLabels: true,
         elevation: 1.5,
         currentIndex: currentScreenIndex,
         onTap: (value) => screenindexprovider.updateScreenIndex(value),
@@ -38,7 +38,7 @@ class BtmNavigation extends StatelessWidget {
           BottomNavigationBarItem(
             label: '',
             icon: Icon(
-              (currentScreenIndex == 2) ? Icons.person : Icons.person_outline,
+              (currentScreenIndex == 1) ? Icons.person : Icons.person_outline,
               color: CustomColor.primaryColor,
               size: 30.sp,
             ),
@@ -46,9 +46,9 @@ class BtmNavigation extends StatelessWidget {
           BottomNavigationBarItem(
             label: '',
             icon: Icon(
-              (currentScreenIndex == 3)
-                  ? Icons.shopping_cart
-                  : Icons.shopping_cart,
+              (currentScreenIndex == 2)
+                  ? Icons.shopping_cart_rounded
+                  : Icons.shopping_cart_outlined,
               color: CustomColor.primaryColor,
             ),
           ),

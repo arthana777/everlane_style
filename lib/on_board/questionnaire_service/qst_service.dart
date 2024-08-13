@@ -6,17 +6,22 @@ class QstService {
   final String apiUrl = 'http://18.143.206.136/api/questionnaire/';
   final String token = 'token';
 
+  Map<String, String> getHeaders() {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    };
+  }
+
   Future<QuestionModel> fetchQuestionnaire() async {
     final response = await http.get(
       Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'token $token',
-      },
+      headers: getHeaders(),
     );
-    print("get toke${token}");
+    print("Authorization token$token");
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
+
     if (response.statusCode == 401) {
       return QuestionModel.fromJson(jsonDecode(response.body));
     } else {
@@ -25,16 +30,12 @@ class QstService {
   }
 
   Future<QuestionModel> updateQuestionnaire(Data data) async {
-    print("Authorization token $token");
     final response = await http.patch(
       Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'token $token',
-      },
+      headers: getHeaders(),
       body: jsonEncode(data.toJson()),
     );
-    print("get toke${token}");
+    print("Authorization token$token");
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     if (response.statusCode == 401) {

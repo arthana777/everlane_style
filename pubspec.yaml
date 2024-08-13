@@ -94,7 +94,8 @@ flutter:
     - asset/images/th (1).jpg
     - asset/images/disasterback.jpg
     - asset/images/th (2).jpg
-  #   - images/a_dot_ham.jpeg
+    - asset/images/bg0.jpg
+    - asset/images/logo1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

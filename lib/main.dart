@@ -45,7 +45,7 @@ return MultiProvider(
               ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    QuestionBloc(QstService())..add(FetchQuestionnaire()),
+                    QuestionBloc(QstService()),
               ),
               BlocProvider(
                 create: (BuildContext context) => CategoryBloc(),

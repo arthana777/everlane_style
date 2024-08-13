@@ -1,5 +1,7 @@
+import 'package:everlane_style/first_page/first_page.dart';
 import 'package:everlane_style/profile/edit_profile.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:everlane_style/widgets/profile_textfield.dart';
@@ -12,14 +14,14 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7F7F7),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(
-          "Profile",
-          style: CustomFont().appbarText,
-        ),
-      ),
+      backgroundColor: const Color(0xFFF7F7F7),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(30.h),
+          child: CustomAppBar(
+            color: Colors.transparent,
+            text: "Profile",
+            action: [],
+          )),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10).r,
@@ -143,7 +145,7 @@ class Profile extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SiginPage(),
+                        builder: (context) => FirstPage(),
                       ),
                     );
                   },
