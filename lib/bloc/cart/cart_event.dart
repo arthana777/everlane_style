@@ -1,0 +1,39 @@
+part of 'cart_bloc.dart';
+
+@immutable
+sealed class CartEvent extends Equatable {}
+class FetchCartData extends CartEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
+class AddToCart extends CartEvent {
+  final int productId;
+  final String size;
+
+   AddToCart( {required this.productId,required this.size,});
+
+  @override
+  List<Object?> get props => [productId];
+}
+class RemovefromCart extends CartEvent{
+
+  final int productId;
+  RemovefromCart(this.productId);
+
+  @override
+  List<Object> get props => [productId];
+}
+class PlaceOrder extends CartEvent {
+  final int deliveryAddressId;
+  final String orderType;
+  final String paymentMethod;
+
+  PlaceOrder({required this.deliveryAddressId, required this.orderType, required this.paymentMethod});
+
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [deliveryAddressId,orderType,paymentMethod];
+}

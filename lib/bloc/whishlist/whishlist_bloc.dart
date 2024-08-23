@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:everlane_style/bloc/whishlist/whishlist_event.dart';
 import 'package:everlane_style/bloc/whishlist/whishlist_state.dart';
 import 'package:everlane_style/data/models/product_model.dart';
@@ -52,7 +54,7 @@ class WhishlistBloc extends Bloc<WishlistEvent, WishlistState> {
        print("deleteditems: $deleteditems");
 
        if (deleteditems == "success") {
-         emit(RemoveWishlistSuccess());  // Simplified success state
+         emit(RemoveWishlistSuccess(event.productId));  // Simplified success state
        } else {
          emit(RemoveWishlistFailure(deleteditems));  // Emitting the failure with the message
        }

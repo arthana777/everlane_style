@@ -1,18 +1,21 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:everlane_style/data/models/product_model.dart';
+
+import '../models/detailproduct.dart';
 
 abstract class ProductRemoteDataSource {
   Future<List<Product>> getProductFromApi();
   Future<List<Product>> getSeasons(String season);
   Future<List<Product>> getfiltercategory(int id);
-  Future<List<Product>> getDetailsProduct(int id);
-
-
+  Future<DetailProduct> getDetailsProduct(int id);
+  Future<List<Product>> searchProducts(String keyword);
 }
 
 class ProductRemoteDataSourceimpl extends ProductRemoteDataSource {
   final client = http.Client();
+  final Dio clientDio= Dio();
 
   @override
   Future<List<Product>> getProductFromApi() async {
@@ -100,25 +103,52 @@ print("uuuuuuuuu${categoryList.length}");
   }
 
   @override
-  Future<List<Product>> getDetailsProduct(int id)async {
+  Future<DetailProduct>getDetailsProduct(int id)async {
     print("http://18.143.206.136/api/products/$id/");
+    final DetailProduct productdetails;
+    try {
+      final response = await clientDio.get(
+       'http://18.143.206.136/api/products/$id/',
+        options: Options(
+          headers: {
+            'content-type': 'application/json',
+          },
+        ),
+
+      );
+      print("details products..${response.data}");
+      if (response.statusCode == 200) {
+       productdetails=DetailProduct.fromJson(response.data['data']);
+        return productdetails;
+      } else {
+        throw Exception("Failed to load products${response.statusCode}");
+      }
+    } catch (e) {
+      print("hhhhhhhhhhhhhhhhhhhhhhhh$e");
+      throw Exception("$e");
+    }
+  }
+
+  @override
+  Future<List<Product>> searchProducts(String keyword) async {
+    print("SSSSSSSSSSSSSSSSSSS :http://18.143.206.136/api/products/?query=$keyword");
+    // print("{http://18.143.206.136/api/products/?query=$keyword}");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/products/$id/'),
+        Uri.parse('http://18.143.206.136/api/products/?query=$keyword'),
         headers: {
           'content-type': 'application/json',
         },
       );
-      print("details products..${response.body}");
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-        final List<dynamic> categoryList = responseBody['data'];
-
-        final List<Product> productdetails = categoryList.map((json) =>
+        print("seasonssss${responseBody}");
+        final List<dynamic> productList = responseBody['data'];
+        final List<Product> keyword = productList.map((json) =>
             Product.fromJson(json)).toList();
-        print(productdetails);
-        return productdetails;
+        print("hereeeeeee${keyword}");
+        return keyword;
       } else {
         throw Exception("Failed to load products${response.statusCode}");
       }

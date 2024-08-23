@@ -49,8 +49,9 @@ class WishlistFailure extends WishlistState {
 class RemoviewishlistLoading extends WishlistState {}
 
 class RemoveWishlistSuccess extends WishlistState {
-  //final int removedProductId;
-//RemoveWishlistSuccess(this.removedProductId);
+  final int removedProductId;
+  RemoveWishlistSuccess(this.removedProductId);
+  List<Object> get props => [removedProductId];
 }
 
 class RemoveWishlistFailure extends WishlistState {

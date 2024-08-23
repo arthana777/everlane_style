@@ -1,30 +1,38 @@
+import 'package:everlane_style/data/datasources/product_datasource.dart';
 import 'package:everlane_style/data/repositories/product_repo_implementation.dart';
 import 'package:everlane_style/domain/entities/category_entity.dart';
 import 'package:everlane_style/domain/entities/product_entity.dart';
 import 'package:everlane_style/repository/product_repo.dart';
 
+import '../../data/models/detailproduct.dart';
+import '../../data/models/product_model.dart';
+
 class ProductUsecases {
   final ProductRepo productRepo=ProductRepoImplementation();
-
+final   ProductRemoteDataSourceimpl productData=ProductRemoteDataSourceimpl();
   //ProductUsecases(this.productRepo);
 
-  Future<List<ProductEntity>> getProductFromDatasource() async {
+  Future<List<Product>> getProductFromDatasource() async {
 
     final product = await productRepo.getProductFromDataSource();
     return product;
   }
-  Future<List<ProductEntity>> getSeasonsfromDatasource(String seasons) async {
+  Future<List<Product>> getSeasonsfromDatasource(String seasons) async {
     final season = await productRepo.getSeasonsfromDatasource(seasons);
     return season;
   }
-  Future<List<ProductEntity>> getfiltercategoryDatasource(int subcategory) async {
+  Future<List<Product>> getfiltercategoryDatasource(int subcategory) async {
     final filtercategories = await productRepo.getfiltercategoryDatasource(subcategory);
     return filtercategories;
   }
 
 
-  Future<List<ProductEntity>> getDetailsProductDatasource(int id) async {
-    final productdetails = await productRepo.getDetailsProductDatasource(id);
+  Future<DetailProduct> getDetailsProductDatasource(int id) async {
+    final productdetails = await productData.getDetailsProduct(id);
     return productdetails;
+  }
+  Future <List<Product>>getSearchfromDtasource(String keyword) async {
+    final season = await productRepo.getSearchfromDtasource(keyword);
+    return season;
   }
 }

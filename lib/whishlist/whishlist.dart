@@ -48,9 +48,9 @@ class _WhishlistState extends State<Whishlist> {
                 listener: (context, state) {
               print("pppppppppp$state");
               if (state is WishlistLoading) {
-                loading=true;
-                setState(() {
 
+                setState(() {
+                  loading=true;
                 });
                 // Show loading indicator
 
@@ -64,14 +64,17 @@ class _WhishlistState extends State<Whishlist> {
 
                 });
 
-              } else if (state is WishlistFailure) {
-
+              }
+              else if (state is WishlistFailure) {
                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.error)),
                 );
               }
                if(state is RemoveWishlistSuccess){
+                 setState(() {
+                   whishlist.removeWhere((item) => item.product == state.removedProductId);
+                 });
                  ScaffoldMessenger.of(context).showSnackBar(
                    SnackBar(content: Text('Item deleted successfully')),
                  );
@@ -84,12 +87,13 @@ class _WhishlistState extends State<Whishlist> {
               children: [
               loading==true?Center(child: CircularProgressIndicator()):SizedBox(
                   child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: whishlist.length,
                     itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: WhishlistItem(removeonTap: (){
+                      child: WhishlistItem(
+                        removeonTap: (){
                         BlocProvider.of<WhishlistBloc>(context)
                                .add(Removefromwishlist(whishlist[index].product),
                         );

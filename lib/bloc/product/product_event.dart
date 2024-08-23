@@ -27,3 +27,10 @@ class LoadDetails extends ProductEvent {
   LoadDetails(this.id);
 
 }
+class Searchproducts extends ProductEvent {
+  final String keyword;
+  Searchproducts(this.keyword);
+
+  @override
+  List<Object> get props => [keyword];
+}
