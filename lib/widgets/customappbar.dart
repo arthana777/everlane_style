@@ -16,12 +16,13 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 10,
+      centerTitle: false,
       backgroundColor: color ?? Colors.white,
       elevation: 0.0,
       automaticallyImplyLeading: false,
       leading: leading,
-      leadingWidth: 50.w,
-      surfaceTintColor: Colors.black,
+      leadingWidth: 70.w,
+      surfaceTintColor: Colors.white,
       toolbarHeight: 70.h,
       //leadingWidth: 20,
       title: Text(text ?? "", style: CustomFont().appbarText),

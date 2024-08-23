@@ -23,15 +23,15 @@ class WhislistProduct {
 
   factory WhislistProduct.fromJson(Map<String, dynamic> json) {
     return WhislistProduct(
-      id: json['id'],
-      product: json['product'],
-      isActive: json['is_active'],
-      isDeleted: json['is_deleted'],
-      createdOn: DateTime.parse(json['created_on']),
-      image: json['product_image'],
-      name: json['product_name'],
-      price: json['product_price'],
-      description: json['product_description'],
+      id: json['id'] != null ? (json['id'] as int) : 0,
+      product: json['product'] != null ? (json['product'] as int) : 0,
+      isActive: json['is_active'] as bool,
+      isDeleted: json['is_deleted'] as bool,
+      createdOn: DateTime.parse(json['created_on'] as String),
+      image: json['product_image'] as String,
+      name: json['product_name'] as String,
+      price: (json['product_price'] as num).toDouble(),
+      description: json['product_description']as String,
     );
   }
 }

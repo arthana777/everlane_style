@@ -28,5 +28,5 @@ class Removefromwishlist extends WishlistEvent{
   Removefromwishlist(this.productId);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [productId];
 }

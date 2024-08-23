@@ -1,3 +1,4 @@
+import 'package:everlane_style/cartscreen/cartitem.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'cartitem.dart';
+
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -20,7 +21,7 @@ class CartScreen extends StatelessWidget {
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddressScreen()));
+              MaterialPageRoute(builder: (context) =>  AddressScreen()));
         },
         label: Container(
           height: 30.h,
@@ -54,7 +55,7 @@ class CartScreen extends StatelessWidget {
                 itemCount: 3,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CartItem(),
+                  child: CartItemCard(),
                 ),
               ),
             ),

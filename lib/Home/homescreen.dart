@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:everlane_style/Home/searchscreen.dart';
 import 'package:everlane_style/Home/seasons/seasongridview.dart';
+import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
-import 'package:everlane_style/domain/entities/category_entity.dart';
-import 'package:everlane_style/domain/entities/product_entity.dart';
 import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:everlane_style/sharedprefrence/sharedprefs_login.dart';
-import 'package:everlane_style/whishlist/whishlist.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,9 @@ import '../bloc/category_bloc.dart';
 import '../bloc/whishlist/whishlist_bloc.dart';
 import '../bloc/whishlist/whishlist_event.dart';
 import '../bloc/whishlist/whishlist_state.dart';
-import '../cart/cartscreen.dart';
+import '../data/models/product_model.dart';
+import '../data/models/whishlistmodel.dart';
+import '../domain/entities/category_entity.dart';
 import '../donation/donationscreen.dart';
 import '../widgets/customcolor.dart';
 import 'category_gridview.dart';
@@ -35,38 +36,52 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<CategoryEntity> categories = [];
   List<CategoryEntity> banners = [];
-  List<ProductEntity> products = [];
-  List<ProductEntity> seasons = [];
-  List<ProductEntity> filtercategories = [];
+  List<Product> products = [];
+  List<Product> seasons = [];
+  List<Product> filtercategories = [];
   List<CategoryEntity> subcategories = [];
+  List<WhislistProduct>whishlist = [];
+  List<int> wishlistProductIds = [];
   int? isclicked;
+  bool isLoading = true;
 
   SharedPrefeService sp = SharedPrefeService();
 
   CustomColor customColor = CustomColor();
+  // bool isProductInWishlist(ProductEntity products) {
+  //   return wishlistProductIds.contains(products.id);
+  // }
+
 
   final List<Map<String, String>> seasonbanner = [
     {
+      'id':'1',
       'title': 'winter',
-      'image':
-          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2ludGVyJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
+      'image': 'assets/images/winter.jpg',
+          //'https://media.istockphoto.com/id/1146996650/photo/knitted-wool-sweaters.jpg?s=612x612&w=0&k=20&c=e_heKrNwFWeAbkTVVA2aKJEO08jz9JZ-5diJPDK92ck='
     },
     {
+      'id':'2',
       'title': 'summer',
-      'image':
-          'https://media.istockphoto.com/id/1493715911/photo/beach-walk-of-young-adult-woman-during-vacation-in-sri-lanka.jpg?s=1024x1024&w=is&k=20&c=CpKczf_6U5N1qcYfy-beRHW2SY_9Bcgr90yKZ8SnlFQ='
+      'image':'assets/images/summer.jpg',
+         // 'https://media.istockphoto.com/id/1465451690/photo/beach-umbralla-and-chair-on-sand-summer-holiday-travel-background.jpg?s=612x612&w=0&k=20&c=ChGTBog7Px_3uTkdCINE43kNf4qM2EZ-pkLzvYq5Wzs='
     },
     {
+      'id':'3',
       'title': 'rainy',
-      'image':
-          'https://plus.unsplash.com/premium_photo-1676762448146-de8a34fbfb88?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFpbnklMjBmYXNoaW9uJTIwYmFubmVyfGVufDB8fDB8fHww'
+      'image': 'assets/images/monsoon.jpg',
     },
     {
+      'id':'4',
       'title': 'autumn',
-      'image':
-          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
+      'image':'assets/images/authumn.jpg',
+          //'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
     },
   ];
+
+
+
+
 
   @override
   void initState() {
@@ -74,8 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<CategoryBloc>(context).add(LoadBanners(1));
     BlocProvider.of<ProductBloc>(context).add(LoadProducts());
     BlocProvider.of<CategoryBloc>(context).add(LoadSubCategories(1));
-
+    BlocProvider.of<WhishlistBloc>(context).add(RetrieveWhishlist());
     sp.getToken();
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
 
     //BlocProvider.of<ProductBloc>(context).add(LoadSeasons(seasonbanner[1]['title']??""));
     // context.read<CategoryBloc>().add(
@@ -87,23 +107,139 @@ class _HomeScreenState extends State<HomeScreen> {
     isclicked = index;
     setState(() {});
   }
+  Widget buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        color: Colors.white,
+      ),
+    );
+  }
+  Widget shimmerCategories() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 18),
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: 8, // You can adjust the number to your need
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 80.h,
+                  width: 80.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                Container(
+                  width: 60.w,
+                  height: 10.h,
+                  color: Colors.black12,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget shimmerBanner() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        height: 600.h,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Widget shimmerTrending() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child:ListView.builder(
+        padding: EdgeInsets.all(5),
+        scrollDirection: Axis.horizontal,
+        itemCount: products.length,
+        itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(left: 20, right: 00),
+            child: Container(
+              height: 200.h,
+              width: 170.w,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.r),
+
+
+              ),
+            )),
+      ),
+    );
+  }
+
+  Widget shimmerSeasons() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: seasonbanner.length,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(
+                left: 20, right: 20, top: 4, bottom: 4),
+            child: Container(
+              height: 200.h,
+              color: Colors.white,
+            )
+          )),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.h),
-          child: CustomAppBar(
-            text: "Everlanestyle",
-            leading: Padding(
-              child: Image.asset(
-                "asset/images/bg0.jpg",
-                fit: BoxFit.cover,
+        appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+          text: "Everlanestyle",
+          action: [
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => Searchscreen(),
+                      ),);
+                    },
+                      child: Icon(Icons.search_rounded,size: 30.sp,)),
+                  SizedBox(width: 10.w,),
+                  InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => DonationHomeScreen(),
+                        ),);
+                      },
+                      child: Icon(Icons.drag_handle_outlined,size: 25.sp,))
+                ],
               ),
-              padding: const EdgeInsets.only(left: 15),
+             // padding: const EdgeInsets.only(left: 15),
             ),
-          ),
+          ],),
         ),
         body: MultiBlocListener(
           listeners: [
@@ -114,10 +250,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   context.read<CategoryBloc>().add(
                         LoadSubCategories(categories[0].id ?? 0),
                       );
-                  //context.read<ProductBloc>().add(LoadProducts());
-                  // context.read<CategoryBloc>().add(
-                  //   LoadBanners(categories[0].id ?? 0),
-                  // );
                   tappingfun(0);
                 }
                 if (state is BannerLoaded) {
@@ -163,6 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SnackBar(
                       content: Text('Product added to wishlist successfully!')),
                 );
+                BlocProvider.of<WhishlistBloc>(context).add(RetrieveWhishlist());
               } else if (state is addtoWishlistFailure) {
                 // Dismiss loading indicator and show error message
                 Navigator.pop(context);
@@ -170,7 +303,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   SnackBar(content: Text(state.error)),
                 );
               }
-            }),
+              else if (state is WishlistSuccess) {
+               // loading=false;
+                whishlist = state.whishlists;
+                for(var i=0;i<=whishlist.length;i++){
+                  wishlistProductIds.add(whishlist[i].product);
+                }
+                print(whishlist.length);
+                print(whishlist[0]);
+                print("oooooooooooooooo");
+                setState(() {
+
+                });
+
+              }
+              else if (state is RemoveWishlistSuccess) {
+                setState(() {
+                  whishlist.removeWhere((item) => item.id == state.removedProductId);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Item deleted successfully')),
+                );
+              } else if (state is RemoveWishlistFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+                },
+            ),
+
           ],
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -179,7 +340,9 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 50.h,
                 width: 400.w,
-                child: ListView.separated(
+                child:  isLoading?
+                buildShimmer():
+                ListView.separated(
                   padding: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -229,7 +392,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 110.h,
-                child: ListView.builder(
+                child: isLoading?
+                shimmerCategories():ListView.builder(
                     padding: EdgeInsets.symmetric(horizontal: 18),
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -248,7 +412,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => CategoryGridview(),
+                                    builder: (context) => CategoryGridview(subcategoryName: subcategories[index].name??"", productId: subcategories[index].id??0,),
                                   ),
                                 );
 
@@ -282,7 +446,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 30.h,
               ),
-              CarouselSlider(
+              isLoading? shimmerBanner():CarouselSlider(
                 options: CarouselOptions(
                     height: 600.0.h,
                     aspectRatio: 5.0,
@@ -315,7 +479,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(
                 height: 300.h,
-                child: ListView.builder(
+                child: isLoading?shimmerTrending():ListView.builder(
                   padding: EdgeInsets.all(5),
                   scrollDirection: Axis.horizontal,
                   itemCount: products.length,
@@ -326,26 +490,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProductDetails(
-                                productdetails: products[index],
-                              ),
+                              builder: (context) => ProductDetails(productId: products[index].id??0,),
                             ),
                           );
                         },
                         child: ProductCard(
                             ontap: () {
-                              BlocProvider.of<WhishlistBloc>(context)
-                                  .add(AddToWishlist(products[index]?.id ?? 0));
-                              print(products[index]?.id ?? 0);
+                              print("wishlist length${whishlist.length}");
+                              setState(() {
+                                if  (wishlistProductIds.contains(products[index]?.id) ){
+                                  print("remove${products[index]?.id}");
+                                  BlocProvider.of<WhishlistBloc>(context)
+                                      .add(Removefromwishlist(whishlist[index].product),
+                                  );
+                                  wishlistProductIds.remove(products[index]?.id??0);
+
+                                }else{
+                                  print("added${products[index]?.id}");
+                                  BlocProvider.of<WhishlistBloc>(context)
+                                      .add(AddToWishlist(products[index]?.id ?? 0));
+                                  wishlistProductIds.add(products[index]?.id??0);
+                                  print(products[index]?.id ?? 0);
+                                }
+                             });
                             },
+
                             title: products[index].name ?? '',
                             subtitle: products[index].description ?? '',
                             image: products[index].image ??
                                 'https://plus.unsplash.com/premium_photo-1706727290668-f6b805ea48da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8',
-                            price: products[index].price ?? "")),
+                            price: products[index].price ?? "",
+                          isInWishlist: wishlistProductIds.contains(products[index]?.id)),
+                         // isInWishlist: whishlist.any((item) => item.id == products[index].id),
+                        )),
                   ),
                 ),
-              ),
               SizedBox(
                 height: 30,
               ),
@@ -353,13 +532,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 30, bottom: 30),
                 child: Text(
-                  "Title",
+                  "Seasons",
                   style: CustomFont().subtitleText,
                 ),
               ),
               SizedBox(
                 height: 950.h,
-                child: ListView.builder(
+                child: isLoading?shimmerSeasons():ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: seasonbanner.length,
                     itemBuilder: (context, index) => Padding(
@@ -370,7 +549,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Seasongridview(),
+                                    builder: (context) => Seasongridview(seasonName: seasonbanner[index]['title']??"",),
                                   ),
                                 );
                                 context.read<ProductBloc>().add(
@@ -386,12 +565,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
               ),
 
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20,right: 20,top: 30),
-              //   child: ProductGrid(),
-              // ),
-            ]),
+
+            ]
           ),
-        ));
+    )
+        )
+    );
+
+
   }
 }

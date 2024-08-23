@@ -22,6 +22,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../checkout/myorders.dart';
+import '../navigation_provider/navigation_provider.dart';
+
 class Profile extends StatelessWidget {
   Profile({super.key});
 

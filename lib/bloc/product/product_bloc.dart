@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:everlane_style/domain/usecases/product_usecases.dart';
 import 'package:meta/meta.dart';
 
+import '../../data/models/detailproduct.dart';
+import '../../data/models/product_model.dart';
 import '../../domain/entities/product_entity.dart';
 
 part 'product_event.dart';
@@ -50,5 +52,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(DetailsError(e.toString()));
       }
     });
+
+    on<Searchproducts>((event, emit) async {
+      emit(SearchLoading());
+      emit(SearchLoaded([]));
+      try {
+        final products = await productUsecases.getSearchfromDtasource(event.keyword);
+        emit(SearchLoaded(products));
+      } catch (e) {
+        emit(SearchError(e.toString()));
+      }
+    });
+
   }
 }

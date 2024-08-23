@@ -1,0 +1,148 @@
+import 'package:everlane_style/bloc/address/address_bloc.dart';
+import 'package:everlane_style/checkout/address_creation.dart';
+import 'package:everlane_style/checkout/payment.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../btm_navigation/btm_navigation.dart';
+import '../data/models/addressmodel.dart';
+import '../navigation_provider/navigation_provider.dart';
+
+class AddressList extends StatefulWidget {
+   AddressList({super.key});
+
+  @override
+  State<AddressList> createState() => _AddressListState();
+}
+
+class _AddressListState extends State<AddressList> {
+  List<UserAddress>useradress=[];
+@override
+  void initState() {
+  BlocProvider.of<AddressBloc>(context).add(FetchUserAddresses());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+        action: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
+          }, icon: Icon(Icons.add,size: 25.sp,)),
+        ],
+        leading: InkWell(
+            onTap: (){
+              final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+              navigationProvider.updateScreenIndex(0);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => BtmNavigation()),
+                    (Route<dynamic> route) => false,
+              );
+            },
+            child: Icon(Icons.arrow_back)),
+        text: "Address",
+      )),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<AddressBloc, AddressState>(
+            listener: (context, state) {
+              print(state);
+              if (state is AddressLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) =>
+                      Center(child: CircularProgressIndicator()),
+                );
+              } else if (state is AddressLoaded) {
+                setState(() {
+
+                });
+                useradress = state.userAddresses;
+                //final useraddress = state.userAddresses;
+                print("adding to addresslist");
+              }
+              else if (state is DeleteAdresssuccess) {
+                setState(() {
+                  useradress.removeWhere((item) => item.id == state.addressid);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Item deleted successfully')),
+                );
+
+              }else if (state is AddressError) {
+                // Dismiss loading indicator and show error message
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
+              }
+
+            },
+          ),
+        ],
+        child: ListView.builder(
+          padding: EdgeInsets.all(10),
+          itemCount: useradress.length,
+            itemBuilder: (context,index){
+            print(useradress.length);
+            print(useradress[index].address);
+             // final address = state.userAddresses[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (Context)=>PaymentScreen()));
+                    },
+                    child: Container(
+                      height: 150.h,
+                      width: 400.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween
+                          ,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(useradress[index].address),
+                                Text(useradress[index].state),
+                                Text(useradress[index].city),
+                                Text(useradress[index].pincode),
+                                Text(useradress[index].mobile),
+                                Text(useradress[index].locality),
+
+                              ],
+                            ),
+                            IconButton(onPressed: (){
+                              BlocProvider.of<AddressBloc>(context)
+                                  .add(DeleteAddress(useradress[index].id),
+                              );
+                            }, icon: Icon(Icons.delete))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+      ),
+    );
+  }
+}
