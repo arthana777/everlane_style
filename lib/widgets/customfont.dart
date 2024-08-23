@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomFont {
   CustomFont();
-  final TextStyle appbarText = GoogleFonts.questrial(
+  final TextStyle appbarText = GoogleFonts.montserrat(
       textStyle: TextStyle(
-          color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.w600));
+          color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600));
+  final TextStyle labelText = GoogleFonts.poppins(color: Colors.white);
   final TextStyle bodyText = GoogleFonts.questrial(
       textStyle: TextStyle(color: Colors.black, fontSize: 12.sp));
   final TextStyle subtitleText = GoogleFonts.questrial(
@@ -20,15 +21,12 @@ class CustomFont {
   final TextStyle buttontext = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w600));
-  final TextStyle hintText = GoogleFonts.poppins(textStyle: const TextStyle());
+  final TextStyle hintText = GoogleFonts.poppins(color: Colors.black);
   final TextStyle titleText = GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.sp));
+          color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16.sp));
   final TextStyle subText = GoogleFonts.questrial(
       textStyle: const TextStyle(color: Colors.black, fontSize: 15));
-  final TextStyle labeltext = GoogleFonts.questrial(
-      textStyle: TextStyle(
-          color: Colors.black, fontSize: 15.sp, fontWeight: FontWeight.w600));
 }
 
 class CustomSize {

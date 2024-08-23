@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
     const HomeScreen(),
-    const Profile(),
+    Profile(),
     const CartScreen(),
   ];
   @override
@@ -22,7 +22,7 @@ class BtmNavigation extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xFFF7F7F7),
-        // showSelectedLabels: true,
+        showSelectedLabels: true,
         elevation: 1.5,
         currentIndex: currentScreenIndex,
         onTap: (value) => screenindexprovider.updateScreenIndex(value),

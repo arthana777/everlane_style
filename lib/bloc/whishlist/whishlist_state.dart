@@ -38,7 +38,24 @@ class WishlistSuccess extends WishlistState {
 }
 
 class WishlistFailure extends WishlistState {
+  final String error;
 
+  WishlistFailure(this.error);
+
+  @override
+  List<Object> get props => [];
+}
+
+class RemoviewishlistLoading extends WishlistState {}
+
+class RemoveWishlistSuccess extends WishlistState {
+  //final int removedProductId;
+//RemoveWishlistSuccess(this.removedProductId);
+}
+
+class RemoveWishlistFailure extends WishlistState {
+  final String error;
+  RemoveWishlistFailure(this.error);
   @override
   List<Object> get props => [];
 }

@@ -6,6 +6,7 @@ import 'package:everlane_style/domain/entities/product_entity.dart';
 import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:everlane_style/sharedprefrence/sharedprefs_login.dart';
 import 'package:everlane_style/whishlist/whishlist.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -91,63 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Image.asset(
-              "asset/images/logo1.jpg",
-              fit: BoxFit.cover,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80.h),
+          child: CustomAppBar(
+            text: "Everlanestyle",
+            leading: Padding(
+              child: Image.asset(
+                "asset/images/bg0.jpg",
+                fit: BoxFit.cover,
+              ),
+              padding: const EdgeInsets.only(left: 15),
             ),
           ),
-          leadingWidth: 130,
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          automaticallyImplyLeading: true,
-          surfaceTintColor: Colors.white,
-          toolbarHeight: 70.h,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.search_rounded,
-                    size: 30.sp,
-                  ),
-                  SizedBox(
-                    width: 30.w,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Whishlist(),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.shopping_bag_outlined,
-                        size: 30.sp,
-                      )),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DonationHomeScreen(),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.ios_share_rounded,
-                        size: 30.sp,
-                      )),
-                ],
-              ),
-            ),
-          ],
         ),
         body: MultiBlocListener(
           listeners: [
@@ -233,7 +189,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       setState(() {
                         tappingfun(index);
-
                         context.read<CategoryBloc>().add(
                               LoadSubCategories(categories[index].id ?? 0),
                             );
@@ -340,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                            color: Colors.amber,
+                            color: Colors.black26,
                             image: DecorationImage(
                                 image: NetworkImage(i.image ?? ''),
                                 fit: BoxFit.cover)),

@@ -1,5 +1,5 @@
 import 'package:everlane_style/bloc_signup/bloc/signup_state.dart';
-import 'package:everlane_style/signup_page/signup_repo/signuprepository.dart';
+import 'package:everlane_style/data/datasources/signuprepository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'signup_event.dart';

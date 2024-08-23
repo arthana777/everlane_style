@@ -4,23 +4,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextfield extends StatefulWidget {
   final TextEditingController controller;
-  final String name;
+  final String hintText;
+  final onChanged;
 
-  final String names;
-  final GestureDetector? Icon;
+  final bool isPassword;
+  final IconButton? icon;
   final bool obscureText;
+  final bool obscureText2;
   final TextCapitalization textCapitalization;
   final TextInputType inputType;
+  final String? Function(String?)? validator;
 
   CustomTextfield({
     Key? key,
-    this.Icon,
     required this.controller,
-    required this.name,
-    required this.names,
+    this.onChanged,
+    this.isPassword = true,
+    required this.hintText,
     this.obscureText = false,
+    this.obscureText2 = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
+    this.validator,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -30,50 +36,38 @@ class CustomTextfield extends StatefulWidget {
 class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        height: 55.h,
-        width: double.infinity.w,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 0,
-              blurRadius: 4,
-              offset: const Offset(1, 2),
-            ),
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            const Radius.circular(10).r,
-          ),
-        ),
-        margin: const EdgeInsets.only(),
-        child: TextFormField(
-          enabled: true,
-          controller: widget.controller,
-          textCapitalization: widget.textCapitalization,
-          maxLength: 32,
-          maxLines: 1,
-          obscureText: widget.obscureText,
-          keyboardType: widget.inputType,
+    return Padding(
+      padding: const EdgeInsets.only(left: 5, right: 5).r,
+      child: TextFormField(
+        
+        controller: widget.controller,
+        textCapitalization: widget.textCapitalization,
+        maxLength: 32,
+        maxLines: 1,
+        obscureText: widget.obscureText,
+        keyboardType: widget.inputType,
+        onChanged: widget.onChanged,
+        style: const TextStyle(color: Colors.black),
+        decoration: InputDecoration(
 
-          // textAlign: TextAlign.center,
-          style: TextStyle(
-              color: widget.obscureText ? Colors.black : Colors.black),
+          contentPadding: const EdgeInsets.only(
+            left: 10,
+            top: 10,
+          ).r,
+          border: OutlineInputBorder(
 
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.only(left: 10, top: 4).r,
-            border: InputBorder.none,
-            labelText: widget.names,
-            labelStyle: CustomFont().hintText,
-            fillColor: Colors.red,
-            hintText: widget.name,
-            suffixIcon: widget.Icon,
-            counterText: '',
-            hintStyle: CustomFont().hintText,
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(8),
           ),
+          hintText: widget.hintText,
+          hintStyle: CustomFont().hintText ,
+          suffixIcon: widget.icon,
+          counterText: '',
+          fillColor: Colors.white,
+          filled: true,
         ),
+        validator: widget.validator,
+        textAlign: TextAlign.start,
       ),
     );
   }
