@@ -11,7 +11,7 @@ import '../../sharedprefrence/sharedprefs_login.dart';
 class Apiservices{
 
   Future<void> saveToken(String token,bool val) async {
-    print("tokensssss${token}");
+    print("token:- ${token}");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('auth_token', token);
     await prefs.setBool('auth_val', val);

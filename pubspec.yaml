@@ -51,6 +51,8 @@ dependencies:
   linear_progress_bar: ^1.1.2
   image_picker: ^1.1.2
   flutter_launcher_icons: ^0.13.1
+  dio: ^5.6.0
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +85,16 @@ flutter_launcher_icons:
   min_sdk_android: 21
   # To add assets to your application, add an assets section, like this:
   assets:
+    - asset/icons/applogo.png
+    - asset/images/applogo.png
+    - asset/images/login.jpg
+    - asset/images/images (2).jpg
+    - asset/images/hr pst.jpg
+    - asset/images/images (1).jpg
+    - asset/images/bnr1.jpg
+    - asset/images/th (2).jpg
+    - asset/images/bg0.jpg
+    - asset/images/logo1.jpg
     - assets/icons/applogo.png
     - assets/images/applogo.png
     - assets/images/login.jpg

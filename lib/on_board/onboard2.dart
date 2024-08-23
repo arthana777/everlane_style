@@ -1,9 +1,10 @@
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
-import 'package:everlane_style/on_board/question%20model/question%20model.dart';
-import 'package:everlane_style/on_board/questionnaire_service/qst_service.dart';
+import 'package:everlane_style/data/models/question%20model.dart';
+import 'package:everlane_style/data/datasources/qst_service.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Onboard2 extends StatefulWidget {
   const Onboard2({super.key});
@@ -35,43 +36,49 @@ class _Onboard2State extends State<Onboard2> {
 
   Future<void> fetchInitialData() async {
     try {
-      QuestionModel questionModel = await qstService.fetchQuestionnaire();
-      setState(() {
-        dropdownValue1 = questionModel.data?.height ?? 'Short';
-        dropdownValue2 = questionModel.data?.skin_color ?? 'dark';
-        dropdownValue3 = questionModel.data?.preferred_season ?? 'Summer';
-        dropdownValue4 = questionModel.data?.usage_of_dress ?? "Casual";
-        dropdownValue5 = questionModel.data?.gender ?? "Male";
-      });
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('auth_token');
+      if (token == null) {
+        print('No token found. Redirecting to login.');
+
+        return;
+      }
+
+    
     } catch (e) {
       print('Error fetching initial data: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Failed to fetch data. Please try again.')),
+      );
     }
   }
 
   Future<void> updateData() async {
     Data data = Data(
-      id: 1,
+      id: null,
       gender: dropdownValue5,
-      skin_color: dropdownValue2,
+      skinColor: dropdownValue2,
       height: dropdownValue1,
-      preferred_season: dropdownValue3,
-      usage_of_dress: dropdownValue4,
+      preferredSeason: dropdownValue3,
+      usageOfDress: dropdownValue4,
     );
 
     try {
-      await qstService.updateQuestionnaire(data);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BtmNavigation(),
-          ));
+      await qstService.updateQuestion;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BtmNavigation()),
+      );
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Data updated successfully!')),
       );
     } catch (e) {
       print('Error updating data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to update data')),
+        const SnackBar(
+            content: Text('Failed to update data. Please try again.')),
       );
     }
   }
@@ -154,7 +161,8 @@ class _Onboard2State extends State<Onboard2> {
       decoration: BoxDecoration(
         image: const DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage("asset/images/bnr1.jpg"),
+          image: NetworkImage(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAyC8Rgj38TQnSalCjkm0zIftNnipHMOY-EjkQkbNK-JUmfV9EcioS1e8-nJge4S_Nd1w&usqp=CAU"),
         ),
         boxShadow: const [
           BoxShadow(

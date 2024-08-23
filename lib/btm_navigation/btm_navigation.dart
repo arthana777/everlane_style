@@ -11,8 +11,8 @@ import '../widgets/customcolor.dart';
 class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
     const HomeScreen(),
-    const Profile(),
-    CartScreen(),
+    Profile(),
+     CartScreen(),
   ];
 
   @override
@@ -23,24 +23,26 @@ class BtmNavigation extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFFF7F7F7),
-        showSelectedLabels: false,
+        backgroundColor: const Color(0xFFF7F7F7),
+        showSelectedLabels: true,
         elevation: 1.5,
         currentIndex: currentScreenIndex,
         onTap: (value) => screenindexprovider.updateScreenIndex(value),
         items: [
           BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-              (currentScreenIndex == 0) ? Icons.home : Icons.home_outlined,
-              color: CustomColor.primaryColor,
-              size: 30.sp,
-            ),
-          ),
+              label: '',
+              icon: Icon(
+                (currentScreenIndex == 0) ? Icons.home : Icons.home_outlined,
+                color: CustomColor.primaryColor,
+                size: 30.sp,
+              ),
+              backgroundColor: Colors.white),
           BottomNavigationBarItem(
             label: '',
             icon: Icon(
-              (currentScreenIndex == 1) ? Icons.person : Icons.person_outline,
+              (currentScreenIndex == 1)
+                  ? Icons.shopping_cart_rounded
+                  : Icons.shopping_cart_outlined,
               color: CustomColor.primaryColor,
               size: 30.sp,
             ),

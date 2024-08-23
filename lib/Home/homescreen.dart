@@ -237,10 +237,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Icon(Icons.drag_handle_outlined,size: 25.sp,))
                 ],
               ),
-            )
-
-          ],
-        )),
+             // padding: const EdgeInsets.only(left: 15),
+            ),
+          ],),
+        ),
         body: MultiBlocListener(
           listeners: [
             BlocListener<CategoryBloc, CategoryState>(
@@ -353,8 +353,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {
                         tappingfun(index);
                         context.read<CategoryBloc>().add(
-                          LoadSubCategories(categories[index].id??0),
-                        );
+                              LoadSubCategories(categories[index].id ?? 0),
+                            );
                         context.read<CategoryBloc>().add(
                               LoadBanners(categories[index].id ?? 0),
                             );

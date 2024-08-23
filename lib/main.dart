@@ -1,14 +1,18 @@
 
+import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.dart';
+import 'package:everlane_style/bloc/editprofile/bloc/editprofile_bloc.dart';
 import 'package:everlane_style/bloc/address/address_bloc.dart';
 import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
+import 'package:everlane_style/bloc/userprofile/bloc/profile_bloc.dart';
 import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
-import 'package:everlane_style/first_page/first_page.dart';
+import 'package:everlane_style/data/datasources/change_password_repo.dart';
 import 'package:everlane_style/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/bloc/question_bloc/bloc/question_bloc.dart';
-import 'package:everlane_style/bloc/question_bloc/bloc/question_event.dart';
-import 'package:everlane_style/on_board/questionnaire_service/qst_service.dart';
-import 'package:everlane_style/signup_page/signup_repo/signuprepository.dart';
+import 'package:everlane_style/data/datasources/qst_service.dart';
+import 'package:everlane_style/data/datasources/editprofileservice.dart';
+import 'package:everlane_style/data/datasources/profileservice.dart';
+import 'package:everlane_style/data/datasources/signuprepository.dart';
 import 'package:everlane_style/splash/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +48,23 @@ class MyApp extends StatelessWidget {
 return MultiProvider(
             providers: [
               BlocProvider(
-                create: (context) => RegistrationBloc(SignupRepository()),
+                create: (BuildContext context) => RegistrationBloc(SignupRepository()),
               ),
               BlocProvider(
+                create: (BuildContext context) =>  ProfileBloc(ProfileService()),
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>  EditprofileBloc(Editprofileservice()),
+                
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>  ChangePasswordBloc(changePasswordRepo:ChangePasswordRepo() ),
+                
+              ),
+              
+              BlocProvider(
                 create: (BuildContext context) =>
-                    QuestionBloc(QstService())..add(FetchQuestionnaire()),
+                    QuestionBloc(QstService()),
               ),
               BlocProvider(
                 create: (BuildContext context) => CategoryBloc(),

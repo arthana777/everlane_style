@@ -1,147 +1,193 @@
+import 'package:everlane_style/bloc/editprofile/bloc/editprofile_bloc.dart';
+import 'package:everlane_style/bloc/editprofile/bloc/editprofile_event.dart';
+import 'package:everlane_style/bloc/editprofile/bloc/editprofile_state.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
+import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   EditProfile({super.key});
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passController = TextEditingController();
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final usernameController = TextEditingController();
+
+  final firstnameController = TextEditingController();
+
   final lastNameController = TextEditingController();
-  final userNameController = TextEditingController();
+
+  final emailController = TextEditingController();
+
   final phoneNumberController = TextEditingController();
+
+  bool _isButtonVisible = false;
+
+   @override
+  void initState() {
+    super.initState();
+    phoneNumberController.addListener(_handleTextChange);
+    emailController.addListener(_handleTextChange);
+    lastNameController.addListener(_handleTextChange);
+    usernameController.addListener(_handleTextChange);
+    lastNameController.addListener(_handleTextChange);
+  }
+
+
+  void _handleTextChange() {
+    setState(() {
+      _isButtonVisible = phoneNumberController.text.isNotEmpty;
+      _isButtonVisible = emailController.text.isNotEmpty;
+      _isButtonVisible = lastNameController.text.isNotEmpty;
+      _isButtonVisible = usernameController.text.isNotEmpty;
+       _isButtonVisible = firstnameController.text.isNotEmpty;
+    });
+  }
+   @override
+  void dispose() {
+    phoneNumberController.dispose();
+    emailController.dispose();
+    lastNameController.dispose();
+    firstnameController.dispose();
+    usernameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Scaffold(
-        backgroundColor: const Color(0xFFEFEFEF),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Text(
-            "Edit Your Profile",
-            style: CustomFont().titleText,
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15).r,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    maxRadius: 70,
-                    backgroundImage: const AssetImage(
-                      "asset/images/tessa.jpg",
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 120, left: 60).r,
-                      child: const Icon(
-                        Icons.edit_document,
-                        color: Colors.white,
-                        shadows: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(0, 1),
-                            blurRadius: 1.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                CustomTextfield(
-                  controller: nameController,
-                  names: "Change Your Firstname",
-                  name: 'Change Your Firstname',
-                  inputType: TextInputType.emailAddress,
-                  //textCapitalization: TextCapitalization.words,
-                ),
-                SizedBox(height: 5.h),
-                CustomTextfield(
-                  controller: lastNameController,
-                  names: "Change Second name",
-                  name: 'Change Second name',
-                  inputType: TextInputType.emailAddress,
-                  //textCapitalization: TextCapitalization.words,
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                CustomTextfield(
-                  controller: emailController,
-                  names: "Change your Email",
-                  name: 'Change your Email',
-                  inputType: TextInputType.emailAddress,
-                  //textCapitalization: TextCapitalization.words,
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                CustomTextfield(
-                  controller: userNameController,
-                  names: "Change your Username",
-                  name: 'Change your Username',
-                  inputType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.words,
+    final editProfileBloc = context.read<EditprofileBloc>();
 
-                  //textCapitalization: TextCapitalization.words,
+    return Scaffold(
+      backgroundColor: const Color(0xFFEFEFEF),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(30),
+        child: CustomAppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          text: "Edit profile",
+          color: Colors.transparent,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 70).r,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20.h),
+              CircleAvatar(
+                backgroundImage: const NetworkImage(
+                  'https://i.pinimg.com/474x/8e/0c/fa/8e0cfaf58709f7e626973f0b00d033d0.jpg',
                 ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                CustomTextfield(
-                  controller: passController,
-                  names: "Change Password",
-                  name: 'Change Password',
-                  inputType: TextInputType.emailAddress,
-                  // textCapitalization: TextCapitalization.words,
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                CustomTextfield(
-                  controller: phoneNumberController,
-                  names: "Chane Your Phone Number",
-                  name: 'Chane Your Phone Number',
-                  inputType: TextInputType.emailAddress,
-                  //textCapitalization: TextCapitalization.words,
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: CustomColor.primaryColor,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10).w,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Profile(),
+                backgroundColor: Colors.white,
+                maxRadius: 60.r,
+              ),
+              SizedBox(height: 30.h),
+              CustomTextfield(
+                controller: usernameController,
+                hintText: 'User name',
+                inputType: TextInputType.text,
+              ),
+              SizedBox(height: 10.h),
+              CustomTextfield(
+                controller: firstnameController,
+                hintText: 'First Name',
+                inputType: TextInputType.name,
+              ),
+              SizedBox(height: 10.h),
+              CustomTextfield(
+                controller: lastNameController,
+                hintText: 'Last Name',
+                inputType: TextInputType.text,
+              ),
+              SizedBox(height: 10.h),
+              CustomTextfield(
+                controller: emailController,
+                hintText: 'Email',
+                inputType: TextInputType.emailAddress,
+              ),
+              SizedBox(height: 10.h),
+              CustomTextfield(
+                controller: phoneNumberController,
+                hintText: 'Mobile Number',
+                inputType: TextInputType.phone,
+              ),
+              SizedBox(height: 20.h),
+              BlocListener<EditprofileBloc, EditprofileState>(
+                listener: (context, state) {
+                  print("loadinggggg");
+                  if (state is UserProfileLoading) {
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                    print("error${state}");
+                  } else if (state is UserProfileUpdated) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Profile Updated Successfully"),
                       ),
                     );
-                  },
-                  child: Text(
-                    "Confirm",
-                    style: CustomFont().buttontext,
-                  ),
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Profile(),
+                      ),
+                    );
+                  } else if (state is UserProfileError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("User Update Failed. Try Again"),
+                      ),
+                    );
+                  }
+                  ;
+                },
+                child: BlocBuilder<EditprofileBloc, EditprofileState>(
+                  builder: (context, state) {
+                    if (state is UserProfileLoading)  {
+
+                      return const CircularProgressIndicator();
+                    }
+                    return _isButtonVisible
+                         ?  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: CustomColor.primaryColor,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10).w,
+                        ),
+                      ),
+                      onPressed: () {
+                        final updatedData = {
+                          'username': usernameController.text,
+                          'first_name': firstnameController.text,
+                          'last_name': lastNameController.text,
+                          'email': emailController.text,
+                          'mobile': phoneNumberController.text,
+                        };
+
+                        editProfileBloc.add(UpdateUserProfile(updatedData));
+                      },
+                      child: Text("Confirm", style: CustomFont().buttontext),
+                    ): SizedBox.shrink();
+                  }
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: 20.h)
+            ],
           ),
         ),
       ),
-    ]);
+    );
   }
 }

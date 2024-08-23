@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:everlane_style/signup_page/user_reg_model/userregistration.dart';
+import 'package:everlane_style/data/models/userregistration.dart';
 import 'package:http/http.dart' as http;
 
 class SignupRepository {
