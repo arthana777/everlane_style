@@ -218,65 +218,6 @@ class _CartScreenState extends State<CartScreen> {
       ],
     );
   }
-  // void _showModalSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     builder: (context) {
-  //       return StatefulBuilder(
-  //         builder: (BuildContext context, StateSetter modalState) {
-  //           return Container(
-  //             height: 200.h,
-  //             decoration: BoxDecoration(
-  //               color: Colors.white,
-  //               borderRadius: BorderRadius.circular(30),
-  //             ),
-  //             child: ListView.builder(
-  //               scrollDirection: Axis.horizontal,
-  //               itemCount: 2,
-  //               itemBuilder: (context, index) {
-  //                 return Padding(
-  //                   padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-  //                   child: InkWell(
-  //                     onTap: () {
-  //                       tappingfun(index);
-  //                       modalState(() {});
-  //                       if (ordertype[index] == 'Buyformyself') {
-  //                         Navigator.push(
-  //                           context,
-  //                           MaterialPageRoute(
-  //                             builder: (context) => PaymentScreen(),
-  //                           ),
-  //                         );
-  //                       } else if (ordertype[index] == 'Donate') {
-  //                         Navigator.push(
-  //                           context,
-  //                           MaterialPageRoute(
-  //                             builder: (context) => DonationHomeScreen(), // Replace with your actual donation screen
-  //                           ),
-  //                         );
-  //                       }
-  //                     },
-  //                     child: Container(
-  //                       height: 20.h,
-  //                       width: 150.w,
-  //                       decoration: BoxDecoration(
-  //                         color: isclicked == index
-  //                             ? Color(0xFF973d93)
-  //                             : Colors.black12,
-  //                       ),
-  //                       child: Center(child: Text(ordertype[index], style: CustomFont().subtitleText)),
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
 
 
 }
