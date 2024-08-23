@@ -37,7 +37,7 @@ class WhishlistDatasource {
           'Authorization': 'Token $stringValue',
         },
         body: jsonEncode({
-          'product': pid
+          'product_id': pid
         }),
       );
       print(response.body);
@@ -112,7 +112,7 @@ class WhishlistDatasource {
           'Authorization': 'Token $stringValue',
         },
         body: jsonEncode({
-          'product': pid
+          'product_id': pid
         }),
       );
       print(response.body);

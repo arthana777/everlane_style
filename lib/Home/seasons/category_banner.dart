@@ -20,7 +20,7 @@ class CategoryBanner extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                  image: NetworkImage(image??""),
+                  image: AssetImage(image??""),
               fit: BoxFit.cover,
               )
             ),

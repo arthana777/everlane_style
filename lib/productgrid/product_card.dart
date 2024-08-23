@@ -7,12 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class ProductCard extends StatelessWidget {
-  ProductCard({super.key,  required this.image,  required this.title, required this.subtitle, required this.price, this.ontap, });
+  const ProductCard({super.key,  required this.image,  required this.title, required this.subtitle, required this.price, this.ontap, this.cartOntap, required this.isInWishlist, });
   final String image;
   final String title;
   final String subtitle;
   final String price;
 final VoidCallback? ontap;
+final VoidCallback? cartOntap;
+   final bool isInWishlist;
 
   @override
   Widget build(BuildContext context) {
@@ -66,24 +68,12 @@ final VoidCallback? ontap;
                       ),
                         child: InkWell(
                           onTap: ontap,
-                            child: Center(child: Icon(Icons.favorite_border,size: 20.sp,))),
+                            child: Center(
+                                child:
+                                Icon(isInWishlist?Icons.favorite:Icons.favorite_border,size: 20.sp,
+                                  color: isInWishlist ? Colors.red : Colors.grey,))),
                   )),
-                  Positioned(
-                      top: 245,
-                      right: 10,
-                      child: Container(
-                        height: 30.h,
-                        width: 30.w,
-                        decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius: BorderRadius.circular(20.r)
-                        ),
-                        child: InkWell(
-                            onTap: (){
 
-                            },
-                            child: Center(child: Icon(Icons.shopping_cart,size: 20.sp,))),
-                      ))
                 ],
               ),
             ),
@@ -94,22 +84,23 @@ final VoidCallback? ontap;
                 children: [
                   Container(
                     height: 30,
-                    child: Text( title,style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp,
-                        fontWeight: FontWeight.w300,color: Colors.grey)),),
+                    child: Text( subtitle,
+                      style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500)),
+                      maxLines: 1,
+                    ),
                   ),
-                  SizedBox(height: 4,),
-                  Text( subtitle,
-                    style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500)),
-                    maxLines: 1,
-                  ),
-                  SizedBox(height: 5,),
+                  //SizedBox(height: 4,),
+                  Text( title,style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp,
+
+                      fontWeight: FontWeight.w300,color: Colors.grey)), maxLines: 1,),
+
+                 // SizedBox(height: 5.h,),
                   Row(
                     children: [
-                      Icon(Icons.star_outlined,color: Colors.yellow,),
-                      // SizedBox(width: 5.w,),
+                      Text(price,style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp,color: Colors.green))),
+                      SizedBox(width: 55.w,),
                       Text( '5',style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 12.sp))),
-                      SizedBox(width: 65.h,),
-                      Text(price,style: GoogleFonts.poppins(textStyle:TextStyle(fontSize: 15.sp,color: Colors.green)))
+                      Icon(Icons.star_outlined,color: Colors.yellow,),
                     ],
                   ),
 

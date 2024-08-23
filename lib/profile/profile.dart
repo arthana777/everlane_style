@@ -1,3 +1,6 @@
+import 'package:everlane_style/Home/homescreen.dart';
+import 'package:everlane_style/btm_navigation/btm_navigation.dart';
+import 'package:everlane_style/first_page/first_page.dart';
 import 'package:everlane_style/profile/edit_profile.dart';
 import 'package:everlane_style/sigin_page/sigin_page.dart';
 import 'package:everlane_style/whishlist/whishlist.dart';
@@ -7,7 +10,11 @@ import 'package:everlane_style/widgets/customfont.dart';
 import 'package:everlane_style/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../checkout/myorders.dart';
+import '../navigation_provider/navigation_provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -22,6 +29,17 @@ class Profile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF7F7F7),
       appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+        leading: InkWell(
+          onTap: (){
+            final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+            navigationProvider.updateScreenIndex(0);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => BtmNavigation()),
+                  (Route<dynamic> route) => false,
+            );
+          },
+            child: Icon(Icons.arrow_back)),
         text: "Profile",
       )),
       body: Center(
@@ -125,7 +143,9 @@ class Profile extends StatelessWidget {
                 ProfileTextfield(
                   icon: Icons.notifications_active,
                   title: "Notifications(13)",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MyOrders()));
+                  },
                 ),
                 ProfileTextfield(
                   icon: Icons.delete_sweep,
@@ -155,7 +175,7 @@ class Profile extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SiginPage(),
+                        builder: (context) => FirstPage(),
                       ),
                     );
                   },

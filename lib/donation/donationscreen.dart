@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/donation/upload_clothes.dart';
+import 'package:everlane_style/donation/imagepickerscreen.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'disaster_list.dart';
 import 'donation_address.dart';
 
 class DonationHomeScreen extends StatelessWidget {
@@ -74,7 +76,7 @@ class DonationHomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => UploadClothes(),
+                        builder: (context) => DisasterList(),
                       ),
                     );
                   },
@@ -84,7 +86,6 @@ class DonationHomeScreen extends StatelessWidget {
                       // padding: EdgeInsets.symmetric(horizontal: 30),
                       height: 50.h,
                       width: 300.w,
-        
                       decoration: BoxDecoration(
                           color: CustomColor.primaryColor,
                           border: Border.all(color: Colors.black26,),

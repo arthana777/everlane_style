@@ -6,16 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/custom_textbutton.dart';
 import '../widgets/customfont.dart';
 
-class CartItem extends StatefulWidget {
-  CartItem({super.key, this.ontap});
-
-  final VoidCallback? ontap;
+class CartItemCard extends StatefulWidget {
+  CartItemCard({super.key, this.ontapremove, this.image, this.title, this.price, this.itemcount});
+final String? image;
+final String? itemcount;
+final String? title;
+final double? price;
+  final VoidCallback? ontapremove;
 
   @override
-  State<CartItem> createState() => _CartItemState();
+  State<CartItemCard> createState() => _CartItemState();
 }
 
-class _CartItemState extends State<CartItem> {
+class _CartItemState extends State<CartItemCard> {
   final List<String> item1 = [
     "1",
     '2',
@@ -23,12 +26,17 @@ class _CartItemState extends State<CartItem> {
     '4',
     '5',
   ];
-  String dropedownvalue1 = '1';
+  late  String dropedownvalue1;
+  @override
+  void initState() {
+    dropedownvalue1 = widget.itemcount ?? '1';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200.w,
+      width: 380.w,
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -50,6 +58,7 @@ class _CartItemState extends State<CartItem> {
                     borderRadius: BorderRadius.circular(5.r),
                     image: DecorationImage(
                         image: NetworkImage(
+                          widget.image??
                             "https://plus.unsplash.com/premium_photo-1658506787944-7939ed84aaf8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"),
                         fit: BoxFit.cover),
                   ),
@@ -61,6 +70,7 @@ class _CartItemState extends State<CartItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      widget.title??
                       "Apple fifteen pro max",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
@@ -72,7 +82,8 @@ class _CartItemState extends State<CartItem> {
                       children: [
                         Icon(Icons.currency_rupee),
                         Text(
-                          "700",
+                          widget.price.toString()
+                          ,
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   color: Colors.black,
@@ -121,9 +132,15 @@ class _CartItemState extends State<CartItem> {
               CustomTextButton(
                 text: "Save for later",
               ),
-              CustomTextButton(
-                text: "Remove",
-              ),
+    InkWell(
+    onTap: widget.ontapremove,
+    child: Container(
+    width: 180.w,
+    padding: EdgeInsets.all(15),
+    child: Center(
+    child: Text("Remove")),
+    ),
+    )
             ],
           ),
         ],

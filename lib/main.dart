@@ -1,4 +1,6 @@
 
+import 'package:everlane_style/bloc/address/address_bloc.dart';
+import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
 import 'package:everlane_style/first_page/first_page.dart';
@@ -16,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'bloc/category_bloc.dart';
 import 'bloc/loginn/loginn_bloc.dart';
 import 'bloc/whishlist/whishlist_bloc.dart';
+
 
 void main() {
   runApp(
@@ -60,6 +63,13 @@ return MultiProvider(
               BlocProvider(
                 create: (BuildContext context) => LoginnBloc(),
               ),
+              BlocProvider(
+                create: (BuildContext context) => CartBloc(),
+              ),
+              BlocProvider(
+                create: (BuildContext context) => AddressBloc(),
+              ),
+
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

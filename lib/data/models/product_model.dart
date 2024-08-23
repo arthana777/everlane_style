@@ -10,7 +10,7 @@ class Product {
   final DateTime createdOn;
   final bool isDeleted;
   final bool isTrending;
-  final List<Item> items;
+ // final List<Item>? items;
 
   // bool isTrending;
 
@@ -26,7 +26,7 @@ class Product {
     required this.createdOn,
     required this.isDeleted,
     required this.isTrending,
-    required this.items,
+    // this.items,
     // required this.isTrending,
   });
 
@@ -43,9 +43,11 @@ class Product {
       createdOn: DateTime.tryParse(json['created_on'] ?? '') ?? DateTime.now(),
       isDeleted: json['is_deleted'] ?? false,
       isTrending: json['is_trending'] ?? false,
-      items: json['items'] != null
-          ? List<Item>.from(json['items'].map((item) => Item.fromJson(item)))
-          : [], // Return an empty list if items is null
+     // items:List<Item>.from(json['items'].map((item) => Item.fromJson(item))),
+      // List<Dish>.from(json["dishes"].map((x) => Dish.fromJson(x))),
+      // items: json['items'] != null
+      //     ? List<Item>.from(json['items'].map((item) => Item.fromJson(item)))
+      //     : [], // Return an empty list if items is null
       //isTrending: json['is_trending'],
     );
   }
@@ -59,16 +61,16 @@ class Product {
       'brand': brand,
       'subcategory': subcategory,
       'image': image,
-
       'created_on': createdOn.toIso8601String(),
       'is_deleted': isDeleted,
       'is_trending': isTrending,
-      'items': items.map((item) => item.toJson()).toList(),
+      //'items': items?.map((item) => item.toJson()).toList(),
       //'is_trending': isTrending,
     };
   }
 }
-  class Item {
+
+class Item {
   final int id;
   final int product;
   final String size;
@@ -76,35 +78,30 @@ class Product {
   final bool isOutOfStock;
 
   Item({
-  required this.id,
-  required this.product,
-  required this.size,
-  required this.stock,
-  required this.isOutOfStock,
+    required this.id,
+    required this.product,
+    required this.size,
+    required this.stock,
+    required this.isOutOfStock,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
-  return Item(
-  id: json['id'],
-  product: json['product'],
-  size: json['size'],
-  stock: json['stock'],
-  isOutOfStock: json['is_out_of_stock'],
-  );
+    return Item(
+      id: json['id'] ?? "",
+      product: json['product'] ?? '',
+      size: json['size'] ?? "",
+      stock: json['stock'] ?? "",
+      isOutOfStock: json['is_out_of_stock'] ?? "",
+    );
   }
 
   Map<String, dynamic> toJson() {
-  return {
-  'id': id,
-  'product': product,
-  'size': size,
-  'stock': stock,
-  'is_out_of_stock': isOutOfStock,
-  };
+    return {
+      'id': id,
+      'product': product,
+      'size': size,
+      'stock': stock,
+      'is_out_of_stock': isOutOfStock,
+    };
   }
-  }
-
-
-
-
-
+}
