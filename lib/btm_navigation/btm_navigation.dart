@@ -1,63 +1,66 @@
+import 'package:everlane_style/Home/homescreen.dart';
+import 'package:everlane_style/cart/cartscreen.dart';
+import 'package:everlane_style/profile/profile.dart';
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
-import '../Home/homescreen.dart';
-import '../cartscreen/cartscreen.dart';
-import '../navigation_provider/navigation_provider.dart';
-import '../profile/profile.dart';
-import '../widgets/customcolor.dart';
+class BtmNavigation extends StatefulWidget {
+  const BtmNavigation({super.key});
 
-class BtmNavigation extends StatelessWidget {
-  final List<dynamic> screens = [
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<BtmNavigation> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
     const HomeScreen(),
     Profile(),
-     CartScreen(),
+    CartScreen(),
   ];
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screenindexprovider = Provider.of<NavigationProvider>(context);
-    int currentScreenIndex = screenindexprovider.fetchCurrentScreenIndex;
-
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F7F7),
+      body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xFFF7F7F7),
-        showSelectedLabels: true,
-        elevation: 1.5,
-        currentIndex: currentScreenIndex,
-        onTap: (value) => screenindexprovider.updateScreenIndex(value),
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
         items: [
           BottomNavigationBarItem(
-              label: '',
-              icon: Icon(
-                (currentScreenIndex == 0) ? Icons.home : Icons.home_outlined,
-                color: CustomColor.primaryColor,
-                size: 30.sp,
-              ),
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-            label: '',
+            backgroundColor: const Color(0xFFF7F7F7),
             icon: Icon(
-              (currentScreenIndex == 1)
-                  ? Icons.shopping_cart_rounded
-                  : Icons.shopping_cart_outlined,
+              _currentIndex == 0 ? Icons.home : Icons.home_outlined,
               color: CustomColor.primaryColor,
-              size: 30.sp,
             ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            label: '',
             icon: Icon(
-              (currentScreenIndex == 2) ? Icons.shopping_cart : Icons.shopping_cart_outlined,
+              _currentIndex == 1 ? Icons.person : Icons.person_outline_outlined,
               color: CustomColor.primaryColor,
-              size: 30.sp,
             ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              _currentIndex == 2
+                  ? Icons.shopping_cart
+                  : Icons.shopping_cart_outlined,
+              color: CustomColor.primaryColor,
+            ),
+            label: '',
           ),
         ],
       ),
-      body: screens[currentScreenIndex],
     );
   }
 }

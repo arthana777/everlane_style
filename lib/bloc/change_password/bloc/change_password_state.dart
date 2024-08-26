@@ -12,7 +12,7 @@ class ChangePasswordLoading extends ChangePasswordState {}
 class ChangePasswordSucces extends ChangePasswordState {
   final String message;
 
-  ChangePasswordSucces({required this.message});
+  ChangePasswordSucces({required this.message});    
 
   @override
   List<Object> get props => [message];
