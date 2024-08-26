@@ -65,6 +65,12 @@ class _EditProfileState extends State<EditProfile> {
     super.dispose();
   }
 
+  FocusNode fieldOne = FocusNode();
+  FocusNode fieldTwo = FocusNode();
+  FocusNode fieldThree = FocusNode();
+  FocusNode fieldFour = FocusNode();
+  FocusNode fieldFive = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     final editProfileBloc = context.read<EditprofileBloc>();
@@ -101,6 +107,10 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 30.h),
                 CustomTextfield(
+                  focusNode: fieldOne,
+                  onFieldSubmitted: (value) {
+                    FocusScope.of(context).requestFocus(fieldTwo);
+                  },
                   controller: usernameController,
                   hintText: 'User name',
                   inputType: TextInputType.text,
@@ -113,6 +123,10 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextfield(
+                  focusNode: fieldTwo,
+                  onFieldSubmitted: (contex) {
+                    FocusScope.of(context).requestFocus(fieldThree);
+                  },
                   controller: firstnameController,
                   hintText: 'First Name',
                   inputType: TextInputType.name,
@@ -125,6 +139,10 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextfield(
+                  focusNode: fieldThree,
+                  onFieldSubmitted: (value) {
+                    FocusScope.of(context).requestFocus(fieldFour);
+                  },
                   controller: lastNameController,
                   hintText: 'Last Name',
                   inputType: TextInputType.text,
@@ -137,6 +155,10 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextfield(
+                  focusNode: fieldFour,
+                  onFieldSubmitted: (value) {
+                    FocusScope.of(context).requestFocus(fieldFive);
+                  },
                   controller: emailController,
                   hintText: 'Email',
                   inputType: TextInputType.emailAddress,
@@ -152,6 +174,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextfield(
+                  focusNode: fieldFive,
                   controller: phoneNumberController,
                   hintText: 'Mobile Number',
                   inputType: TextInputType.phone,

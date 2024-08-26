@@ -1,6 +1,7 @@
 import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/cartscreen/cartscreen.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +21,6 @@ import '../data/models/detailproduct.dart';
 import '../data/models/product_model.dart';
 import '../data/models/whishlistmodel.dart';
 import '../domain/entities/product_entity.dart';
-import '../navigation_provider/navigation_provider.dart';
 import '../widgets/customcolor.dart';
 
 class ProductDetails extends StatefulWidget {

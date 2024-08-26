@@ -1,4 +1,4 @@
- import 'package:everlane_style/Home/homescreen.dart';
+import 'package:everlane_style/Home/homescreen.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_event.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_state.dart';
@@ -36,7 +36,7 @@ class Profile extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BtmNavigation()),
+                  MaterialPageRoute(builder: (context) => const BtmNavigation()),
                 );
               },
               icon: const Icon(Icons.arrow_back)),
@@ -79,7 +79,7 @@ class Profile extends StatelessWidget {
 class ProfileDetails extends StatefulWidget {
   final Userprofile userProfile;
 
-  ProfileDetails({required this.userProfile});
+  const ProfileDetails({super.key, required this.userProfile});
 
   @override
   State<ProfileDetails> createState() => _ProfileDetailsState();
@@ -94,6 +94,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
   final new_PassController = TextEditingController();
 
   final old_passwordController = TextEditingController();
+  FocusNode fieldOne = FocusNode();
+  FocusNode fieldTwo = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +204,10 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CustomTextfield(
+                                      focusNode: fieldOne,
+                                      onFieldSubmitted: (value) {
+                                        FocusScope.of(context).requestFocus(fieldTwo);
+                                      },
                                       controller: old_passwordController,
                                       hintText: 'Old Password',
                                       inputType: TextInputType.name,
@@ -209,7 +215,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                         if (value == null || value.isEmpty) {
                                           return "Please enter your old  password";
                                         }
-                                      
+
                                         return null;
                                       },
                                     ),
@@ -217,6 +223,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                       height: 10.h,
                                     ),
                                     CustomTextfield(
+                                      focusNode: fieldTwo,
                                       controller: new_PassController,
                                       hintText: 'New Password',
                                       inputType: TextInputType.name,
@@ -237,14 +244,15 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                       listener: (context, state) async {
                                         print("State is  loading = ${state}");
                                         if (state is ChangePasswordSucces) {
-                                         Fluttertoast.showToast(
-                                          backgroundColor: Colors.green,
-                                          gravity: ToastGravity.BOTTOM,
-                                          textColor: Colors.white,
-                                          msg: "Profile Updated Successfully",
-                                        );
-                                        await Future.delayed(const Duration(seconds: 1));
-                                        Navigator.pop(context);
+                                          Fluttertoast.showToast(
+                                            backgroundColor: Colors.green,
+                                            gravity: ToastGravity.BOTTOM,
+                                            textColor: Colors.white,
+                                            msg: "Profile Updated Successfully",
+                                          );
+                                          await Future.delayed(
+                                              const Duration(seconds: 1));
+                                          Navigator.pop(context);
 
                                           print("   = ${state}");
                                         } else if (state
@@ -255,8 +263,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                             textColor: Colors.white,
                                             msg: "Enter Password Wrong",
                                           );
-                                         
-                                        } 
+                                        }
                                       },
                                       child: BlocBuilder<ChangePasswordBloc,
                                           ChangePasswordState>(

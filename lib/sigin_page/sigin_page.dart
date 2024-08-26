@@ -67,6 +67,9 @@ class _SiginPageState extends State<SiginPage> {
     return null;
   }
 
+  FocusNode fieldOne = FocusNode();
+  FocusNode fieldTwo = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     Color colorWithOpacity;
@@ -122,6 +125,10 @@ class _SiginPageState extends State<SiginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextfield(
+                        focusNode: fieldOne,
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context).requestFocus(fieldTwo);
+                        },
                         hintText: 'Enter your Username',
                         controller: _usernameController,
                         inputType: TextInputType.emailAddress,
@@ -139,6 +146,7 @@ class _SiginPageState extends State<SiginPage> {
                         height: 15.h,
                       ),
                       CustomTextfield(
+                        focusNode: fieldTwo,
                         hintText: 'Enter Your Password',
                         controller: _passwordController,
                         inputType: TextInputType.text,

@@ -1,6 +1,7 @@
 import 'package:everlane_style/bloc/address/address_bloc.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/checkout/payment.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../btm_navigation/btm_navigation.dart';
 import '../data/models/addressmodel.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 
 class AddressList extends StatefulWidget {
    AddressList({super.key});

@@ -1,5 +1,6 @@
 import 'package:everlane_style/checkout/address_list.dart';
 import 'package:everlane_style/checkout/payment.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,7 @@ import '../btm_navigation/btm_navigation.dart';
 import '../checkout/address_creation.dart';
 import '../data/models/cartmodel.dart';
 import '../donation/donationscreen.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 import '../widgets/customappbar.dart';
 import '../widgets/customcolor.dart';
 import '../widgets/customfont.dart';

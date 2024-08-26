@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
@@ -9,10 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../bloc/address/address_bloc.dart';
 import '../btm_navigation/btm_navigation.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 
 class ImagePickerScreen extends StatefulWidget {
   @override
@@ -125,7 +125,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
               navigationProvider.updateScreenIndex(0);
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => BtmNavigation()),
+                MaterialPageRoute(builder: (context) => const BtmNavigation()),
                     (Route<dynamic> route) => false,
               );
             },

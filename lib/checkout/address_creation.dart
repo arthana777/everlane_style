@@ -1,5 +1,6 @@
 
 import 'package:everlane_style/checkout/payment.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +13,7 @@ import 'package:provider/provider.dart';
 import '../bloc/address/address_bloc.dart';
 import '../btm_navigation/btm_navigation.dart';
 import '../data/models/addressmodel.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 import '../widgets/customcolor.dart';
 import '../widgets/cutsofield_address.dart';
 

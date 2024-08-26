@@ -1,13 +1,11 @@
 import 'package:everlane_style/checkout/orderitem.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../btm_navigation/btm_navigation.dart';
-import '../navigation_provider/navigation_provider.dart';
 
 class MyOrders extends StatelessWidget {
   const MyOrders({super.key});

@@ -10,4 +10,4 @@ class NavigationProvider extends ChangeNotifier {
     screenIndex = newIndex;
     notifyListeners();
   }
-}
+} 

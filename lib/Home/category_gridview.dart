@@ -1,4 +1,5 @@
 import 'package:everlane_style/bloc/category_bloc.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,7 @@ import '../data/models/product_model.dart';
 import '../data/models/whishlistmodel.dart';
 import '../domain/entities/category_entity.dart';
 import '../domain/entities/product_entity.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 import '../productgrid/product_card.dart';
 
 class CategoryGridview extends StatefulWidget {
@@ -54,7 +55,7 @@ class _CategoryGridviewState extends State<CategoryGridview> {
                 navigationProvider.updateScreenIndex(0);
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => BtmNavigation()),
+                  MaterialPageRoute(builder: (context) => const BtmNavigation()),
                       (Route<dynamic> route) => false,
                 );
               },
