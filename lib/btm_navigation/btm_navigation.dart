@@ -12,7 +12,7 @@ class BtmNavigation extends StatelessWidget {
   final List<dynamic> screens = [
     const HomeScreen(),
     Profile(),
-     CartScreen(),
+    CartScreen(),
   ];
 
   @override
@@ -41,8 +41,8 @@ class BtmNavigation extends StatelessWidget {
             label: '',
             icon: Icon(
               (currentScreenIndex == 1)
-                  ? Icons.shopping_cart_rounded
-                  : Icons.shopping_cart_outlined,
+                  ? Icons.person
+                  : Icons.person_2_outlined,
               color: CustomColor.primaryColor,
               size: 30.sp,
             ),
@@ -50,7 +50,9 @@ class BtmNavigation extends StatelessWidget {
           BottomNavigationBarItem(
             label: '',
             icon: Icon(
-              (currentScreenIndex == 2) ? Icons.shopping_cart : Icons.shopping_cart_outlined,
+              (currentScreenIndex == 2)
+                  ? Icons.shopping_cart
+                  : Icons.shopping_cart_outlined,
               color: CustomColor.primaryColor,
               size: 30.sp,
             ),

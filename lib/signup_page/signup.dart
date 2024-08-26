@@ -41,6 +41,8 @@ class _SiginupState extends State<Siginup> {
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  
   final nameController = TextEditingController();
 
   final emailController = TextEditingController();
