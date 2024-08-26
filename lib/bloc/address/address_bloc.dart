@@ -25,9 +25,14 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
 
         list=result;
         print("@D@D@D${list.length}");
-        if(list.isNotEmpty){
+        if (list.isEmpty) {
+          emit(AddressLoaded(userAddresses: []));  // Emit an empty list
+        } else {
           emit(AddressLoaded(userAddresses: result));
         }
+        // if(list.isNotEmpty){
+        //   emit(AddressLoaded(userAddresses: []));
+        // }
       } catch (e) {
         print("kikikikkiki");
         emit(AddressError(message: e.toString()));

@@ -26,7 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(CartLoaded(result));
         }
         else{
-            emit(CartError(e.toString()));
+            emit(CartLoaded([]));
         }
       } catch (e) {
         print("@@@@@@@@@@@@@@@@@@");
@@ -67,13 +67,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<PlaceOrder>((event, emit) async {
       emit(palceOrderLoading());
       try {
-        final cartitems = await cartDataSource.placeOrder(event.paymentMethod,event.orderType,event.deliveryAddressId);
-        print("object${cartitems}");
-        if(cartitems=="success"){
+        final result = await cartDataSource.placeOrder(event.paymentMethod,event.orderType,event.deliveryAddressId);
+        print("object${result}");
+        if(result=="success"){
           emit(placeOrderSuccess());
         }
         else{
-          emit(placeOrdererror(message: cartitems));
+          emit(placeOrdererror(message: result));
         }
       } catch (e) {
         emit(placeOrdererror(message: e.toString()));
