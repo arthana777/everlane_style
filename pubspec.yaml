@@ -45,13 +45,16 @@ dependencies:
   flutter_bloc: ^8.1.6
   shimmer: ^3.0.0
   flutter_pw_validator: ^1.6.0
-  dio:
-  carousel_slider: ^4.2.1
+  dio: ^5.6.0
+  carousel_slider:
   shared_preferences: ^2.3.1
   linear_progress_bar: ^1.1.2
   image_picker: ^1.1.2
   flutter_launcher_icons: ^0.13.1
+ 
   fluttertoast: ^8.2.8
+  url_launcher: ^6.3.0
+  flutter_image_compress: ^2.3.0
 
 dev_dependencies:
   flutter_test:

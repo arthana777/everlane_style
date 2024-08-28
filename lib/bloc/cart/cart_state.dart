@@ -85,6 +85,47 @@ class RemoveCartFailure extends CartState {
 }
 
 
+class incrementsuccess extends CartState {
+  @override
+  // final List<Cart> carts; // Assuming you have a Cart model
+  //
+  // addtoCartSuccess({required this.carts});
+
+  @override
+  List<Object?> get props => [];
+}
+
+class incrementerror extends CartState {
+  @override
+  final String message;
+
+  incrementerror({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
+
+class decrementsuccess extends CartState {
+  @override
+  // final List<Cart> carts; // Assuming you have a Cart model
+  //
+  // addtoCartSuccess({required this.carts});
+
+  @override
+  List<Object?> get props => [];
+}
+
+class decrementerror extends CartState {
+  @override
+  final String message;
+
+  decrementerror({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
 
 
 class palceOrderLoading extends CartState {
@@ -108,6 +149,56 @@ class placeOrdererror extends CartState {
   final String message;
 
   placeOrdererror({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+class OrderLoading extends CartState {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+
+class OrderLoaded extends CartState {
+
+  final List<Order> orders;
+  OrderLoaded(this.orders);
+
+  @override
+  List<Object> get props => [orders];
+}
+
+class OrderError extends CartState {
+  final String message;
+
+  OrderError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+
+class Returnloading extends CartState {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+
+class ReturnSuccess extends CartState {
+  @override
+  // final List<Cart> carts; // Assuming you have a Cart model
+  //
+  // addtoCartSuccess({required this.carts});
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ReturnError extends CartState {
+  @override
+  final String message;
+
+  ReturnError({required this.message});
 
   @override
   List<Object?> get props => [message];

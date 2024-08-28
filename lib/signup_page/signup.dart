@@ -41,6 +41,7 @@ class _SiginupState extends State<Siginup> {
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final nameController = TextEditingController();
 
   final emailController = TextEditingController();
@@ -55,7 +56,6 @@ class _SiginupState extends State<Siginup> {
 
   final _mobileController = TextEditingController();
 
-  
   bool passwordVisible = true;
 
   bool _obscurePassword = true;
@@ -83,6 +83,14 @@ class _SiginupState extends State<Siginup> {
     }
     return null;
   }
+
+  FocusNode fieldOne = FocusNode();
+  FocusNode fieldTwo = FocusNode();
+  FocusNode fieldThree = FocusNode();
+  FocusNode fieldFour = FocusNode();
+  FocusNode fieldFive = FocusNode();
+  FocusNode fieldSix = FocusNode();
+  FocusNode fieldSeven = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +123,10 @@ class _SiginupState extends State<Siginup> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextfield(
+                          focusNode: fieldOne,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(fieldTwo);
+                          },
                           controller: nameController,
                           hintText: "Firstname",
                           inputType: TextInputType.emailAddress,
@@ -130,6 +142,10 @@ class _SiginupState extends State<Siginup> {
                           height: 10.h,
                         ),
                         CustomTextfield(
+                          focusNode: fieldTwo,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(fieldThree);
+                          },
                           controller: lastNameController,
                           hintText: 'Enter Last Name',
                           inputType: TextInputType.text,
@@ -144,6 +160,10 @@ class _SiginupState extends State<Siginup> {
                           height: 10.h,
                         ),
                         CustomTextfield(
+                          focusNode: fieldThree,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(fieldFour);
+                          },
                           controller: emailController,
                           hintText: 'Enter Your Email',
                           inputType: TextInputType.text,
@@ -163,6 +183,10 @@ class _SiginupState extends State<Siginup> {
                           height: 10.h,
                         ),
                         CustomTextfield(
+                          focusNode: fieldFour,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(fieldFive);
+                          },
                           controller: userNameController,
                           hintText: 'Enter UserName',
                           inputType: TextInputType.emailAddress,
@@ -178,6 +202,10 @@ class _SiginupState extends State<Siginup> {
                           height: 10.h,
                         ),
                         CustomTextfield(
+                          focusNode: fieldFive,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(fieldSix);
+                          },
                           controller: _mobileController,
                           hintText: 'Enter mobile number',
                           inputType: TextInputType.number,
@@ -198,10 +226,14 @@ class _SiginupState extends State<Siginup> {
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5).r,
                           child: TextFormField(
+                            focusNode: fieldSix,
+                            onFieldSubmitted: (value) {
+                              FocusScope.of(context).requestFocus(fieldSeven);
+                            },
                             controller: passController,
                             obscureText: _obscurePassword,
                             decoration: InputDecoration(
-                              hintStyle:  CustomFont().hintText,
+                              hintStyle: CustomFont().hintText,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(8),
@@ -233,10 +265,11 @@ class _SiginupState extends State<Siginup> {
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           child: TextFormField(
+                            focusNode: fieldSeven,
                             controller: confirmpassController,
                             obscureText: _obscureConfirmPassword,
                             decoration: InputDecoration(
-                              hintStyle:  CustomFont().hintText,
+                              hintStyle: CustomFont().hintText,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(8),

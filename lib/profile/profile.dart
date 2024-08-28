@@ -3,7 +3,9 @@ import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.da
 import 'package:everlane_style/bloc/change_password/bloc/change_password_event.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_state.dart';
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
+import 'package:everlane_style/checkout/myorders.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
+import 'package:everlane_style/whishlist/whishlist.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +24,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../checkout/myorders.dart';
-import '../navigation_provider/navigation_provider.dart';
-
 class Profile extends StatelessWidget {
   Profile({super.key});
 
@@ -39,7 +38,7 @@ class Profile extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BtmNavigation()),
+                  MaterialPageRoute(builder: (context) => const BtmNavigation()),
                 );
               },
               icon: const Icon(Icons.arrow_back)),
@@ -79,13 +78,26 @@ class Profile extends StatelessWidget {
   }
 }
 
-class ProfileDetails extends StatelessWidget {
+class ProfileDetails extends StatefulWidget {
   final Userprofile userProfile;
 
-  final new_PassController = TextEditingController();
-  final old_passwordController = TextEditingController();
+  const ProfileDetails({super.key, required this.userProfile});
 
-  ProfileDetails({required this.userProfile});
+  @override
+  State<ProfileDetails> createState() => _ProfileDetailsState();
+}
+
+class _ProfileDetailsState extends State<ProfileDetails> {
+  void _confirm() {
+    if (_formKey.currentState!.validate()) {}
+  }
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final new_PassController = TextEditingController();
+
+  final old_passwordController = TextEditingController();
+  FocusNode fieldOne = FocusNode();
+  FocusNode fieldTwo = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -93,209 +105,288 @@ class ProfileDetails extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10).r,
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundImage: const NetworkImage(
-                  'https://i.pinimg.com/474x/8e/0c/fa/8e0cfaf58709f7e626973f0b00d033d0.jpg',
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: const NetworkImage(
+                    'https://i.pinimg.com/474x/8e/0c/fa/8e0cfaf58709f7e626973f0b00d033d0.jpg',
+                  ),
+                  backgroundColor: Colors.white,
+                  maxRadius: 60.r,
                 ),
-                backgroundColor: Colors.white,
-                maxRadius: 60.r,
-              ),
-              SizedBox(height: 10.h),
-              Text('${userProfile.username}', style: CustomFont().titleText),
-              SizedBox(height: 4.h),
-              Text('${userProfile.email}', style: GoogleFonts.poppins()),
-              SizedBox(height: 4.h),
-              Text("${userProfile.mobile}", style: CustomFont().subText),
-              SizedBox(height: 10.h),
-              ProfileTextfield(
-                icon: Icons.favorite,
-                title: "Wish List",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EditProfile(),
-                  //   ),
-                  // );
-                },
-              ),
-              SizedBox(height: 5.h),
-              ProfileTextfield(
-                icon: Icons.shopping_cart,
-                title: "My Orders",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EditProfile(),
-                  //   ),
-                  // );
-                },
-              ),
-              SizedBox(height: 5.h),
-              ProfileTextfield(
-                icon: Icons.settings,
-                title: "Settings",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EditProfile(),
-                  //   ),
-                  // );
-                },
-              ),
-              SizedBox(height: 5.h),
-              ProfileTextfield(
-                icon: Icons.person_2_sharp,
-                title: "Edit Profile",
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfile(),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 5.h),
-              ProfileTextfield(
-                icon: Icons.person_2_sharp,
-                title: "Change password",
-                onTap: () {
-                  showModalBottomSheet(
-                    backgroundColor: const Color(0xFFEBEBEB),
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) {
-                      return BlocProvider(
-                        create: (context) => ChangePasswordBloc(
-                          changePasswordRepo: ChangePasswordRepo(),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: SizedBox(
-                            height: 250.h,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 25, left: 10, right: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CustomTextfield(
-                                    controller: old_passwordController,
-                                    hintText: 'Old Password',
-                                    inputType: TextInputType.name,
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  CustomTextfield(
-                                    controller: new_PassController,
-                                    hintText: 'New Password',
-                                    inputType: TextInputType.name,
-                                  ),
-                                  SizedBox(height: 10.h),
-                                  BlocConsumer<ChangePasswordBloc,
-                                      ChangePasswordState>(
-                                    listener: (context, state) {
-                                      print("State 1000= ${state}");
-                                      if (state is ChangePasswordSucces) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                                " Change Password Success :- ${state.message}"),
+                SizedBox(height: 10.h),
+                Text('${widget.userProfile.username}',
+                    style: CustomFont().titleText),
+                SizedBox(height: 4.h),
+                Text('${widget.userProfile.email}',
+                    style: GoogleFonts.poppins()),
+                SizedBox(height: 4.h),
+                Text("${widget.userProfile.mobile}",
+                    style: CustomFont().subText),
+                SizedBox(height: 10.h),
+                ProfileTextfield(
+                  icon: Icons.favorite,
+                  title: "Wish List",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Whishlist(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 5.h),
+                ProfileTextfield(
+                  icon: Icons.shopping_cart,
+                  title: "My Orders",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyOrders(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 5.h),
+                ProfileTextfield(
+                  icon: Icons.settings,
+                  title: "Settings",
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => EditProfile(),
+                    //   ),
+                    // );
+                  },
+                ),
+                SizedBox(height: 5.h),
+                ProfileTextfield(
+                  icon: Icons.person_2_sharp,
+                  title: "Edit Profile",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 5.h),
+                ProfileTextfield(
+                  icon: Icons.person_2_sharp,
+                  title: "Change password",
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: const Color(0xFFEBEBEB),
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return BlocProvider(
+                          create: (context) => ChangePasswordBloc(
+                            changePasswordRepo: ChangePasswordRepo(),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: SizedBox(
+                              height: 250.h,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 25, left: 10, right: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    CustomTextfield(
+                                      focusNode: fieldOne,
+                                      onFieldSubmitted: (value) {
+                                        FocusScope.of(context).requestFocus(fieldTwo);
+                                      },
+                                      controller: old_passwordController,
+                                      hintText: 'Old Password',
+                                      inputType: TextInputType.name,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please enter your old  password";
+                                        }
+
+                                        return null;
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    CustomTextfield(
+                                      focusNode: fieldTwo,
+                                      controller: new_PassController,
+                                      hintText: 'New Password',
+                                      inputType: TextInputType.name,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please enter a proper password";
+                                        }
+                                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                            .hasMatch(value)) {
+                                          return 'Please enter a proper password';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    BlocListener<ChangePasswordBloc,
+                                        ChangePasswordState>(
+                                      listener: (context, state) async {
+                                        print("State is  loading = ${state}");
+                                        if (state is ChangePasswordSucces) {
+                                          Fluttertoast.showToast(
                                             backgroundColor: Colors.green,
-                                          ),
-                                        );
-                                        Navigator.pop(context);
-                                        print("State00= ${state}");
-                                      } else if (state
-                                          is ChangePasswordFailure) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(
-                                          content: Text("Error:${state.error}"),
-                                          backgroundColor: Colors.red,
-                                        ));
-                                      }
-                                    },
-                                    builder: (context, state) {
-                                      print("State6= ${state}");
-                                      if (state is ChangePasswordLoading) {
-                                        return const CircularProgressIndicator();
-                                      }
-                                      return ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomColor.primaryColor,
-                                          foregroundColor: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10).w,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          print("State 10= ${state}");
-                                          if (new_PassController.text.isEmpty ||
-                                              old_passwordController
-                                                  .text.isEmpty) {
-                                            Fluttertoast.showToast(
-                                                backgroundColor: Colors.white,
-                                                gravity: ToastGravity.SNACKBAR,
-                                                textColor: Colors.red,
-                                                msg:
-                                                    "Please fill in all fields");
-                                          } else {
-                                            context
-                                                .read<ChangePasswordBloc>()
-                                                .add(ChangePasswordSubmitted(
-                                                    old_passwordController.text,
-                                                    new_PassController.text));
-                                          }
+                                            gravity: ToastGravity.BOTTOM,
+                                            textColor: Colors.white,
+                                            msg: "Profile Updated Successfully",
+                                          );
+                                          await Future.delayed(
+                                              const Duration(seconds: 1));
                                           Navigator.pop(context);
+
+                                          print("   = ${state}");
+                                        } else if (state
+                                            is ChangePasswordFailure) {
+                                          Fluttertoast.showToast(
+                                            backgroundColor: Colors.green,
+                                            gravity: ToastGravity.BOTTOM,
+                                            textColor: Colors.white,
+                                            msg: "Enter Password Wrong",
+                                          );
+                                        }
+                                      },
+                                      child: BlocBuilder<ChangePasswordBloc,
+                                          ChangePasswordState>(
+                                        builder: (context, state) {
+                                          if (state is ChangePasswordLoading) {
+                                            return const CircularProgressIndicator();
+                                          }
+                                          return ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  CustomColor.primaryColor,
+                                              foregroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10).w,
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              print("State 10= ${state}");
+                                              if (new_PassController
+                                                      .text.isEmpty ||
+                                                  old_passwordController
+                                                      .text.isEmpty) {
+                                                Fluttertoast.showToast(
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    gravity:
+                                                        ToastGravity.SNACKBAR,
+                                                    textColor: Colors.red,
+                                                    msg:
+                                                        "Please fill in all fields");
+                                              } else {
+                                                context
+                                                    .read<ChangePasswordBloc>()
+                                                    .add(ChangePasswordSubmitted(
+                                                        old_passwordController
+                                                            .text,
+                                                        new_PassController
+                                                            .text));
+                                              }
+                                            },
+                                            child: Text(
+                                              "Confirm",
+                                              style: CustomFont().buttontext,
+                                            ),
+                                          );
                                         },
-                                        child: Text(
-                                          "Confirm",
-                                          style: CustomFont().buttontext,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-              SizedBox(height: 8.h),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColor.primaryColor,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10).w,
-                  ),
+                        );
+                      },
+                    );
+                  },
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FirstPage()),
-                  );
-                },
-                child: Text("Logout", style: CustomFont().buttontext),
-              ),
-              SizedBox(height: 5.h),
-            ],
+                SizedBox(height: 8.h),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: CustomColor.primaryColor,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10).w,
+                    ),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.white,
+                        title: Text(
+                          'Log Out',
+                          style: GoogleFonts.poppins(),
+                        ),
+                        content: Text(
+                          'If You Want To Log Out!!!',
+                          style: GoogleFonts.poppins(),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.all(14),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Text(
+                                  'Yes!',
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.red,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .popUntil((route) => route.isFirst);
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FirstPage(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                  child: Text("Logout", style: CustomFont().buttontext),
+                ),
+                SizedBox(height: 5.h),
+              ],
+            ),
           ),
         ),
       ),

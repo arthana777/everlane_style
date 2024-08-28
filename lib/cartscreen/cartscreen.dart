@@ -1,5 +1,7 @@
 import 'package:everlane_style/checkout/address_list.dart';
 import 'package:everlane_style/checkout/payment.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
+import 'package:everlane_style/product_detail/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,11 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/cart/cart_bloc.dart';
+import '../bloc/whishlist/whishlist_bloc.dart';
+import '../bloc/whishlist/whishlist_event.dart';
+import '../bloc/whishlist/whishlist_state.dart';
 import '../btm_navigation/btm_navigation.dart';
 import '../checkout/address_creation.dart';
 import '../data/models/cartmodel.dart';
+import '../data/models/whishlistmodel.dart';
 import '../donation/donationscreen.dart';
-import '../navigation_provider/navigation_provider.dart';
+
 import '../widgets/customappbar.dart';
 import '../widgets/customcolor.dart';
 import '../widgets/customfont.dart';
@@ -28,7 +34,9 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
 
   List<Cart> carts = [];
-  int? isclicked;
+  List<int> wishlistProductIds = [];
+  List<WhislistProduct> whishlist = [];
+  int? isclicked; 
 
   @override
   void initState() {
@@ -51,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
               ? () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddressList()),
+              MaterialPageRoute(builder: (context) => PaymentScreen()),
             );
           } : null,
         label: Container(
@@ -79,10 +87,11 @@ class _CartScreenState extends State<CartScreen> {
               final navigationProvider =
               Provider.of<NavigationProvider>(context, listen: false);
               navigationProvider.updateScreenIndex(0);
+
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => BtmNavigation()),
-                    (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
               );
             },
             child: Icon(Icons.arrow_back),
@@ -120,6 +129,55 @@ class _CartScreenState extends State<CartScreen> {
               }
             },
           ),
+          BlocListener<WhishlistBloc, WishlistState>(
+            listener: (context, state) {
+              print(state);
+              if (state is addtoWishlistLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) =>
+                      Center(child: CircularProgressIndicator()),
+                );
+              } else if (state is addtoWishlistSuccess) {
+                print("adding to whislisttt");
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content:
+                      Text('Product added to wishlist successfully!')),
+                );
+                //BlocProvider.of<WhishlistBloc>(context).add(RetrieveWhishlist());
+              } else if (state is addtoWishlistFailure) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              } else if (state is WishlistSuccess) {
+                // loading=false;
+                whishlist = state.whishlists;
+                for (var i = 0; i <= whishlist.length; i++) {
+                  wishlistProductIds.add(whishlist[i].product);
+                }
+                print(whishlist.length);
+                print(whishlist[0]);
+                print("oooooooooooooooo");
+                setState(() {});
+              } else if (state is RemoveWishlistSuccess) {
+                setState(() {
+                  whishlist.removeWhere(
+                          (item) => item.id == state.removedProductId);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Item deleted successfully')),
+                );
+              } else if (state is RemoveWishlistFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+            },
+          ),
         ],
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -150,10 +208,25 @@ class _CartScreenState extends State<CartScreen> {
                                 .add(RemovefromCart(item.id),
                             );
                           },
+                          movetowish: (){
+                            BlocProvider.of<WhishlistBloc>(context).add(
+                                AddToWishlist(item?.id ?? 0));
+                            BlocProvider.of<CartBloc>(context)
+                                .add(RemovefromCart(item.id),
+                            );
+                          },
                           title: item.productName,
                           price: item.productPrice,
                           image: item.productImage,
                           itemcount: item.quantity.toString(),
+                          decreased: (){
+                            BlocProvider.of<CartBloc>(context).add(IncreaseCartItemQuantity(item.id,'increase'));
+                          },
+                          increased: (){
+                            if (item.quantity > 1) {
+                              BlocProvider.of<CartBloc>(context).add(DecreaseCartItemQuantity(item.id,'decrease'));
+                            }
+                          },
 
                         ),
                       );

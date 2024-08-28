@@ -7,7 +7,7 @@ import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/bloc/userprofile/bloc/profile_bloc.dart';
 import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
-import 'package:everlane_style/navigation_provider/navigation_provider.dart';
+import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/bloc/question_bloc/bloc/question_bloc.dart';
 import 'package:everlane_style/data/datasources/qst_service.dart';
 import 'package:everlane_style/data/datasources/editprofileservice.dart';

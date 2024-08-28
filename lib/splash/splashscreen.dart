@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (BuildContext context) =>
-          userIsLogedIn? BtmNavigation():FirstPage()),
+          userIsLogedIn? const BtmNavigation():FirstPage()),
       );
     });
 
