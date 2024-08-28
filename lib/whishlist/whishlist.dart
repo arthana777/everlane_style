@@ -1,4 +1,5 @@
 import 'package:everlane_style/checkout/address_creation.dart';
+import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/whishlist/whishlistitem.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
@@ -7,12 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../bloc/whishlist/whishlist_bloc.dart';
 import '../bloc/whishlist/whishlist_event.dart';
 import '../bloc/whishlist/whishlist_state.dart';
 import '../data/models/product_model.dart';
 import '../data/models/whishlistmodel.dart';
+import '../data/navigation_provider/navigation_provider.dart';
 import '../domain/entities/product_entity.dart';
 
 class Whishlist extends StatefulWidget {
@@ -41,6 +44,20 @@ class _WhishlistState extends State<Whishlist> {
             preferredSize: Size.fromHeight(80),
             child: CustomAppBar(
               text: 'Your Whishlist',
+              leading: InkWell(
+                onTap: () {
+                  final navigationProvider =
+                  Provider.of<NavigationProvider>(context, listen: false);
+                  navigationProvider.updateScreenIndex(0);
+
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile()),
+                        (Route<dynamic> route) => false,
+                  );
+                },
+                child: Icon(Icons.arrow_back),
+              ),
             )),
         body: MultiBlocListener(
           listeners: [
@@ -86,7 +103,7 @@ class _WhishlistState extends State<Whishlist> {
             child: Column(
               children: [
               loading==true?Center(child: CircularProgressIndicator()):SizedBox(
-                  child: ListView.builder(
+                  child:whishlist.isEmpty?Center(child: Text("Add Products to wishlist",style: CustomFont().subtitleText,),): ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: whishlist.length,

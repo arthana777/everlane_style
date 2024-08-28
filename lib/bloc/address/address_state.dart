@@ -6,14 +6,14 @@ sealed class AddressState extends Equatable{}
 final class AddressInitial extends AddressState {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 
 class AddressLoading extends AddressState {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class AddressLoaded extends AddressState {
@@ -37,7 +37,7 @@ class AddressError extends AddressState {
 class AddressCreationSuccess extends AddressState {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 
@@ -50,7 +50,7 @@ class DeleteAdresssuccess extends AddressState {
 class DisasteregSuccess extends AddressState {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class DisasterLoaded extends AddressState {
@@ -65,8 +65,32 @@ class DisasterLoaded extends AddressState {
 class uploadclothesuccess extends AddressState {
   @override
   // TODO: implement props
+  List<Object?> get props => [];
+}
+
+
+class Pickuploading extends AddressState {
+  @override
+  // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
 
+class Pickuploaded extends AddressState {
+  final List<PickupLocation> pickuplocations;
+
+  Pickuploaded({required this.pickuplocations});
+
+  @override
+  List<Object> get props => [pickuplocations];
+}
+
+class PickupError extends AddressState {
+  final String message;
+
+  PickupError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 

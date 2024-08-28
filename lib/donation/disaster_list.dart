@@ -21,6 +21,7 @@ class DisasterList extends StatefulWidget {
 
 class _DisasterListState extends State<DisasterList> {
   List<Disaster>disaster=[];
+  int? selectedIndex;
   @override
   void initState() {
     BlocProvider.of<AddressBloc>(context).add(FetchDisaster());
@@ -91,6 +92,7 @@ class _DisasterListState extends State<DisasterList> {
                 shrinkWrap: true,
                 itemCount: disaster.length,
                 itemBuilder: (context, index) {
+                  final isSelected = selectedIndex == index;
                   print(disaster[index].location);
                   print(disaster.length,);
 
@@ -98,13 +100,17 @@ class _DisasterListState extends State<DisasterList> {
                   padding: EdgeInsets.symmetric(vertical: 6.h),
                   child: InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ImagePickerScreen()));
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ImagePickerScreen( disaster: disaster[index],
+                        location: disaster[index].name,)));
                     },
                     child: Container(
                       padding: EdgeInsets.all(16),
                       height: 200.h,
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isSelected? Colors.black12: Colors.white,
                         border: Border.all(color: Colors.black26),
                         borderRadius: BorderRadius.circular(10.r),
                       ),

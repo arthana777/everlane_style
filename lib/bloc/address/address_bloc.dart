@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:everlane_style/data/models/pickupmodel.dart';
 import 'package:everlane_style/donation/upload_clothes.dart';
 import 'package:meta/meta.dart';
 
@@ -114,8 +115,9 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     on<uploadclothes>((event,emit) async {
       emit(AddressLoading());
       try {
-        final addresses = await useraddressDatasourse.uploadCloths();
-        print("object${addresses}");
+        final addresses = await useraddressDatasourse.uploadCloths(event.disasterId,
+          event.images,);
+        print("adressesss${addresses}");
         if(addresses=="success"){
           emit(uploadclothesuccess());
         }
@@ -124,6 +126,29 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         }
       } catch (e) {
         emit(AddressError( message: e.toString(),));
+      }
+    });
+
+    on<Fetchpickuplocations>((event, emit) async {
+      List<PickupLocation> list=[];
+      emit(Pickuploading());
+      print("mnbvcxx");
+      try {
+        final result = await useraddressDatasourse.getPickuplocations();
+
+        list=result;
+        print("@D@D@D${list.length}");
+        if (list.isNotEmpty) {
+          emit(Pickuploaded(pickuplocations: list));  // Emit an empty list
+        } else {
+          emit(Pickuploaded(pickuplocations: []));
+        }
+        // if(list.isNotEmpty){
+        //   emit(AddressLoaded(userAddresses: []));
+        // }
+      } catch (e) {
+        print("kikikikkiki");
+        emit(PickupError(message: e.toString()));
       }
     });
 

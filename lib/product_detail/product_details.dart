@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import '../bloc/address/address_bloc.dart';
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/whishlist/whishlist_bloc.dart';
@@ -39,6 +40,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   List<WhislistProduct> whishlist = [];
   DetailProduct? productdetail;
   int? isclicked;
+  bool isAddedToCart = false;
   bool isInWishlist(int? productId) {
     return wishlistProductIds.contains(productId);
   }
@@ -59,9 +61,9 @@ class _ProductDetailsState extends State<ProductDetails> {
         backgroundColor: Colors.white,
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
-          backgroundColor: CustomColor.primaryColor,
+          backgroundColor: isAddedToCart?Colors.grey:CustomColor.primaryColor,
           onPressed: () {
-            if (isclicked != null) {
+            if (isclicked != null && !isAddedToCart) {
               BlocProvider.of<CartBloc>(context).add(
                 AddToCart(
                   productId: productdetail?.id??0,
@@ -70,7 +72,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               );
               print('Product ID: ${productdetail?.id}');
               print('Selected Size: ${productdetail?.items?[isclicked!].size}');
+              setState(() {
+                isAddedToCart = true;  // Update state variable
+              });
 
+            }
+            else if(isAddedToCart){
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -83,10 +90,10 @@ class _ProductDetailsState extends State<ProductDetails> {
             height: 30.h,
             width: 150.w,
             decoration: BoxDecoration(
-              color: CustomColor.primaryColor,
+              color: isAddedToCart?Colors.grey:CustomColor.primaryColor,
             ),
             child: Center(
-              child: Text("Add to cart", style: CustomFont().buttontext),
+              child: Text(isAddedToCart?"Go to Cart":"Add to cart", style: CustomFont().buttontext),
             ),
           ),
           icon: IconButton(
@@ -312,7 +319,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 50.w),
-                      child: Container(
+                      child: productdetail == null
+                          ? Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          height: 50.h,
+                          width: double.infinity,
+                          color: Colors.white,
+                        ),
+                      ):Container(
                         height: 50.h,
                        // color: Colors.orangeAccent,
                         child: ListView.builder(

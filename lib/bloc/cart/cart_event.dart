@@ -37,3 +37,43 @@ class PlaceOrder extends CartEvent {
   // TODO: implement props
   List<Object?> get props => [deliveryAddressId,orderType,paymentMethod];
 }
+
+class IncreaseCartItemQuantity extends CartEvent {
+  final int cartItemId;
+  final String increase;
+
+  IncreaseCartItemQuantity(this.cartItemId, this.increase);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+
+class DecreaseCartItemQuantity extends CartEvent {
+  final int cartItemId;
+final String decrease;
+  DecreaseCartItemQuantity(this.cartItemId, this.decrease);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+class fetchOrders extends CartEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
+class ReturnOrder extends CartEvent {
+  final int? orderItemId;
+  final int? returnQuantity;
+  final String? returnReason;
+
+
+  ReturnOrder({this.orderItemId, this.returnQuantity, this.returnReason, });
+
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [orderItemId,returnQuantity,returnReason];
+}

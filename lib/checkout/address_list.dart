@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../btm_navigation/btm_navigation.dart';
+import '../cartscreen/cartscreen.dart';
 import '../data/models/addressmodel.dart';
 
 
@@ -64,7 +65,8 @@ class _AddressListState extends State<AddressList> {
                   builder: (context) =>
                       Center(child: CircularProgressIndicator()),
                 );
-              } else if (state is AddressLoaded) {
+              }
+              else if (state is AddressLoaded) {
                 setState(() {
 
                 });

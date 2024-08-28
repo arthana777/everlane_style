@@ -1,8 +1,18 @@
+import 'package:everlane_style/widgets/customcolor.dart';
+import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
+  final String invoiceUrl = "http://18.143.206.136/media/invoices/invoice_D83A32A692.pdf";
+  Future<void> _launchURL() async {
+    final Uri url = Uri.parse("http://18.143.206.136/media/invoices/invoice_D83A32A692.pdf");
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +39,43 @@ class OrderSuccessScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 80.h),
+              InkWell(
+                onTap:
+                  _launchURL,
+                child: Container(
+                  height: 50.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(color:CustomColor.primaryColor,),
+                  ),
+                  child: Center(
+                    child: Text('Download Invoice', style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w500)),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 20.h),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+
+
+
+              InkWell(
+                onTap: (){
+
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
                 },
-                child: Text('Continue Shopping',style: GoogleFonts.questrial(color: Colors.purple),),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h),
+                child: Container(
+                  height: 50.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(
+                    color: CustomColor.primaryColor,
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Center(child: Text('Continue Shopping',style: CustomFont().buttontext,)),
                 ),
               ),
             ],

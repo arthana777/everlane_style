@@ -7,29 +7,26 @@ import '../widgets/custom_textbutton.dart';
 import '../widgets/customfont.dart';
 
 class CartItemCard extends StatefulWidget {
-  CartItemCard({super.key, this.ontapremove, this.image, this.title, this.price, this.itemcount});
+  CartItemCard({super.key, this.ontapremove, this.image, this.title, this.price, this.itemcount, this.increased, this.decreased, this.movetowish});
 final String? image;
 final String? itemcount;
 final String? title;
 final double? price;
   final VoidCallback? ontapremove;
+  final VoidCallback? movetowish;
+  final VoidCallback? increased;
+  final VoidCallback? decreased;
 
   @override
   State<CartItemCard> createState() => _CartItemState();
 }
 
 class _CartItemState extends State<CartItemCard> {
-  final List<String> item1 = [
-    "1",
-    '2',
-    '3',
-    '4',
-    '5',
-  ];
-  late  String dropedownvalue1;
+
+  int itemCount = 1;
   @override
   void initState() {
-    dropedownvalue1 = widget.itemcount ?? '1';
+    itemCount = int.parse(widget.itemcount ?? '1');
     super.initState();
   }
 
@@ -69,14 +66,17 @@ class _CartItemState extends State<CartItemCard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.title??
-                      "Apple fifteen pro max",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12.sp)),
+                    SizedBox(
+                      width: 200.w,
+                      child: Text(
+                        widget.title??
+                        "",
+                        style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12.sp)),
+                      ),
                     ),
                     Row(
                       children: [
@@ -99,29 +99,25 @@ class _CartItemState extends State<CartItemCard> {
                       height: 5.h,
                     ),
                     Container(
-                      height: 20.h,
+                      height: 30.h,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black26),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: DropdownButton(
-                        value: dropedownvalue1,
-                        dropdownColor: Colors.white,
-                        borderRadius: BorderRadius.circular(3),
-                        underline: SizedBox(),
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: item1.map((String item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropedownvalue1 = newValue!;
-                          });
-                        },
-                      ),
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(onPressed: widget.increased,
+                              icon: Icon(Icons.remove)),
+                          Text(
+                              widget.itemcount.toString(),
+                            style: CustomFont().bodyText,
+                          ),
+                          IconButton(onPressed: widget.decreased,
+                              icon: Icon(Icons.add)),
+                        ],
+                      )
                     ),
                   ],
                 ),
@@ -132,8 +128,14 @@ class _CartItemState extends State<CartItemCard> {
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomTextButton(
-                text: "Save for later",
+              InkWell(
+                onTap: widget.movetowish,
+                child: Container(
+                  width: 180.w,
+                  padding: EdgeInsets.all(15),
+                  child: Center(
+                      child: Text("Add to wishlist")),
+                ),
               ),
     InkWell(
     onTap: widget.ontapremove,

@@ -1,7 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:everlane_style/checkout/address_creation.dart';
-import 'package:everlane_style/donation/upload_clothes.dart';
-import 'package:everlane_style/donation/imagepickerscreen.dart';
+
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';

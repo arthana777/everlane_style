@@ -162,7 +162,7 @@ class _SeasongridviewState extends State<Seasongridview> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProductDetails(
-                                    productId: products[index].id ?? 0,
+                                    productId: seasons[index].id ?? 0,
                                   )),
                         );
                       },

@@ -3,7 +3,9 @@ import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.da
 import 'package:everlane_style/bloc/change_password/bloc/change_password_event.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_state.dart';
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
+import 'package:everlane_style/checkout/myorders.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
+import 'package:everlane_style/whishlist/whishlist.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,12 +131,12 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   icon: Icons.favorite,
                   title: "Wish List",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => EditProfile(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Whishlist(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 5.h),
@@ -142,12 +144,12 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   icon: Icons.shopping_cart,
                   title: "My Orders",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => EditProfile(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyOrders(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 5.h),
