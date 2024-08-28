@@ -1,8 +1,9 @@
 import 'package:everlane_style/Home/homescreen.dart';
-import 'package:everlane_style/cart/cartscreen.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
+
+import '../cartscreen/cartscreen.dart';
 
 class BtmNavigation extends StatefulWidget {
   const BtmNavigation({super.key});
@@ -16,7 +17,7 @@ class _MainScreenState extends State<BtmNavigation> {
   final List<Widget> _screens = [
     const HomeScreen(),
     Profile(),
-    const CartScreen(),
+     CartScreen(),
   ];
 
   void _onTabTapped(int index) {

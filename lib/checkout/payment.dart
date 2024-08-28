@@ -1,6 +1,10 @@
 
+
 import 'package:everlane_style/checkout/address_list.dart';
 import 'package:everlane_style/checkout/ordersuccess.dart';
+import 'package:everlane_style/checkout/pickuplocations.dart';
+import 'package:everlane_style/data/models/disastermodel.dart';
+import 'package:everlane_style/data/models/pickupmodel.dart';
 import 'package:everlane_style/donation/disaster_list.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:everlane_style/widgets/customfont.dart';
@@ -19,7 +23,9 @@ import 'orderitem.dart';
 
 class PaymentScreen extends StatefulWidget {
   final UserAddress? address;
-  PaymentScreen({super.key,  this.address,});
+  late final PickupLocation? pickupLocation;
+  // late final PickupLocation? pickuplocations;
+  PaymentScreen({super.key,  this.address,  this.pickupLocation, });
 
 
   @override
@@ -31,6 +37,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String selectedPaymentMethod = "COD";
   String selectedOrderType = "delivery";
    bool isSelected=false;
+  bool _isAddressSelected = false;
+  String disasterName = '';
+
+  String disasterLocation = '';
+  List<PickupLocation> pickuplocation=[];
+
 
    bool _isVisible=false;
 
@@ -61,11 +73,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
         selectedOrderType = type;
         if (type == "donate") {
           selectedPaymentMethod = "ONLINE";
+          _isAddressSelected = true;
         }
       }
     });
   }
-@override
+  Future<void> _selectDisasterAddress() async {
+    final PickupLocation? selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Pickuplocations()),
+    );
+
+    if (selectedLocation != null) {
+      setState(() {
+        // Set address fields with selected pickup location data
+        widget.pickupLocation = selectedLocation;
+        selectedOrderType = "donate";
+        _isAddressSelected = true;
+      });
+    }
+  }
+
+
+  @override
   void initState() {
   context.read<CartBloc>().add(FetchCartData());
     super.initState();
@@ -73,61 +103,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton.extended(
-      //   elevation: 0,
-      //   backgroundColor: CustomColor.primaryColor,
-      //   onPressed: () {
-      //     if (selectedPaymentMethod.isNotEmpty) {
-      //       if (selectedOrderType == "donate") {
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => DisasterList()), // Replace with your DonateHomeScreen
-      //         );
-      //       } else {
-      //         context.read<CartBloc>().add(PlaceOrder(
-      //           deliveryAddressId: widget.address?.id??0,
-      //           orderType: selectedOrderType,
-      //           paymentMethod: selectedPaymentMethod,
-      //
-      //         ));
-      //         ScaffoldMessenger.of(context).showSnackBar(
-      //           SnackBar(content: Text('Order placed successfully!')),
-      //         );
-      //       }
-      //     } else {
-      //       ScaffoldMessenger.of(context).showSnackBar(
-      //         SnackBar(content: Text('Please select a payment method')),
-      //       );
-      //     }
-      //   },
-      //
-      //   // context.read<CartBloc>().add(PlaceOrder(deliveryAddressId: 11, ordertype: 'delivery', method: selectedPaymentMethod));
-      //     // Navigator.push(context, MaterialPageRoute(builder: (context)=>)
-      //   label: Container(
-      //     height: 30.h,
-      //     width: 150.w,
-      //     decoration: BoxDecoration(
-      //       color: CustomColor.primaryColor,
-      //     ),
-      //     child: Center(
-      //       child: Text("Place Order", style: CustomFont().buttontext),
-      //     ),
-      //   ),
-      //   icon: Icon(
-      //     Icons.shopping_bag_outlined,
-      //     size: 20.sp,
-      //     color: CustomColor.buttoniconColor,
-      //   ),
-      // ),
+
       floatingActionButton: FloatingActionButton.extended(
         elevation: 0,
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
           if (selectedPaymentMethod.isNotEmpty) {
-            if (selectedOrderType == "donate") {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DisasterList()), // Replace with your DonateHomeScreen
+            if (selectedOrderType == "donate" && widget.pickupLocation == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Please select a pickup location')),
+              );
+            } else if (selectedOrderType == "delivery" && widget.address == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Please select a delivery address')),
               );
             } else if (carts.isNotEmpty) {
               context.read<CartBloc>().add(PlaceOrder(
@@ -179,7 +167,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Navigator.pop(
                 context,
                 MaterialPageRoute(builder: (context) => AddressList()),
-
               );
             },
             child: Icon(Icons.arrow_back)),)),
@@ -282,12 +269,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   Text("Cash on delivery",style: CustomFont().bodyText,),
              IconButton(onPressed: (){
                _selectPaymentMethod("COD");
-             }, icon:      Icon(selectedPaymentMethod == "COD" ? Icons.check_circle : Icons.circle_outlined))
-
+             },
+                 icon:Icon(selectedPaymentMethod == "COD" ? Icons.check_circle : Icons.circle_outlined))
                 ],
               ),
-
-
                   ),
             ),
                 Padding(
@@ -363,8 +348,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         ,
                       ],
                     ),
-
-
                   ),
                 ),
                 SizedBox(height: 20.h,),
@@ -375,12 +358,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     children: [
                       Text("Delivery Address",style: CustomFont().subtitleText,),
                       TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressList()));
-                      }, child: Text("Change",style: GoogleFonts.questrial(color: Colors.purple,),))],
+    if (selectedOrderType == "delivery") {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => AddressList()),
+    );
+    } else if (selectedOrderType == "donate") {
+    _selectDisasterAddress(); // Navigate to DisasterList and select disaster address
+    }
+    },
+                      child: Text("Choose",style: GoogleFonts.questrial(color: Colors.purple,),))],
                   ),
                 ),
                 SizedBox(height: 8.h,),
-                Padding(
+                if (selectedOrderType == "delivery")
+                  Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 10.w),
                   child: Container(
                     height: 150.h,
@@ -400,13 +392,40 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           Text(widget.address?.city??""),
                           Text(widget.address?.pincode??""),
                           Text(widget.address?.mobile??""),
-                          Text(widget.address?.locality??"")
+                          Text(widget.address?.locality??""),
+                          //Text(widget.pickupLocation?.city??""),
+
                         ],
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 8.h,),
+                )
+                    else if (selectedOrderType == "donate")
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      height: 150.h,
+                      width: 400.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text(widget.pickupLocation?.city??""),
+                            Text(widget.pickupLocation?.address??""),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                      SizedBox(height: 8.h,),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 10.w),
                   child: Container(

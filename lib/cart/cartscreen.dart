@@ -1,131 +1,121 @@
-import 'package:everlane_style/btm_navigation/btm_navigation.dart';
-import 'package:everlane_style/cartscreen/cartitem.dart';
-import 'package:everlane_style/checkout/address_creation.dart';
-import 'package:everlane_style/widgets/customappbar.dart';
-import 'package:everlane_style/widgets/customcolor.dart';
-import 'package:everlane_style/widgets/customfont.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_transition/page_transition.dart';
-
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEF),
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: 0,
-        backgroundColor: CustomColor.primaryColor,
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddressScreen()));
-        },
-        label: Container(
-          height: 30.h,
-          width: 130.w,
-          decoration: const BoxDecoration(
-            color: CustomColor.primaryColor,
-          ),
-          child: Center(
-            child: Text("Checkout", style: CustomFont().buttontext),
-          ),
-        ),
-        icon: Icon(
-          Icons.shopping_cart_outlined,
-          size: 20.sp,
-          color: CustomColor.buttoniconColor,
-        ),
-      ),
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
-          child: CustomAppBar(
-            text: 'You Shopping Cart',
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          child: const BtmNavigation(),
-                          type: PageTransitionType.leftToRight,
-                          duration: const Duration(milliseconds: 220)));
-                },
-                icon: const Icon(Icons.arrow_back)),
-          )),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            SizedBox(
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(right: 0, top: 10),
-                  child: CartItemCard(),
-                ),
-              ),
-            ),
-            SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: Container(
-                height: 150.h,
-                width: 450.w,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      _buildRow(context, "Delivery", "0.0"),
-                      SizedBox(height: 10.h),
-                      _buildRow(context, "Discount", "00"),
-                      SizedBox(height: 10.h),
-                      _buildRow(context, "Total", "00.0"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRow(BuildContext context, String label, String value) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 100.w,
-          child: Text(
-            label,
-            style: CustomFont().bodyText,
-          ),
-        ),
-        SizedBox(
-          width: 20.w,
-          child: Text(
-            ":",
-            style: CustomFont().subtitleText,
-          ),
-        ),
-        SizedBox(width: 5.w),
-        SizedBox(
-          width: 100.w,
-          child: Text(
-            value,
-            style: CustomFont().bodyText,
-          ),
-        ),
-      ],
-    );
-  }
-}
+// import 'package:everlane_style/cartscreen/cartitem.dart';
+// import 'package:everlane_style/checkout/address_creation.dart';
+// import 'package:everlane_style/widgets/customappbar.dart';
+// import 'package:everlane_style/widgets/customcolor.dart';
+// import 'package:everlane_style/widgets/customfont.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+//
+//
+//
+// class CartScreen extends StatelessWidget {
+//   const CartScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: const Color(0xFFEFEFEF),
+//       floatingActionButton: FloatingActionButton.extended(
+//         elevation: 0,
+//         backgroundColor: CustomColor.primaryColor,
+//         onPressed: () {
+//           Navigator.push(context,
+//               MaterialPageRoute(builder: (context) =>  AddressScreen()));
+//         },
+//         label: Container(
+//           height: 30.h,
+//           width: 130.w,
+//           decoration: const BoxDecoration(
+//             color: CustomColor.primaryColor,
+//           ),
+//           child: Center(
+//             child: Text("Checkout", style: CustomFont().buttontext),
+//           ),
+//         ),
+//         icon: Icon(
+//           Icons.shopping_cart_outlined,
+//           size: 20.sp,
+//           color: CustomColor.buttoniconColor,
+//         ),
+//       ),
+//       appBar: PreferredSize(
+//           preferredSize: const Size.fromHeight(80),
+//           child: CustomAppBar(
+//             text: 'You Shopping Cart',
+//           )),
+//       body: SingleChildScrollView(
+//         scrollDirection: Axis.vertical,
+//         child: Column(
+//           children: [
+//             SizedBox(
+//               child: ListView.builder(
+//                 physics: const NeverScrollableScrollPhysics(),
+//                 shrinkWrap: true,
+//                 itemCount: 3,
+//                 itemBuilder: (context, index) => Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: CartItemCard(),
+//                 ),
+//               ),
+//             ),
+//             SizedBox(height: 20.h),
+//             Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 15.w),
+//               child: Container(
+//                 height: 150.h,
+//                 width: 450.w,
+//                 decoration: BoxDecoration(
+//                   color: Colors.white,
+//                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
+//                   borderRadius: BorderRadius.circular(10.r),
+//                 ),
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(20.0),
+//                   child: Column(
+//                     children: [
+//                       _buildRow(context, "Delivery", "0.0"),
+//                       SizedBox(height: 10.h),
+//                       _buildRow(context, "Discount", "00"),
+//                       SizedBox(height: 10.h),
+//                       _buildRow(context, "Total", "00.0"),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Widget _buildRow(BuildContext context, String label, String value) {
+//     return Row(
+//       children: [
+//         SizedBox(
+//           width: 100.w,
+//           child: Text(
+//             label,
+//             style: CustomFont().bodyText,
+//           ),
+//         ),
+//         SizedBox(
+//           width: 20.w,
+//           child: Text(
+//             ":",
+//             style: CustomFont().subtitleText,
+//           ),
+//         ),
+//         SizedBox(width: 10.w),
+//         SizedBox(
+//           width: 100.w,
+//           child: Text(
+//             value,
+//             style: CustomFont().bodyText,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

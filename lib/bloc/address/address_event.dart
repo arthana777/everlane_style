@@ -90,13 +90,20 @@ class FetchDisaster extends AddressEvent {
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
+
 class uploadclothes extends AddressEvent{
   @override
+  final int disasterId;
   final List<File> images;
 
-  uploadclothes({required this.images});
-  List<Object?> get props => throw UnimplementedError();
+  uploadclothes( {required this.images, required this.disasterId,});
+  List<Object?> get props => [images, disasterId];
 
 }
 
+class Fetchpickuplocations extends AddressEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
