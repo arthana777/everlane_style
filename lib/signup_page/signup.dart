@@ -108,11 +108,11 @@ class _SiginupState extends State<Siginup> {
             child: Container(
               height: double.infinity.h,
               width: double.infinity.w,
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: BorderRadius.only(
+                  borderRadius:  const BorderRadius.only(
                       topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20))),
+                      topRight: Radius.circular(20)).r),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
                 child: SingleChildScrollView(
@@ -236,7 +236,7 @@ class _SiginupState extends State<Siginup> {
                               hintStyle: CustomFont().hintText,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(8).w,
                               ),
                               fillColor: const Color(0xFFFFFFFF),
                               filled: true,
@@ -263,7 +263,7 @@ class _SiginupState extends State<Siginup> {
                           height: 10.h,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 5, right: 5).r,
                           child: TextFormField(
                             focusNode: fieldSeven,
                             controller: confirmpassController,
@@ -272,7 +272,7 @@ class _SiginupState extends State<Siginup> {
                               hintStyle: CustomFont().hintText,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(8).r,
                               ),
                               fillColor: Colors.white,
                               filled: true,

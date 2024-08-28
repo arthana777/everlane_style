@@ -1,12 +1,12 @@
-class Data {
-  final int? id;
-  final String? gender;
-  final String? skinColor; 
-  final String? height;
-  final String? preferredSeason; 
-  final String? usageOfDress; 
+class Questionmodel {
+  int? id;
+  String? gender;
+  String? skinColor;
+  String? height;
+  String? preferredSeason;
+  String? usageOfDress;
 
-  Data({
+  Questionmodel({
     this.id,
     this.gender,
     this.skinColor,
@@ -15,25 +15,23 @@ class Data {
     this.usageOfDress,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-      id: json['id'],
-      gender: json['gender'],
-      skinColor: json['skin_color'],
-      height: json['height'],
-      preferredSeason: json['preferred_season'],
-      usageOfDress: json['usage_of_dress'],
-    );
+  Questionmodel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    gender = json['gender'];
+    skinColor = json['skin_color'];
+    height = json['height'];
+    preferredSeason = json['preferred_season'];
+    usageOfDress = json['usage_of_dress'];
   }
 
-  get data => null;
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'gender': gender,
-        'skin_color': skinColor,
-        'height': height,
-        'preferred_season': preferredSeason,
-        'usage_of_dress': usageOfDress,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'gender': gender,
+      'skin_color': skinColor,
+      'height': height,
+      'preferred_season': preferredSeason,
+      'usage_of_dress': usageOfDress,
+    };
+  }
 }

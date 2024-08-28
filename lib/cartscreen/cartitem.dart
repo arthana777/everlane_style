@@ -34,7 +34,7 @@ class _CartItemState extends State<CartItemCard> {
   Widget build(BuildContext context) {
     return Container(
       width: 380.w,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
         borderRadius: BorderRadius.circular(10.r),
@@ -43,7 +43,7 @@ class _CartItemState extends State<CartItemCard> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -54,8 +54,7 @@ class _CartItemState extends State<CartItemCard> {
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(5.r),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          widget.image??
+                        image: NetworkImage(widget.image ??
                             "https://plus.unsplash.com/premium_photo-1658506787944-7939ed84aaf8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"),
                         fit: BoxFit.cover),
                   ),
@@ -80,13 +79,12 @@ class _CartItemState extends State<CartItemCard> {
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.currency_rupee,
                           size: 14,
                         ),
                         Text(
-                          widget.price.toString()
-                          ,
+                          widget.price.toString(),
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   color: Colors.black,
@@ -124,7 +122,7 @@ class _CartItemState extends State<CartItemCard> {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -137,15 +135,14 @@ class _CartItemState extends State<CartItemCard> {
                       child: Text("Add to wishlist")),
                 ),
               ),
-    InkWell(
-    onTap: widget.ontapremove,
-    child: Container(
-    width: 180.w,
-    padding: EdgeInsets.all(15),
-    child: Center(
-    child: Text("Remove")),
-    ),
-    )
+              InkWell(
+                onTap: widget.ontapremove,
+                child: Container(
+                  width: 168.w,
+                  padding: const EdgeInsets.only(left: 20),
+                  child: const Center(child: Text("Remove")),
+                ),
+              )
             ],
           ),
         ],

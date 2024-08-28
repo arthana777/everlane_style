@@ -51,8 +51,10 @@ dependencies:
   linear_progress_bar: ^1.1.2
   image_picker: ^1.1.2
   flutter_launcher_icons: ^0.13.1
+  page_transition: ^2.1.0
  
   fluttertoast: ^8.2.8
+  dropdown_button2: ^2.3.9
   url_launcher: ^6.3.0
   flutter_image_compress: ^2.3.0
 

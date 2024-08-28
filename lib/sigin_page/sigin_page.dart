@@ -1,5 +1,6 @@
 import 'package:everlane_style/bloc/loginn/loginn_bloc.dart';
-import 'package:everlane_style/on_board/onboard2.dart';
+import 'package:everlane_style/btm_navigation/btm_navigation.dart';
+import 'package:everlane_style/questionnaire/qstmodalbottomsheet.dart';
 import 'package:everlane_style/signup_page/signup.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
@@ -100,7 +101,7 @@ class _SiginPageState extends State<SiginPage> {
               );
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Onboard2()),
+                MaterialPageRoute(builder: (context) =>  const BtmNavigation()),
               );
             }
           },
@@ -202,7 +203,7 @@ class _SiginPageState extends State<SiginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Onboard2()),
+                                builder: (context) => const BtmNavigation()),
                           );
                         },
                         child: Center(

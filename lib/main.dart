@@ -1,14 +1,14 @@
-
 import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.dart';
 import 'package:everlane_style/bloc/editprofile/bloc/editprofile_bloc.dart';
 import 'package:everlane_style/bloc/address/address_bloc.dart';
 import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
+import 'package:everlane_style/bloc/question_bloc/bloc/question_bloc.dart';
+import 'package:everlane_style/bloc/question_result/bloc/question_result_bloc.dart';
 import 'package:everlane_style/bloc/userprofile/bloc/profile_bloc.dart';
 import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
 import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
-import 'package:everlane_style/bloc/question_bloc/bloc/question_bloc.dart';
 import 'package:everlane_style/data/datasources/qst_service.dart';
 import 'package:everlane_style/data/datasources/editprofileservice.dart';
 import 'package:everlane_style/data/datasources/profileservice.dart';
@@ -22,7 +22,6 @@ import 'package:provider/provider.dart';
 import 'bloc/category_bloc.dart';
 import 'bloc/loginn/loginn_bloc.dart';
 import 'bloc/whishlist/whishlist_bloc.dart';
-
 
 void main() {
   runApp(
@@ -45,30 +44,29 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-return MultiProvider(
+          return MultiProvider(
             providers: [
               BlocProvider(
-                create: (BuildContext context) => RegistrationBloc(SignupRepository()),
+                create: (BuildContext context) =>
+                    RegistrationBloc(SignupRepository()),
               ),
               BlocProvider(
-                create: (BuildContext context) =>  ProfileBloc(ProfileService()),
+                create: (BuildContext context) => ProfileBloc(ProfileService()),
               ),
               BlocProvider(
-                create: (BuildContext context) =>  EditprofileBloc(Editprofileservice()),
-                
+                create: (BuildContext context) =>
+                    EditprofileBloc(Editprofileservice()),
               ),
               BlocProvider(
-                create: (BuildContext context) =>  ChangePasswordBloc(changePasswordRepo:ChangePasswordRepo() ),
-                
+                create: (BuildContext context) => ChangePasswordBloc(
+                    changePasswordRepo: ChangePasswordRepo()),
               ),
-              
               BlocProvider(
                 create: (BuildContext context) =>
                     QuestionBloc(QstService()),
               ),
               BlocProvider(
                 create: (BuildContext context) => CategoryBloc(),
-
               ),
               BlocProvider(
                 create: (BuildContext context) => ProductBloc(),
@@ -85,7 +83,10 @@ return MultiProvider(
               BlocProvider(
                 create: (BuildContext context) => AddressBloc(),
               ),
-
+              BlocProvider(
+                create: (BuildContext context) =>
+                    QuestionResultBloc(QstService()),
+              )
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

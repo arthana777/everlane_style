@@ -1,5 +1,4 @@
 import 'package:everlane_style/Home/homescreen.dart';
-import 'package:everlane_style/cart/cartscreen.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class _MainScreenState extends State<BtmNavigation> {
   final List<Widget> _screens = [
     const HomeScreen(),
     Profile(),
-    CartScreen(),
+     CartScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -33,6 +32,7 @@ class _MainScreenState extends State<BtmNavigation> {
       backgroundColor: const Color(0xFFF7F7F7),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 26.0,
         backgroundColor: const Color(0xFFF7F7F7),
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
@@ -40,6 +40,10 @@ class _MainScreenState extends State<BtmNavigation> {
           BottomNavigationBarItem(
             backgroundColor: const Color(0xFFF7F7F7),
             icon: Icon(
+              shadows: const [
+                Shadow(
+                    blurRadius: 2, color: Colors.grey, offset: Offset(0.6, 0.5))
+              ],
               _currentIndex == 0 ? Icons.home : Icons.home_outlined,
               color: CustomColor.primaryColor,
             ),
@@ -47,6 +51,10 @@ class _MainScreenState extends State<BtmNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              shadows: const [
+                Shadow(
+                    blurRadius: 2, color: Colors.grey, offset: Offset(0.6, 0.8))
+              ],
               _currentIndex == 1 ? Icons.person : Icons.person_outline_outlined,
               color: CustomColor.primaryColor,
             ),
@@ -54,6 +62,10 @@ class _MainScreenState extends State<BtmNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              shadows: const [
+                Shadow(
+                    blurRadius: 2, color: Colors.grey, offset: Offset(0.6, 0.8))
+              ],
               _currentIndex == 2
                   ? Icons.shopping_cart
                   : Icons.shopping_cart_outlined,
