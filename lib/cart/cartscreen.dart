@@ -1,3 +1,4 @@
+import 'package:everlane_style/btm_navigation/btm_navigation.dart';
 import 'package:everlane_style/cartscreen/cartitem.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
@@ -6,8 +7,7 @@ import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
+import 'package:page_transition/page_transition.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -21,7 +21,7 @@ class CartScreen extends StatelessWidget {
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) =>  AddressScreen()));
+              MaterialPageRoute(builder: (context) => AddressScreen()));
         },
         label: Container(
           height: 30.h,
@@ -43,6 +43,16 @@ class CartScreen extends StatelessWidget {
           preferredSize: const Size.fromHeight(80),
           child: CustomAppBar(
             text: 'You Shopping Cart',
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const BtmNavigation(),
+                          type: PageTransitionType.leftToRight,
+                          duration: const Duration(milliseconds: 220)));
+                },
+                icon: const Icon(Icons.arrow_back)),
           )),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -54,7 +64,7 @@ class CartScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(right: 0, top: 10),
                   child: CartItemCard(),
                 ),
               ),
@@ -107,7 +117,7 @@ class CartScreen extends StatelessWidget {
             style: CustomFont().subtitleText,
           ),
         ),
-        SizedBox(width: 10.w),
+        SizedBox(width: 5.w),
         SizedBox(
           width: 100.w,
           child: Text(

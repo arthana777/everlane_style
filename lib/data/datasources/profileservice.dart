@@ -41,7 +41,7 @@ class ProfileService {
     if (response.statusCode == 200) {
       userprofile = Userprofile.fromJson(response.data['data']);
 
-      print("jkydsgvxkgj ${response.data['data']}");
+      print("hehehe kittyy ${response.data['data']}");
 
       return userprofile;
     } else {

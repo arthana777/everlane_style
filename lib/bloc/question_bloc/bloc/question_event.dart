@@ -8,10 +8,9 @@ abstract class QuestionEvent extends Equatable {
 }
 
 class UpdateQuestion extends QuestionEvent {
-  final Map<String, dynamic> updatedQst;
-
-  const UpdateQuestion(this.updatedQst);
+  final Map<String, dynamic> data;
+  UpdateQuestion({required this.data});
 
   @override
-  List<Object> get props => [updatedQst];
+  List<Object> get props => [data];
 }

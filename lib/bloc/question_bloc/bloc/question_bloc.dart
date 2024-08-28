@@ -4,20 +4,24 @@ import 'package:everlane_style/data/datasources/qst_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
-  final QstService _qstService;
+  final QstService qstService;
 
-  QuestionBloc(this._qstService) : super(QstInitial()) {
+  QuestionBloc(this.qstService) : super(QstInitial()) {
     on<UpdateQuestion>(_onUpdateQuestion);
   }
 
   Future<void> _onUpdateQuestion(
-      UpdateQuestion event,
-       Emitter<QuestionState> emit,
-       ) async {
+    UpdateQuestion event,
+    Emitter<QuestionState> emit,
+  ) async {
     emit(QuestionLoading());
     try {
-      await _qstService.updateQuestion(event.updatedQst);
-      emit(QuestionUpdated());
+      String message = await qstService.updateUserQuestion(event.data);
+      if (message.contains("Failed")) {
+        emit(QuestionError(message));
+      } else {
+        emit(QuestionUpdated());
+      }
     } catch (e) {
       emit(QuestionError(e.toString()));
     }

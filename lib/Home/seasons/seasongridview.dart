@@ -147,7 +147,7 @@ class _SeasongridviewState extends State<Seasongridview> {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
             child: GridView.builder(
                 shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 0.62,
                   crossAxisSpacing: 10,
                   crossAxisCount: 2,

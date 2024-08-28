@@ -7,11 +7,17 @@ import '../widgets/custom_textbutton.dart';
 import '../widgets/customfont.dart';
 
 class CartItemCard extends StatefulWidget {
-  CartItemCard({super.key, this.ontapremove, this.image, this.title, this.price, this.itemcount});
-final String? image;
-final String? itemcount;
-final String? title;
-final double? price;
+  CartItemCard(
+      {super.key,
+      this.ontapremove,
+      this.image,
+      this.title,
+      this.price,
+      this.itemcount});
+  final String? image;
+  final String? itemcount;
+  final String? title;
+  final double? price;
   final VoidCallback? ontapremove;
 
   @override
@@ -26,7 +32,7 @@ class _CartItemState extends State<CartItemCard> {
     '4',
     '5',
   ];
-  late  String dropedownvalue1;
+  late String dropedownvalue1;
   @override
   void initState() {
     dropedownvalue1 = widget.itemcount ?? '1';
@@ -37,7 +43,7 @@ class _CartItemState extends State<CartItemCard> {
   Widget build(BuildContext context) {
     return Container(
       width: 380.w,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
         borderRadius: BorderRadius.circular(10.r),
@@ -46,7 +52,7 @@ class _CartItemState extends State<CartItemCard> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,8 +63,7 @@ class _CartItemState extends State<CartItemCard> {
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(5.r),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          widget.image??
+                        image: NetworkImage(widget.image ??
                             "https://plus.unsplash.com/premium_photo-1658506787944-7939ed84aaf8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"),
                         fit: BoxFit.cover),
                   ),
@@ -70,8 +75,7 @@ class _CartItemState extends State<CartItemCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.title??
-                      "Apple fifteen pro max",
+                      widget.title ?? "Apple fifteen pro max",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Colors.black,
@@ -80,13 +84,12 @@ class _CartItemState extends State<CartItemCard> {
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.currency_rupee,
                           size: 14,
                         ),
                         Text(
-                          widget.price.toString()
-                          ,
+                          widget.price.toString(),
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   color: Colors.black,
@@ -108,7 +111,7 @@ class _CartItemState extends State<CartItemCard> {
                         value: dropedownvalue1,
                         dropdownColor: Colors.white,
                         borderRadius: BorderRadius.circular(3),
-                        underline: SizedBox(),
+                        underline: const SizedBox(),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: item1.map((String item) {
                           return DropdownMenuItem(
@@ -128,22 +131,21 @@ class _CartItemState extends State<CartItemCard> {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomTextButton(
                 text: "Save for later",
               ),
-    InkWell(
-    onTap: widget.ontapremove,
-    child: Container(
-    width: 180.w,
-    padding: EdgeInsets.all(15),
-    child: Center(
-    child: Text("Remove")),
-    ),
-    )
+              InkWell(
+                onTap: widget.ontapremove,
+                child: Container(
+                  width: 168.w,
+                  padding: const EdgeInsets.only(left: 20),
+                  child: const Center(child: Text("Remove")),
+                ),
+              )
             ],
           ),
         ],

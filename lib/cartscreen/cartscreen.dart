@@ -27,6 +27,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   List<Cart> carts = [];
   int? isclicked; 
 
@@ -39,29 +40,26 @@ class _CartScreenState extends State<CartScreen> {
     isclicked = index;
     setState(() {});
   }
-  final List<String> ordertype = [
-    'Buyformyself',
-    'Donate',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFEFEF),
-      floatingActionButton: FloatingActionButton.extended(
+      backgroundColor:  Color(0xFFEFEFEF),
+      floatingActionButton:  FloatingActionButton.extended(
         elevation: 0,
-        backgroundColor: CustomColor.primaryColor,
-        onPressed: () {
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddressList(  )),
-          );
-        },
+        backgroundColor:  carts.any((cart) => cart.items.isNotEmpty)?CustomColor.primaryColor:Colors.grey,
+        onPressed:
+          carts.any((cart) => cart.items.isNotEmpty)
+              ? () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddressList()),
+            );
+          } : null,
         label: Container(
           height: 30.h,
           width: 150.w,
           decoration: BoxDecoration(
-            color: CustomColor.primaryColor,
+            color:  carts.any((cart) => cart.items.isNotEmpty)?CustomColor.primaryColor:Colors.grey,
           ),
           child: Center(
             child: Text("Checkout", style: CustomFont().buttontext),
@@ -84,7 +82,7 @@ class _CartScreenState extends State<CartScreen> {
               navigationProvider.updateScreenIndex(0);
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => BtmNavigation()),
+                MaterialPageRoute(builder: (context) => const BtmNavigation()),
                     (Route<dynamic> route) => false,
               );
             },
@@ -133,8 +131,13 @@ class _CartScreenState extends State<CartScreen> {
                 shrinkWrap: true,
                 itemCount: carts.isEmpty ? 0 : carts.length,
                 itemBuilder: (context, cartIndex) {
-                  if (carts.isEmpty) {
-                    return Center(child: Text("No items in cart"));
+                  final cart = carts[cartIndex];
+                  print(carts.length);
+                  if (cart.items.isEmpty) {
+                    return Padding(
+                      padding:  EdgeInsets.symmetric(vertical: 100.h,horizontal: 140.w),
+                      child: Text("No items in cart",style: CustomFont().subtitleText,),
+                    );
                   }
                   return Column(
                     children: carts[cartIndex].items.map((item) {
@@ -162,7 +165,7 @@ class _CartScreenState extends State<CartScreen> {
               SizedBox(height: 20.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: Container(
+                child:  carts.any((cart) => cart.items.isNotEmpty)?Container(
                   height: 150.h,
                   width: 450.w,
                   decoration: BoxDecoration(
@@ -172,7 +175,8 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
+                    child:
+                    Column(
                       children: [
                         _buildRow(context, "Delivery", "0.0"),
                         SizedBox(height: 10.h),
@@ -182,7 +186,7 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     ),
                   ),
-                ),
+                ):null
               ),
             ],
           ),

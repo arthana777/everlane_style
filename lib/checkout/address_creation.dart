@@ -1,4 +1,5 @@
 
+import 'package:everlane_style/checkout/address_list.dart';
 import 'package:everlane_style/checkout/payment.dart';
 import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
@@ -50,7 +51,7 @@ class _AddressScreenState extends State<AddressScreen> {
         elevation: 0,
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen() ,
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddressList() ,
 
           )
           );
@@ -62,9 +63,9 @@ class _AddressScreenState extends State<AddressScreen> {
             city: cityController.text,
             state: stateController.text,
             landmark: landmarkController.text,
-            isDefault: true, // Update as needed
-            isActive: true, // Update as needed
-            isDeleted: false, // Update as needed
+            isDefault: true,
+            isActive: true,
+            isDeleted: false,
           ));
         },
         label: Container(

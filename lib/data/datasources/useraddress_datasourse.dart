@@ -34,12 +34,17 @@ class UseraddressDatasourse{
         print("Successful response: ${response.body}");
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
 
-        final List<dynamic> dataList = responseBody['data'];
 
+        if (responseBody['data'] != null && responseBody['data'] is List) {
+          final List<dynamic> dataList = responseBody['data'];
         final List<UserAddress> useradress = dataList.map((json) =>
             UserAddress.fromJson(json)).toList();
         print(useradress.length);
         return useradress;
+      } else {
+          // Return an empty list if 'data' is null or not a list
+          return <UserAddress>[];
+        }
       } else {
         print("Failed with status code: ${response.statusCode}");
         throw Exception("Failed to load userdata ${response.statusCode}");

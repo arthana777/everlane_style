@@ -38,8 +38,8 @@ class FirstPage extends StatelessWidget {
                       fontSize: 26.sp,
                       fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(
-                  height: 350,
+                 SizedBox(
+                  height: 350.h,
                 ),
                 Card(
                   child: Container(
@@ -95,7 +95,7 @@ class FirstPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 40, bottom: 5).r,
+                        padding: const EdgeInsets.only(left: 40, bottom: 5).w,
                         child: Text(
                           "Sign Up Account",
                           style: CustomFont().labelText,

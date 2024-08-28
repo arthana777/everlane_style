@@ -1,4 +1,5 @@
 import 'package:everlane_style/bloc/address/address_bloc.dart';
+import 'package:everlane_style/cart/cartscreen.dart';
 import 'package:everlane_style/checkout/address_creation.dart';
 import 'package:everlane_style/checkout/payment.dart';
 import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
@@ -23,6 +24,7 @@ class AddressList extends StatefulWidget {
 class _AddressListState extends State<AddressList> {
   List<UserAddress>useradress=[];
 @override
+
   void initState() {
   BlocProvider.of<AddressBloc>(context).add(FetchUserAddresses());
     super.initState();
@@ -39,16 +41,16 @@ class _AddressListState extends State<AddressList> {
         ],
         leading: InkWell(
             onTap: (){
-              final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
-              navigationProvider.updateScreenIndex(0);
-              Navigator.pushAndRemoveUntil(
+              // final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+              // navigationProvider.updateScreenIndex(0);
+              Navigator.pop(
                 context,
-                MaterialPageRoute(builder: (context) => BtmNavigation()),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+
               );
             },
             child: Icon(Icons.arrow_back)),
-        text: "Address",
+        text: "Select Address",
       )),
       body: MultiBlocListener(
         listeners: [
@@ -89,7 +91,7 @@ class _AddressListState extends State<AddressList> {
             },
           ),
         ],
-        child: ListView.builder(
+        child: useradress.isEmpty?Center(child: Text("No address available"),):ListView.builder(
           padding: EdgeInsets.all(10),
           itemCount: useradress.length,
             itemBuilder: (context,index){
@@ -102,7 +104,7 @@ class _AddressListState extends State<AddressList> {
                   padding:  EdgeInsets.symmetric(horizontal: 10.w),
                   child: InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (Context)=>PaymentScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (Context)=>PaymentScreen(address: useradress[index])));
                     },
                     child: Container(
                       height: 150.h,

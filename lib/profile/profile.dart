@@ -21,6 +21,7 @@ import 'package:everlane_style/widgets/profile_textfield.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Profile extends StatelessWidget {
   Profile({super.key});
@@ -35,9 +36,13 @@ class Profile extends StatelessWidget {
           leading: IconButton(
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BtmNavigation()),
-                );
+                    context,
+                    PageTransition(
+                        child: BtmNavigation(),
+                        type: PageTransitionType.bottomToTop,
+                        duration: Duration(milliseconds: 230))
+                    // MaterialPageRoute(builder: (context) => const BtmNavigation()),
+                    );
               },
               icon: const Icon(Icons.arrow_back)),
           text: "Profile",
@@ -56,12 +61,12 @@ class Profile extends StatelessWidget {
             }
           },
           child: BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, state) {
-              if (state is ProfileLoading) {
+            builder: (context, state){
+              if (state is ProfileLoading){
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is ProfileLoaded) {
+              } else if (state is ProfileLoaded){
                 return ProfileDetails(userProfile: state.userProfile);
-              } else if (state is ProfileError) {
+              } else if (state is ProfileError){
                 return Center(child: Text(state.message));
               } else {
                 return const Center(
@@ -169,11 +174,11 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   title: "Edit Profile",
                   onTap: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProfile(),
-                      ),
-                    );
+                        context,
+                        PageTransition(
+                            child: EditProfile(),
+                            type: PageTransitionType.bottomToTop,
+                            duration: Duration(milliseconds: 220)));
                   },
                 ),
                 SizedBox(height: 5.h),
@@ -206,7 +211,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                                     CustomTextfield(
                                       focusNode: fieldOne,
                                       onFieldSubmitted: (value) {
-                                        FocusScope.of(context).requestFocus(fieldTwo);
+                                        FocusScope.of(context)
+                                            .requestFocus(fieldTwo);
                                       },
                                       controller: old_passwordController,
                                       hintText: 'Old Password',
@@ -352,14 +358,14 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                             },
                             child: Container(
                               color: Colors.white,
-                              padding: const EdgeInsets.all(14),
+                              padding: const EdgeInsets.all(14).w,
                               child: InkWell(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10).w,
                                 child: Text(
                                   'Yes!',
                                   style: GoogleFonts.poppins(
                                       color: Colors.red,
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 onTap: () {

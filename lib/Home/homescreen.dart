@@ -4,6 +4,7 @@ import 'package:everlane_style/Home/seasons/seasongridview.dart';
 import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/product_detail/product_details.dart';
+import 'package:everlane_style/questionnaire/qstmodalbottomsheet.dart';
 import 'package:everlane_style/sharedprefrence/sharedprefs_login.dart';
 import 'package:everlane_style/widgets/customappbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,24 +57,24 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'id': '1',
       'title': 'winter',
-      'image': 'assets/images/winter.jpg',
+      //'image': 'assets/images/winter.jpg',
       //'https://media.istockphoto.com/id/1146996650/photo/knitted-wool-sweaters.jpg?s=612x612&w=0&k=20&c=e_heKrNwFWeAbkTVVA2aKJEO08jz9JZ-5diJPDK92ck='
     },
     {
       'id': '2',
       'title': 'summer',
-      'image': 'assets/images/summer.jpg',
+      //'image': 'assets/images/summer.jpg',
       // 'https://media.istockphoto.com/id/1465451690/photo/beach-umbralla-and-chair-on-sand-summer-holiday-travel-background.jpg?s=612x612&w=0&k=20&c=ChGTBog7Px_3uTkdCINE43kNf4qM2EZ-pkLzvYq5Wzs='
     },
     {
       'id': '3',
       'title': 'rainy',
-      'image': 'assets/images/monsoon.jpg',
+      //'image': 'assets/images/monsoon.jpg',
     },
     {
       'id': '4',
       'title': 'autumn',
-      'image': 'assets/images/authumn.jpg',
+      //'image': 'assets/images/authumn.jpg',
       //'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
     },
   ];
@@ -203,6 +204,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          elevation: 6,
+          backgroundColor: CustomColor.primaryColor,
+          onPressed: () {
+             Qstmodalbottomsheet.moreModalBottomSheet(context);
+          },
+          label: Container(
+            height: 30.h,
+            decoration: const BoxDecoration(
+              color: CustomColor.primaryColor,
+            ),
+          ),
+          icon: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Icon(
+              Icons.question_answer_outlined,
+              size: 20.sp,
+              color: CustomColor.buttoniconColor,
+            ),
+          ),
+        ),
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(80.h),

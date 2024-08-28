@@ -25,7 +25,7 @@ class CustomFont {
   final TextStyle titleText = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16.sp));
-  final TextStyle subText = GoogleFonts.questrial(
+  final TextStyle subText = GoogleFonts.roboto(
       textStyle: const TextStyle(color: Colors.black, fontSize: 15));
 }
 
