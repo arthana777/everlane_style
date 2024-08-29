@@ -2,6 +2,7 @@ import 'package:everlane_style/Home/homescreen.dart';
 import 'package:everlane_style/profile/profile.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../cartscreen/cartscreen.dart';
 
@@ -32,7 +33,7 @@ class _MainScreenState extends State<BtmNavigation> {
       backgroundColor: const Color(0xFFF7F7F7),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 26.0,
+        iconSize: 26.0.sp,
         backgroundColor: const Color(0xFFF7F7F7),
         currentIndex: _currentIndex,
         onTap: _onTabTapped,

@@ -25,7 +25,7 @@ class Apiservices{
     final SharedPrefeService sp = SharedPrefeService();
     try{
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/login/'),
+        Uri.parse('https://18.143.206.136/api/login/'),
         headers: {
           'Content-Type': 'application/json',
         },

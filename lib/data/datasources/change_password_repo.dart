@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordRepo {
-  String url = 'http://18.143.206.136/api/profile/change-password/';
+  String url = 'https://18.143.206.136/api/profile/change-password/';
 
   Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

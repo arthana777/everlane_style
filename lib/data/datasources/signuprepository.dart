@@ -3,7 +3,7 @@ import 'package:everlane_style/data/models/userregistration.dart';
 import 'package:http/http.dart' as http;
 
 class SignupRepository {
-  final String apiUrl = 'http://18.143.206.136/api/register/';
+  final String apiUrl = 'https://18.143.206.136/api/register/';
 
   Future registerUser(Userregistration user) async {
     try {

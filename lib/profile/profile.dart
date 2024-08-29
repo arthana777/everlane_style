@@ -33,7 +33,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F7),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: Size.fromHeight(50.h),
         child: CustomAppBar(
           leading: IconButton(
               onPressed: () {

@@ -95,7 +95,7 @@ class FirstPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(left: 40, bottom: 5).w,
+                        padding: const EdgeInsets.only(left: 40, bottom: 5).r,
                         child: Text(
                           "Sign Up Account",
                           style: CustomFont().labelText,

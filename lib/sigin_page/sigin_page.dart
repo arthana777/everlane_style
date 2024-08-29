@@ -1,8 +1,6 @@
 import 'package:everlane_style/bloc/loginn/loginn_bloc.dart';
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
 import 'package:everlane_style/forgot_password/forgot_bottomsheet.dart';
-import 'package:everlane_style/questionnaire/qstmodalbottomsheet.dart';
-import 'package:everlane_style/signup_page/signup.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:everlane_style/widgets/customfont.dart';
@@ -117,7 +115,7 @@ class _SiginPageState extends State<SiginPage> {
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
-                ),
+                ).w,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70, left: 10, right: 10).r,
@@ -138,7 +136,7 @@ class _SiginPageState extends State<SiginPage> {
                       ),
                       if (_usernameError != null)
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(top: 4.0).r,
                           child: Text(
                             _usernameError!,
                             style: const TextStyle(color: Colors.red),
@@ -169,14 +167,14 @@ class _SiginPageState extends State<SiginPage> {
                       ),
                       if (_passwordError != null)
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(top: 4.0).r,
                           child: Text(
                             _passwordError!,
                             style: const TextStyle(color: Colors.red),
                           ),
                         ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
                             onPressed: () {
@@ -205,7 +203,7 @@ class _SiginPageState extends State<SiginPage> {
                         },
                         child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            padding: const EdgeInsets.only(left: 5, right: 5).r,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 fixedSize: const Size(350, 48),
@@ -231,7 +229,7 @@ class _SiginPageState extends State<SiginPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 30.h,
                       )
                     ],
                   ),

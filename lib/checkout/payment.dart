@@ -3,6 +3,7 @@
 import 'package:everlane_style/checkout/address_list.dart';
 import 'package:everlane_style/checkout/ordersuccess.dart';
 import 'package:everlane_style/checkout/pickuplocations.dart';
+import 'package:everlane_style/checkout/webviewscreen.dart';
 import 'package:everlane_style/data/models/disastermodel.dart';
 import 'package:everlane_style/data/models/pickupmodel.dart';
 import 'package:everlane_style/donation/disaster_list.dart';
@@ -73,7 +74,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         selectedOrderType = type;
         if (type == "donate") {
           selectedPaymentMethod = "ONLINE";
-          _isAddressSelected = true;
+          // _isAddressSelected = true;
         }
       }
     });
@@ -117,20 +118,34 @@ class _PaymentScreenState extends State<PaymentScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Please select a delivery address')),
               );
-            } else if (carts.isNotEmpty) {
-              context.read<CartBloc>().add(PlaceOrder(
-                deliveryAddressId: widget.address?.id ?? 0,
-                orderType: selectedOrderType,
-                paymentMethod: selectedPaymentMethod,
-              ));
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Order placed successfully!')),
-              );
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => OrderSuccessScreen()),
-              );
-            } else {
+            }
+            else if (carts.isNotEmpty) {
+              if (selectedPaymentMethod == "COD") {
+                // Place order directly for COD
+                context.read<CartBloc>().add(PlaceOrder(
+                  deliveryAddressId: widget.address?.id ?? 0,
+                  orderType: selectedOrderType,
+                  paymentMethod: selectedPaymentMethod,
+                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Order placed successfully!')),
+                );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrderSuccessScreen()),
+                );
+              } else if (selectedPaymentMethod == "ONLINE") {
+
+                String approvalUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-3A653758636168226";
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WebviewScreen(url: approvalUrl),
+                  ),
+                );
+              }
+            }
+            else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Your cart is empty. Please add items to the cart before placing an order.')),
               );
