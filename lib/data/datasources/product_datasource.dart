@@ -21,7 +21,7 @@ class ProductRemoteDataSourceimpl extends ProductRemoteDataSource {
   Future<List<Product>> getProductFromApi() async {
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/products/trending/'),
+        Uri.parse('https://18.143.206.136/api/products/trending/'),
         headers: {
           'content-type': 'application/json',
         },
@@ -48,10 +48,10 @@ print("uuuuuuuuu${categoryList.length}");
 
   @override
   Future<List<Product>> getSeasons(String season) async {
-    print("http://18.143.206.136/api/products/$season/");
+    print("https://18.143.206.136/api/products/$season/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/products/$season/'),
+        Uri.parse('https://18.143.206.136/api/products/$season/'),
         headers: {
           'content-type': 'application/json',
         },
@@ -76,10 +76,10 @@ print("uuuuuuuuu${categoryList.length}");
 
   @override
   Future<List<Product>> getfiltercategory(int subcategory) async{
-    print("http://18.143.206.136/api/products/?subcategory=$subcategory");
+    print("https://18.143.206.136/api/products/?subcategory=$subcategory");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/products/?subcategory=$subcategory'),
+        Uri.parse('https://18.143.206.136/api/products/?subcategory=$subcategory'),
         headers: {
           'content-type': 'application/json',
         },
@@ -104,11 +104,11 @@ print("uuuuuuuuu${categoryList.length}");
 
   @override
   Future<DetailProduct>getDetailsProduct(int id)async {
-    print("http://18.143.206.136/api/products/$id/");
+    print("https://18.143.206.136/api/products/$id/");
     final DetailProduct productdetails;
     try {
       final response = await clientDio.get(
-       'http://18.143.206.136/api/products/$id/',
+       'https://18.143.206.136/api/products/$id/',
         options: Options(
           headers: {
             'content-type': 'application/json',
@@ -131,11 +131,11 @@ print("uuuuuuuuu${categoryList.length}");
 
   @override
   Future<List<Product>> searchProducts(String keyword) async {
-    print("SSSSSSSSSSSSSSSSSSS :http://18.143.206.136/api/products/?query=$keyword");
+    print("SSSSSSSSSSSSSSSSSSS :https://18.143.206.136/api/products/?query=$keyword");
     // print("{http://18.143.206.136/api/products/?query=$keyword}");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/products/?query=$keyword'),
+        Uri.parse('https://18.143.206.136/api/products/?query=$keyword'),
         headers: {
           'content-type': 'application/json',
         },

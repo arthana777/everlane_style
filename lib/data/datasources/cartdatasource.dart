@@ -21,10 +21,10 @@ class CartDatasource{
     if (token == null || token.isEmpty) {
       throw Exception('Failed: Token not found or is empty');
     }
-    print("http://18.143.206.136/api/carts/");
+    print("https://18.143.206.136/api/carts/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/carts/'),
+        Uri.parse('https://18.143.206.136/api/carts/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $token',
@@ -60,7 +60,7 @@ class CartDatasource{
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/add-to-cart/'),
+        Uri.parse('https://18.143.206.136/api/add-to-cart/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -99,7 +99,7 @@ class CartDatasource{
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.delete(
-        Uri.parse('http://18.143.206.136/api/cart-item/$pid/delete/'),
+        Uri.parse('https://18.143.206.136/api/cart-item/$pid/delete/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -137,7 +137,7 @@ class CartDatasource{
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/place-order/'),
+        Uri.parse('https://18.143.206.136/api/place-order/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -181,7 +181,7 @@ class CartDatasource{
     try {
       print("Making HTTP POST request...");
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/request-return/'), // Update the endpoint if necessary
+        Uri.parse('https://18.143.206.136/api/request-return/'), // Update the endpoint if necessary
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -218,10 +218,10 @@ class CartDatasource{
     if (stringValue == null || stringValue.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    print("http://18.143.206.136/api/orders/");
+    print("https://18.143.206.136/api/orders/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/orders/'),
+        Uri.parse('https://18.143.206.136/api/orders/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -262,7 +262,7 @@ class CartDatasource{
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/update-cart-item-quantity/'),
+        Uri.parse('https://18.143.206.136/api/update-cart-item-quantity/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',

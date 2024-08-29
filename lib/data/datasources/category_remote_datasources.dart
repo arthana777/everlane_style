@@ -15,7 +15,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
   Future<List<CategoryModel>> getCategoryFromApi() async {
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/categories/'),
+        Uri.parse('https://18.143.206.136/api/categories/'),
         headers: {
           'content-type': 'application/json',
         },
@@ -42,7 +42,7 @@ print("kjdfkyhujh ${ responseBody['data']}");
 
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/subcategories/?category_id=$id'),
+        Uri.parse('https://18.143.206.136/api/subcategories/?category_id=$id'),
 
         headers: {
           'content-type': 'application/json',
@@ -70,7 +70,7 @@ print("kjdfkyhujh ${ responseBody['data']}");
 
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/bannerss/?category_id=$id'),
+        Uri.parse('https://18.143.206.136/api/bannerss/?category_id=$id'),
 
         headers: {
           'content-type': 'application/json',

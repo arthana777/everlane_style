@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.dart';
 import 'package:everlane_style/bloc/editprofile/bloc/editprofile_bloc.dart';
 import 'package:everlane_style/bloc/address/address_bloc.dart';
@@ -23,7 +25,17 @@ import 'bloc/category_bloc.dart';
 import 'bloc/loginn/loginn_bloc.dart';
 import 'bloc/whishlist/whishlist_bloc.dart';
 
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     MultiProvider(
       providers: [

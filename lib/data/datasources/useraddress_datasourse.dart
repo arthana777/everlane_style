@@ -24,10 +24,10 @@ class UseraddressDatasourse{
     if (stringValue == null || stringValue.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    print("http://18.143.206.136/api/addresses/");
+    print("https://18.143.206.136/api/addresses/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/addresses/'),
+        Uri.parse('https://18.143.206.136/api/addresses/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -68,7 +68,7 @@ class UseraddressDatasourse{
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.delete(
-        Uri.parse('http://18.143.206.136/api/addresses/$aid/delete/'),
+        Uri.parse('https://18.143.206.136/api/addresses/$aid/delete/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -115,7 +115,7 @@ class UseraddressDatasourse{
     // final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/addresses/create/'),
+        Uri.parse('https://18.143.206.136/api/addresses/create/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -172,7 +172,7 @@ class UseraddressDatasourse{
 
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/disasters/'),
+        Uri.parse('https://18.143.206.136/api/disasters/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -211,10 +211,10 @@ class UseraddressDatasourse{
     if (stringValue == null || stringValue.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    print("http://18.143.206.136/api/disasters/");
+    print("https://18.143.206.136/api/disasters/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/disasters/'),
+        Uri.parse('https://18.143.206.136/api/disasters/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -334,7 +334,7 @@ class UseraddressDatasourse{
     }
 
     final dio = Dio();
-    final uri = 'http://18.143.206.136/api/donations/';
+    final uri = 'https://18.143.206.136/api/donations/';
 
     try {
       final imageFiles = await Future.wait(images.map((image) async {
@@ -387,10 +387,10 @@ print("response of upload image $response");
     if (stringValue == null || stringValue.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    print("http://18.143.206.136/api/pickups/");
+    print("https://18.143.206.136/api/pickups/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/pickups/'),
+        Uri.parse('https://18.143.206.136/api/pickups/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $stringValue',

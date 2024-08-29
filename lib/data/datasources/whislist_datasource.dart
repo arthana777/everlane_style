@@ -31,7 +31,7 @@ class WhishlistDatasource {
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.post(
-        Uri.parse('http://18.143.206.136/api/wishlist/add/'),
+        Uri.parse('https://18.143.206.136/api/wishlist/add/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -66,10 +66,10 @@ class WhishlistDatasource {
     if (stringValue == null || stringValue.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    print("http://18.143.206.136/api/wishlist/");
+    print("https://18.143.206.136/api/wishlist/");
     try {
       final response = await client.get(
-        Uri.parse('http://18.143.206.136/api/wishlist/'),
+        Uri.parse('https://18.143.206.136/api/wishlist/'),
         headers: {
           'content-type': 'application/json',
           'Authorization': 'Token $stringValue',
@@ -106,7 +106,7 @@ class WhishlistDatasource {
     final SharedPrefeService sp = SharedPrefeService();
     try {
       final response = await http.delete(
-        Uri.parse('http://18.143.206.136/api/wishlist/delete/$pid/'),
+        Uri.parse('https://18.143.206.136/api/wishlist/delete/$pid/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $stringValue',
