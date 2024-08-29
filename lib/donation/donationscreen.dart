@@ -5,7 +5,9 @@ import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../data/navigation_provider/navigation_provider.dart';
 import 'disaster_list.dart';
 import 'donation_address.dart';
 
@@ -20,6 +22,13 @@ class DonationHomeScreen extends StatelessWidget {
       appBar: PreferredSize(preferredSize: Size.fromHeight(100.h), child: CustomAppBar(
         color: Colors.transparent,
         text: "Donate here",
+        leading: InkWell(
+            onTap: (){
+              final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+              navigationProvider.updateScreenIndex(0);
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back)),
       )),
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),

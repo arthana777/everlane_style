@@ -212,7 +212,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   SnackBar(content: Text(state.message)),
                 );
               }
-
             },
           ),
         ],
@@ -264,9 +263,87 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         )),),
                   ),
                 ),
+                Padding(
+                  padding:  EdgeInsets.only(left: 10.w,right: 10.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Delivery Address",style: CustomFont().subtitleText,),
+                      TextButton(onPressed: (){
+                        if (selectedOrderType == "delivery") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AddressList()),
+                          );
+                        } else if (selectedOrderType == "donate") {
+                          _selectDisasterAddress(); // Navigate to DisasterList and select disaster address
+                        }
+                      },
+                          child: Text("Choose",style: GoogleFonts.questrial(color: Colors.purple,),))],
+                  ),
+                ),
+                SizedBox(height: 8.h,),
+                if (selectedOrderType == "delivery")
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      height: 150.h,
+                      width: 400.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.address?.address??""),
+                            Text(widget.address?.state??""),
+                            Text(widget.address?.city??""),
+                            Text(widget.address?.pincode??""),
+                            Text(widget.address?.mobile??""),
+                            Text(widget.address?.locality??""),
+                            //Text(widget.pickupLocation?.city??""),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                else if (selectedOrderType == "donate")
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      height: 150.h,
+                      width: 400.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text(widget.pickupLocation?.city??""),
+                            Text(widget.pickupLocation?.address??""),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 8.h,),
 
             SizedBox(height: 8.h,),
-
+                Padding(
+                  padding:  EdgeInsets.only(left: 10.w,right: 10.w),
+                  child: Text("Payment Method",style: CustomFont().subtitleText,),
+                ),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
               child: Container(
@@ -304,7 +381,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Upi",style: CustomFont().bodyText,),
+                        Text("Paypal",style: CustomFont().bodyText,),
                         IconButton(onPressed: (){
                           _selectPaymentMethod("ONLINE");
                         }, icon: Icon(selectedPaymentMethod == "ONLINE" ? Icons.check_circle : Icons.circle_outlined))
@@ -316,7 +393,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                 ),
                 SizedBox(height: 20.h,),
-                 Text("OrderType",style: CustomFont().subtitleText,),
+                 Padding(
+                   padding:  EdgeInsets.only(left: 10.w,right: 10.w),
+                   child: Text("OrderType",style: CustomFont().subtitleText,),
+                 ),
                Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
                   child: Container(
@@ -366,81 +446,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                 ),
                 SizedBox(height: 20.h,),
-                Padding(
-                  padding:  EdgeInsets.only(left: 10.w,right: 10.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Delivery Address",style: CustomFont().subtitleText,),
-                      TextButton(onPressed: (){
-    if (selectedOrderType == "delivery") {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => AddressList()),
-    );
-    } else if (selectedOrderType == "donate") {
-    _selectDisasterAddress(); // Navigate to DisasterList and select disaster address
-    }
-    },
-                      child: Text("Choose",style: GoogleFonts.questrial(color: Colors.purple,),))],
-                  ),
-                ),
-                SizedBox(height: 8.h,),
-                if (selectedOrderType == "delivery")
-                  Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Container(
-                    height: 150.h,
-                    width: 400.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(widget.address?.address??""),
-                          Text(widget.address?.state??""),
-                          Text(widget.address?.city??""),
-                          Text(widget.address?.pincode??""),
-                          Text(widget.address?.mobile??""),
-                          Text(widget.address?.locality??""),
-                          //Text(widget.pickupLocation?.city??""),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-                    else if (selectedOrderType == "donate")
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                    child: Container(
-                      height: 150.h,
-                      width: 400.w,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-                            Text(widget.pickupLocation?.city??""),
-                            Text(widget.pickupLocation?.address??""),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                      SizedBox(height: 8.h,),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 10.w),
                   child: Container(

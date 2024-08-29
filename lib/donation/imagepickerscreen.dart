@@ -109,6 +109,45 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   }
 
 
+  Future<XFile?> compressImage(File file) async {
+    try {
+      final tempDir = await getTemporaryDirectory();
+      final compressedFilePath = path.join(tempDir.path, '${DateTime.now().millisecondsSinceEpoch}_compressed.jpg');
+      final compressedFile = await FlutterImageCompress.compressAndGetFile(
+        file.path,
+        compressedFilePath,
+        quality: 88,
+      );
+      return compressedFile != null ? XFile(compressedFilePath) : null;
+    } catch (e) {
+      print('Error compressing image: $e');
+      return null;
+    }
+  }
+
+  // Future<void> _uploadImages() async {
+  //   if (images.isNotEmpty) {
+  //     // Compress images
+  //     List<XFile?> compressedImages = await Future.wait(images.map((image) async {
+  //       final compressedFile = await compressImage(image);
+  //       return compressedFile;
+  //     }));
+  //
+  //     // Remove any null values (failed compressions)
+  //     compressedImages.removeWhere((image) => image == null);
+  //
+  //     // Proceed with uploading compressed images
+  //     context.read<AddressBloc>().add(uploadclothes(
+  //       disasterId: widget.disaster?.id ?? 0,
+  //       images: compressedImages.whereType<File>().toList(), // Ensure the type is List<XFile>
+  //     ));
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Please select images first')),
+  //     );
+  //   }
+  // }
+
 
   void _uploadImages() {
     print(widget.disaster?.id);
@@ -170,11 +209,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             onTap: (){
               final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
               navigationProvider.updateScreenIndex(0);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const BtmNavigation()),
-                    (Route<dynamic> route) => false,
-              );
+              Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back)),
       action: [
@@ -345,81 +380,74 @@ SizedBox(height: 50.h,),
   //   }
   // }
 
-  Future<XFile?> compressImage(XFile file) async {
-    try {
-      final tempDir = await getTemporaryDirectory();
-      final compressedFilePath = path.join(tempDir.path, '${DateTime.now().millisecondsSinceEpoch}_compressed.jpg');
-print("compressedFilePath${compressedFilePath}");
-      final compressedFile = await FlutterImageCompress.compressAndGetFile(
-        file.path,
-        compressedFilePath,
-        quality: 88,
-      );
+//   Future<File?> compressImage(XFile file) async {
+//     try {
+//       final tempDir = await getTemporaryDirectory();
+//       final compressedFilePath = path.join(tempDir.path, '${DateTime.now().millisecondsSinceEpoch}_compressed.jpg');
+// print("compressedFilePath${compressedFilePath}");
+//       final compressedFile = await FlutterImageCompress.compressAndGetFile(
+//         file.path,
+//         compressedFilePath,
+//         quality: 88,
+//       );
+//
+//       return compressedFile != null ? XFile(compressedFilePath) : null;
+//     } catch (e) {
+//       print('Error compressing image: $e');
+//       return null;
+//     }
+//   }
 
-      return compressedFile != null ? XFile(compressedFilePath) : null;
-    } catch (e) {
-      print('Error compressing image: $e');
-      return null;
-    }
-  }
 
 
-
-  Future<void> uploadImagesDIO(List<XFile> images) async {
-    final String uploadUrl = 'http://18.143.206.136/api/donations/';
-    print("uploadding herr ");
-
-    final String? token = await getToken();
-    var data = FormData.fromMap({
-      'images': [
-        await MultipartFile.fromFile('postman-cloud:///1ef65241-56fc-4810-8d59-41a04e9bde84', filename: 'postman-cloud:///1ef65241-56fc-4810-8d59-41a04e9bde84'),
-        await MultipartFile.fromFile('postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667', filename: 'postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667'),
-        await MultipartFile.fromFile('postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667', filename: 'postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667'),
-        await MultipartFile.fromFile('postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667', filename: 'postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667'),
-        await MultipartFile.fromFile('postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667', filename: 'postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667'),
-        await MultipartFile.fromFile('postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667', filename: 'postman-cloud:///1ef644f3-796f-4a10-9df7-4a1bc2ed8667')
-      ],
-      'disaster':  widget.disaster?.id
-    });
-
-    try {
-
-      List<XFile> compressedImages = (await Future.wait(
-          images.map((image) async {
-            return await compressImage(image);
-          })
-      )).whereType<XFile>().toList();
-
-      List<MultipartFile> files = compressedImages.map((image) {
-        return MultipartFile.fromFileSync(
-          image.path,
-          filename: path.basename(image.path),
-        );
-      }).toList();
-
-      final FormData formData = FormData.fromMap({
-        'images': files,
-        'disaster': widget.disaster?.id,
-      });
-      final response = await _dio.post(uploadUrl, data: FormData,
-        options: Options(
-          headers: {
-            'Authorization': 'Token $token',
-            'Content-Type': 'multipart/form-data',
-          },
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        print('Images uploaded successfully');
-      } else {
-        print('Failed to upload images: ${response.statusCode}');
-        print('Response body: ${response.data}');
-      }
-    } catch (e) {
-      print('Error uploading images: $e');
-    }
-  }
+  // Future<void> uploadImagesDIO(List<XFile> images) async {
+  //   final String uploadUrl = 'https://18.143.206.136/api/donations/';
+  //   print("uploadding herr ");
+  //
+  //   final String? token = await getToken();
+  //   var data = FormData.fromMap({
+  //     'images': images,
+  //     'disaster':  widget.disaster?.id
+  //   });
+  //
+  //   try {
+  //
+  //     List<XFile> compressedImages = (await Future.wait(
+  //         images.map((image) async {
+  //           return await compressImage(image);
+  //         })
+  //     )).whereType<XFile>().toList();
+  //
+  //     List<MultipartFile> files = compressedImages.map((image) {
+  //       return MultipartFile.fromFileSync(
+  //         image.path,
+  //         filename: path.basename(image.path),
+  //       );
+  //     }).toList();
+  //
+  //     final FormData formData = FormData.fromMap({
+  //       'images': files,
+  //       'disaster': widget.disaster?.id,
+  //     });
+  //     final response = await _dio.post(uploadUrl, data: FormData,
+  //       options: Options(
+  //         headers: {
+  //           'Authorization': 'Token $token',
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       ),
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       print('Images uploaded successfully');
+  //     } else {
+  //       print('Failed to upload images: ${response.statusCode}');
+  //       print('Response body: ${response.data}');
+  //     }
+  //   } catch (e) {
+  //     print('Error uploading images: $e');
+  //   }
+  // }
 
 
 
