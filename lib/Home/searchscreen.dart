@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import '../bloc/product/product_bloc.dart';
 import '../data/models/product_model.dart';
 import '../data/models/whishlistmodel.dart';
+import '../data/navigation_provider/navigation_provider.dart';
 import '../product_detail/product_details.dart';
 import '../productgrid/product_card.dart';
+import '../widgets/customappbar.dart';
 import '../widgets/cutsofield_address.dart';
 
 class Searchscreen extends StatelessWidget {
@@ -19,6 +22,16 @@ class Searchscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
+        text: 'Search here..',
+        leading: InkWell(
+            onTap: (){
+              final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+              navigationProvider.updateScreenIndex(0);
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back)),
+      )),
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),

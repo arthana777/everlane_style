@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 
@@ -42,6 +43,12 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController localityController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String? _usernameError;
+  String? _passwordError;
+  String _mobileErrorMessage = '';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +58,9 @@ class _AddressScreenState extends State<AddressScreen> {
         elevation: 0,
         backgroundColor: CustomColor.primaryColor,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddressList() ,
+    if (_formKey.currentState?.validate() ?? false) {
+    // Form is valid, proceed with action
 
-          )
-          );
           context.read<AddressBloc>().add(CreateAddress(
             mobile: mobileController.text,
             pincode: pinCodeController.text,
@@ -67,6 +73,24 @@ class _AddressScreenState extends State<AddressScreen> {
             isActive: true,
             isDeleted: false,
           ));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddressList(),
+            ),
+          );
+    }
+    else {
+      // Show toast if form is not valid
+      Fluttertoast.showToast(
+        msg: "Please fill out all fields.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+    }
         },
         label: Container(
           height: 30.h,
@@ -90,11 +114,7 @@ class _AddressScreenState extends State<AddressScreen> {
             onTap: (){
               final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
               navigationProvider.updateScreenIndex(0);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => BtmNavigation()),
-                    (Route<dynamic> route) => false,
-              );
+              Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back)),
       )),
@@ -135,48 +155,119 @@ class _AddressScreenState extends State<AddressScreen> {
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: 15.w,vertical: 10.h),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-            
-                AdrressCustomField(hinttext: 'House no/Flat no',
-                inputType: TextInputType.text,
-                controller: houseNoController,),
-                SizedBox(height: 8.h,),
-                AdrressCustomField(hinttext: 'Pin Code',
-                  inputType: TextInputType.number,
-                  controller: pinCodeController,
-                ),
-                SizedBox(height: 8.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AdrressCustomField(hinttext: 'City',width: 175.h,controller: cityController,inputType: TextInputType.text, ),
-                    AdrressCustomField(hinttext: 'State',width: 175.h,controller: stateController,inputType: TextInputType.text, )
-            
-                  ],
-                ),
-                SizedBox(height: 8.h,),
-                AdrressCustomField(hinttext: 'Landmark',controller: landmarkController,inputType: TextInputType.text,),
-                SizedBox(height: 20.h,),
-                Text("Save as",style: CustomFont().titleText,),
-                SizedBox(height: 8.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomAdressSelection(text: 'Home',),
-                    CustomAdressSelection(text: 'Work',),
-                    CustomAdressSelection(text: 'Friend',),
-                  ],
-                ),
-                SizedBox(height: 20.h,),
-                AdrressCustomField(hinttext: 'Recievers Adress',controller: addressController,inputType: TextInputType.text,),
-                SizedBox(height: 8.h,),
-                AdrressCustomField(hinttext: 'Recievers Phone number',controller: mobileController,inputType: TextInputType.phone,),
-                SizedBox(height: 8.h,),
-                AdrressCustomField(hinttext: 'locality',controller: localityController,inputType: TextInputType.text,)
-            
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  AdrressCustomField(hinttext: 'House no/Flat no',
+                  inputType: TextInputType.text,
+                  controller: houseNoController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the locality';
+                      }
+                      return null;
+                    },
+
+                  ),
+                  SizedBox(height: 8.h,),
+                  AdrressCustomField(hinttext: 'Pin Code',
+                    inputType: TextInputType.number,
+                    controller: pinCodeController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the pin code';
+                      } else if (value.length != 6) {
+                        return 'Pin code must be 6 digits';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 8.h,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AdrressCustomField(hinttext: 'City',width: 175.h,controller: cityController,inputType: TextInputType.text,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the city';
+                          }
+                          return null;
+                        },
+                      ),
+                      AdrressCustomField(hinttext: 'State',width: 175.h,controller: stateController,inputType: TextInputType.text,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the state';
+                          }
+                          return null;
+                        },),
+
+
+                    ],
+                  ),
+                  SizedBox(height: 8.h,),
+                  AdrressCustomField(hinttext: 'Landmark',controller: landmarkController,inputType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the landmark';
+                      }
+                      return null;
+                    },),
+                  SizedBox(height: 20.h,),
+                  Text("Save as",style: CustomFont().titleText,),
+                  SizedBox(height: 8.h,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomAdressSelection(text: 'Home',),
+                      CustomAdressSelection(text: 'Work',),
+                      CustomAdressSelection(text: 'Friend',),
+                    ],
+                  ),
+                  SizedBox(height: 20.h,),
+                  AdrressCustomField(hinttext: 'Recievers Adress',controller: addressController,inputType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the receiver\'s address';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 8.h,),
+                  AdrressCustomField(hinttext: 'Recievers Phone number',controller: mobileController,inputType: TextInputType.phone,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the phone number';
+                      } else if (value.length != 10) {
+                        return 'Phone number must be 8 digits';
+                      }
+                      return null;
+                    },
+                      onchanged: (value){
+                        setState(() {
+                          if (value.length > 8) {
+                            _mobileErrorMessage = 'Phone number cannot be more than 8 digits';
+                          } else {
+                            _mobileErrorMessage = '';
+                          }
+                        });
+                        //String telNo = value==null?("+91" + value) :null
+                      },
+                    ),
+                  SizedBox(height: 8.h,),
+                  AdrressCustomField(hinttext: 'locality',controller: localityController,inputType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the locality';
+                      }
+                      return null;
+                    },),
+
+                ],
+              ),
             ),
           ),
         ),

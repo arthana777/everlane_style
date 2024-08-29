@@ -38,11 +38,7 @@ class _DisasterListState extends State<DisasterList> {
               onTap: (){
                 final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
                 navigationProvider.updateScreenIndex(0);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BtmNavigation()),
-                      (Route<dynamic> route) => false,
-                );
+                Navigator.pop(context);
               },
               child: Icon(Icons.arrow_back)),
         ),

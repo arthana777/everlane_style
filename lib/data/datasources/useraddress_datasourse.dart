@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:everlane_style/bloc/address/address_bloc.dart';
 import 'package:everlane_style/data/models/addressmodel.dart';
 import 'package:everlane_style/data/models/disastermodel.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -327,7 +328,7 @@ class UseraddressDatasourse{
 
   Future<String> uploadCloths(int disid, List<File> images) async {
     print("disasterId: $disid ");
-    print("image length: ${images.length}");
+    print("image length: ${images}");
     final String? token = await getToken();
     if (token == null || token.isEmpty) {
       return "Failed: Token not found or is empty";
@@ -337,11 +338,13 @@ class UseraddressDatasourse{
     final uri = 'https://18.143.206.136/api/donations/';
 
     try {
+
       final imageFiles = await Future.wait(images.map((image) async {
+        //return MultipartFile.fromFile(image.path, filename: path.basename(image.path));
         return MultipartFile.fromFile(image.path, filename: image.uri.pathSegments.last);
       }).toList());
         final formData = FormData.fromMap({
-          'disaster': 5,
+          'disaster': disid,
           // disid.toString(),
           'images':imageFiles
           //'images': await MultipartFile.fromFile(image.path, filename: image.uri.pathSegments.last),
@@ -359,11 +362,9 @@ print("formdataaa${formData}");
               'Content-Type': 'multipart/form-data',
             },
           ),
-
-
         );
 print("response of upload image $response");
-        if (response.statusCode != 201) {
+        if (response.statusCode != 200) {
           return "Failed: ${response.statusMessage}";
         }
 

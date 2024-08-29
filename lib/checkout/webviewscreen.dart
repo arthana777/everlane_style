@@ -23,14 +23,14 @@ class WebviewScreen extends StatelessWidget {
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
+            if (request.url.startsWith('https://18.143.206.136/api/payment/execute/?paymentId=PAYID-M3H7R7Q4C119875AT841503S&token=EC-3A653758636168226&PayerID=ZSVBFLZEMDX58 ')) {
               return NavigationDecision.prevent;
             }
             return NavigationDecision.navigate;
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+      ..loadRequest(Uri.parse(url));
     return Scaffold(
       appBar: AppBar(title: const Text('PAYMENT')),
       body: WebViewWidget(controller: controller),
