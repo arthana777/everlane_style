@@ -3,8 +3,8 @@ import 'package:everlane_style/data/models/qstresult.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QstService {
-  String url = 'http://18.143.206.136/api/questionnaire/';
-  String getUrl = 'http://18.143.206.136/api/recommendations/';
+  String url = 'https://18.143.206.136/api/questionnaire/';
+  String getUrl = 'https://18.143.206.136/api/recommendations/';
 
   Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
