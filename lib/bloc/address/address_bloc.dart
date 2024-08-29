@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:everlane_style/data/models/pickupmodel.dart';
 import 'package:everlane_style/donation/upload_clothes.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/datasources/useraddress_datasourse.dart';
@@ -117,6 +118,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
       try {
         final addresses = await useraddressDatasourse.uploadCloths(event.disasterId,
           event.images,);
+        print("disaster id in bloc ${event.disasterId}");
         print("adressesss${addresses}");
         if(addresses=="success"){
           emit(uploadclothesuccess());

@@ -44,11 +44,7 @@ class _AddressListState extends State<AddressList> {
             onTap: (){
               // final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
               // navigationProvider.updateScreenIndex(0);
-              Navigator.pop(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-
-              );
+             Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back)),
         text: "Select Address",
