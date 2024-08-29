@@ -22,6 +22,10 @@ class _EditProfileState extends State<EditProfile> {
     if (_formKey.currentState!.validate()) {}
   }
 
+  Future<void> _refresh() {
+    return Future.delayed(Duration(seconds: 2));
+  }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
 
@@ -78,7 +82,7 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(30),
+        preferredSize: Size.fromHeight(30.h),
         child: CustomAppBar(
           leading: IconButton(
             onPressed: () {
@@ -95,165 +99,168 @@ class _EditProfileState extends State<EditProfile> {
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                SizedBox(height: 20.h),
-                CircleAvatar(
-                  backgroundImage: const NetworkImage(
-                    'https://i.pinimg.com/474x/8e/0c/fa/8e0cfaf58709f7e626973f0b00d033d0.jpg',
+            child: RefreshIndicator(
+              onRefresh: _refresh,
+              child: Column(
+                children: [
+                  SizedBox(height: 20.h),
+                  CircleAvatar(
+                    backgroundImage: const NetworkImage(
+                      'https://i.pinimg.com/474x/8e/0c/fa/8e0cfaf58709f7e626973f0b00d033d0.jpg',
+                    ),
+                    backgroundColor: Colors.white,
+                    maxRadius: 60.r,
                   ),
-                  backgroundColor: Colors.white,
-                  maxRadius: 60.r,
-                ),
-                SizedBox(height: 30.h),
-                CustomTextfield(
-                  focusNode: fieldOne,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(fieldTwo);
-                  },
-                  controller: usernameController,
-                  hintText: 'User name',
-                  inputType: TextInputType.text,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 10.h),
-                CustomTextfield(
-                  focusNode: fieldTwo,
-                  onFieldSubmitted: (contex) {
-                    FocusScope.of(context).requestFocus(fieldThree);
-                  },
-                  controller: firstnameController,
-                  hintText: 'First Name',
-                  inputType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your  first name';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 10.h),
-                CustomTextfield(
-                  focusNode: fieldThree,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(fieldFour);
-                  },
-                  controller: lastNameController,
-                  hintText: 'Last Name',
-                  inputType: TextInputType.text,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your Last name';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 10.h),
-                CustomTextfield(
-                  focusNode: fieldFour,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(fieldFive);
-                  },
-                  controller: emailController,
-                  hintText: 'Email',
-                  inputType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter a valid email Address";
-                    }
-                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                      return 'Please enter a valid email Address';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 10.h),
-                CustomTextfield(
-                  focusNode: fieldFive,
-                  controller: phoneNumberController,
-                  hintText: 'Mobile Number',
-                  inputType: TextInputType.phone,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your mobile number';
-                    }
-                    if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                      return 'Please enter a valid 10-digit mobile number';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20.h),
-                BlocListener<EditprofileBloc, EditprofileState>(
-                  listener: (context, state) {
-                    print("loadinggggg");
-                    if (state is UserProfileLoading) {
-                      const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                      print("error${state}");
-                    } else if (state is UserProfileUpdated) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Profile Updated Successfully"),
-                        ),
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Profile(),
-                        ),
-                      );
-                    } else if (state is UserProfileError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("User Update Failed. Try Again"),
-                        ),
-                      );
-                    }
-                    ;
-                  },
-                  child: BlocBuilder<EditprofileBloc, EditprofileState>(
-                    builder: (context, state) {
-                      if (state is UserProfileLoading) {
-                        return const CircularProgressIndicator();
+                  SizedBox(height: 30.h),
+                  CustomTextfield(
+                    focusNode: fieldOne,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(fieldTwo);
+                    },
+                    controller: usernameController,
+                    hintText: 'User name',
+                    inputType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
                       }
-                      return _isButtonVisible
-                          ? ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomColor.primaryColor,
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10).w,
-                                ),
-                              ),
-                              onPressed: () {
-                                final updatedData = {
-                                  'username': usernameController.text,
-                                  'first_name': firstnameController.text,
-                                  'last_name': lastNameController.text,
-                                  'email': emailController.text,
-                                  'mobile': phoneNumberController.text,
-                                };
-                                if (_formKey.currentState!.validate()) {
-                                  editProfileBloc
-                                      .add(UpdateUserProfile(updatedData));
-                                }
-                              },
-                              child: Text("Confirm",
-                                  style: CustomFont().buttontext),
-                            )
-                          : const SizedBox.shrink();
+                      return null;
                     },
                   ),
-                ),
-                SizedBox(height: 20.h)
-              ],
+                  SizedBox(height: 10.h),
+                  CustomTextfield(
+                    focusNode: fieldTwo,
+                    onFieldSubmitted: (contex) {
+                      FocusScope.of(context).requestFocus(fieldThree);
+                    },
+                    controller: firstnameController,
+                    hintText: 'First Name',
+                    inputType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your  first name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomTextfield(
+                    focusNode: fieldThree,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(fieldFour);
+                    },
+                    controller: lastNameController,
+                    hintText: 'Last Name',
+                    inputType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your Last name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomTextfield(
+                    focusNode: fieldFour,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(fieldFive);
+                    },
+                    controller: emailController,
+                    hintText: 'Email',
+                    inputType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter a valid email Address";
+                      }
+                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                        return 'Please enter a valid email Address';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomTextfield(
+                    focusNode: fieldFive,
+                    controller: phoneNumberController,
+                    hintText: 'Mobile Number',
+                    inputType: TextInputType.phone,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your mobile number';
+                      }
+                      if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                        return 'Please enter a valid 10-digit mobile number';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20.h),
+                  BlocListener<EditprofileBloc, EditprofileState>(
+                    listener: (context, state) {
+                      print("loadinggggg");
+                      if (state is UserProfileLoading) {
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                        print("error${state}");
+                      } else if (state is UserProfileUpdated) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Profile Updated Successfully"),
+                          ),
+                        );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Profile(),
+                          ),
+                        );
+                      } else if (state is UserProfileError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("User Update Failed. Try Again"),
+                          ),
+                        );
+                      }
+                      ;
+                    },
+                    child: BlocBuilder<EditprofileBloc, EditprofileState>(
+                      builder: (context, state) {
+                        if (state is UserProfileLoading) {
+                          return const CircularProgressIndicator();
+                        }
+                        return _isButtonVisible
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: CustomColor.primaryColor,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10).w,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  final updatedData = {
+                                    'username': usernameController.text,
+                                    'first_name': firstnameController.text,
+                                    'last_name': lastNameController.text,
+                                    'email': emailController.text,
+                                    'mobile': phoneNumberController.text,
+                                  };
+                                  if (_formKey.currentState!.validate()) {
+                                    editProfileBloc
+                                        .add(UpdateUserProfile(updatedData));
+                                  }
+                                },
+                                child: Text("Confirm",
+                                    style: CustomFont().buttontext),
+                              )
+                            : const SizedBox.shrink();
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20.h)
+                ],
+              ),
             ),
           ),
         ),

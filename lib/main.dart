@@ -23,6 +23,10 @@ import 'bloc/category_bloc.dart';
 import 'bloc/loginn/loginn_bloc.dart';
 import 'bloc/whishlist/whishlist_bloc.dart';
 
+
+
+
+
 void main() {
   runApp(
     MultiProvider(

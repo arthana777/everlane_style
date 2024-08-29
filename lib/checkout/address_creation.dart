@@ -9,12 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
-
 import '../bloc/address/address_bloc.dart';
 import '../btm_navigation/btm_navigation.dart';
 import '../data/models/addressmodel.dart';
-
 import '../widgets/customcolor.dart';
 import '../widgets/cutsofield_address.dart';
 
@@ -24,7 +21,7 @@ class AddressScreen extends StatefulWidget {
   @override
   State<AddressScreen> createState() => _AddressScreenState();
 }
-List<UserAddress>useradress=[];
+List<UserAddress>useradress=[];   
 class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController houseNoController = TextEditingController();
 

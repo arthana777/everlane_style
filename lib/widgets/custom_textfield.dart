@@ -59,7 +59,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
           ).r,
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8).w,
           ),
           hintText: widget.hintText,
           hintStyle: CustomFont().hintText,

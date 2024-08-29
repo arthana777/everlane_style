@@ -13,7 +13,7 @@ class CustomTextButton extends StatelessWidget {
       onTap: ontap,
       child: Container(
         width: 180.w,
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15).w,
         child: Center(
             child: Text(text??"")),
       ),

@@ -40,9 +40,9 @@ class Profile extends StatelessWidget {
                 Navigator.push(
                     context,
                     PageTransition(
-                        child: BtmNavigation(),
+                        child: const BtmNavigation(),
                         type: PageTransitionType.bottomToTop,
-                        duration: Duration(milliseconds: 230))
+                        duration: const Duration(milliseconds: 230))
                     // MaterialPageRoute(builder: (context) => const BtmNavigation()),
                     );
               },
@@ -139,7 +139,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Whishlist(),
+                        builder: (context) => const Whishlist(),
                       ),
                     );
                   },
@@ -152,7 +152,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MyOrders(),
+                        builder: (context) => const MyOrders(),
                       ),
                     );
                   },
@@ -180,7 +180,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                         PageTransition(
                             child: EditProfile(),
                             type: PageTransitionType.bottomToTop,
-                            duration: Duration(milliseconds: 220)));
+                            duration: const Duration(milliseconds: 220)));
                   },
                 ),
                 SizedBox(height: 5.h),
@@ -205,7 +205,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                               height: 250.h,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 25, left: 10, right: 10),
+                                    top: 25, left: 10, right: 10).r,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,

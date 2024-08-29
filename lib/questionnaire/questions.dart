@@ -60,7 +60,7 @@ class _QuestionsState extends State<Questions> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+             SizedBox(height: 20.h),
             Text(
               "Provide structured and standardized responses, making the analysis process more streamlined and less time-consuming.",
               style: CustomFont().subText,
@@ -153,7 +153,7 @@ class _QuestionsState extends State<Questions> {
                 child: Text("Update", style: CustomFont().buttontext),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
           ],
         ));
   }
@@ -172,7 +172,7 @@ class _QuestionsState extends State<Questions> {
           ),
         ],
         color: const Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.all(const Radius.circular(5).w),
+        borderRadius: const BorderRadius.all(Radius.circular(5)).w,
       ),
       child: Center(
         child: ListTile(

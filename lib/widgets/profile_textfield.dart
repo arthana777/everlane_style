@@ -19,13 +19,13 @@ class ProfileTextfield extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin:  EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-        padding:  EdgeInsets.all(16.0),
+        margin:  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0).w,
+        padding:  const EdgeInsets.all(16.0).w,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0).r,
-          boxShadow:  [
-            BoxShadow(
+          boxShadow:  const [
+             BoxShadow(
               color: Colors.black26,
               offset: Offset(0, 1),
               blurRadius: 1.0,
@@ -45,7 +45,7 @@ class ProfileTextfield extends StatelessWidget {
                 Text(title, style: CustomFont().hintText),
               ],
             ),
-             Icon(
+             const Icon(
               Icons.arrow_forward_ios,
               color: CustomColor.primaryColor,
             ),

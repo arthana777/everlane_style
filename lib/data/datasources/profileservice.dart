@@ -3,14 +3,14 @@ import 'package:everlane_style/data/models/userprofile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileService {
-  final String baseUrl = 'http://18.143.206.136/api/profile/';
+  final String baseUrl = 'https://18.143.206.136/api/profile/';
 
   Future<void> saveToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('auth_token', token);
   }
 
-  Dio client = Dio(); 
+  Dio client = Dio();
 
   Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

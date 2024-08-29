@@ -54,11 +54,11 @@ class DropDownnLatest extends StatelessWidget {
             .toList(),
         onChanged: onChanged,
         buttonStyleData: ButtonStyleData(
-          height: 50,
+          height: 50.h,
           // width: 160,
-          padding: const EdgeInsets.only(left: 14, right: 14),
+          padding: const EdgeInsets.only(left: 14, right: 14).r,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10).w,
             border: Border.all(
               color: Colors.white,
             ),
@@ -75,7 +75,7 @@ class DropDownnLatest extends StatelessWidget {
           elevation: 2,
         ),
         iconStyleData: IconStyleData(
-          icon: Icon(
+          icon:  const Icon(
             Icons.keyboard_arrow_down,
           ),
           iconSize: 22.sp,
@@ -83,12 +83,12 @@ class DropDownnLatest extends StatelessWidget {
           iconDisabledColor: CustomColor.iconColor,
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: 400,
-          width: 200,
+          maxHeight: 400.h,
+          width: 200.w,
           direction: DropdownDirection.right,
           padding: null,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(4).w,
             color: Colors.white,
             boxShadow: const [
               BoxShadow(
@@ -101,14 +101,14 @@ class DropDownnLatest extends StatelessWidget {
           elevation: 8,
           offset: const Offset(60, 0),
           scrollbarTheme: ScrollbarThemeData(
-            radius: const Radius.circular(40),
+            radius: const Radius.circular(40).w,
             thickness: MaterialStateProperty.all<double>(6),
             thumbVisibility: MaterialStateProperty.all<bool>(true),
           ),
         ),
-        menuItemStyleData: const MenuItemStyleData(
-          height: 40,
-          padding: EdgeInsets.only(left: 14, right: 14),
+        menuItemStyleData: MenuItemStyleData(
+          height: 40.h,
+          padding: const EdgeInsets.only(left: 14, right: 14).r,
         ),
       ),
     );

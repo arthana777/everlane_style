@@ -26,7 +26,7 @@ class CustomFont {
       textStyle: TextStyle(
           color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16.sp));
   final TextStyle subText = GoogleFonts.roboto(
-      textStyle: const TextStyle(color: Colors.black, fontSize: 15));
+      textStyle:TextStyle(color: Colors.black, fontSize: 15.sp));
 }
 
 class CustomSize {

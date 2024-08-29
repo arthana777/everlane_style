@@ -1,5 +1,6 @@
 import 'package:everlane_style/bloc/loginn/loginn_bloc.dart';
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
+import 'package:everlane_style/forgot_password/forgot_bottomsheet.dart';
 import 'package:everlane_style/questionnaire/qstmodalbottomsheet.dart';
 import 'package:everlane_style/signup_page/signup.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
@@ -101,7 +102,7 @@ class _SiginPageState extends State<SiginPage> {
               );
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  const BtmNavigation()),
+                MaterialPageRoute(builder: (context) => const BtmNavigation()),
               );
             }
           },
@@ -179,11 +180,7 @@ class _SiginPageState extends State<SiginPage> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Siginup()),
-                              );
+                              ForgotBottomsheet.moreModalBottomSheet(context);
                             },
                             child: Text(
                               "Forgot Password?",
@@ -233,6 +230,9 @@ class _SiginPageState extends State<SiginPage> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 30,
+                      )
                     ],
                   ),
                 ),
