@@ -25,9 +25,8 @@ import 'bloc/whishlist/whishlist_bloc.dart';
 
 
 
-
-
 void main() {
+    
   runApp(
     MultiProvider(
       providers: [
