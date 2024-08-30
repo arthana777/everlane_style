@@ -133,16 +133,15 @@ class palceOrderLoading extends CartState {
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
+class PlaceOrderSuccess extends CartState {
+  final String approvalUrl;
 
-class placeOrderSuccess extends CartState {
-  @override
-  // final List<Cart> carts; // Assuming you have a Cart model
-  //
-  // addtoCartSuccess({required this.carts});
+  PlaceOrderSuccess({required this.approvalUrl});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [approvalUrl];
 }
+
 
 class placeOrdererror extends CartState {
   @override
@@ -203,6 +202,30 @@ class ReturnError extends CartState {
   @override
   List<Object?> get props => [message];
 }
+
+class ExecutionLoading extends CartState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ExecutionLoaded extends CartState {
+  final PaymentResponse paymentResponse;
+
+  ExecutionLoaded(this.paymentResponse);
+
+  @override
+  List<Object> get props => [paymentResponse];
+}
+
+class ExecutionError extends CartState {
+  final String message;
+
+  ExecutionError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 
 
 

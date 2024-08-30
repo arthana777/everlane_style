@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                         child: Icon(
-                          Icons.drag_handle_outlined,
+                          Icons.handshake_outlined,
                           size: 25.sp,
                         ))
                   ],
@@ -342,9 +342,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     for (var i = 0; i <= whishlist.length; i++) {
                       wishlistProductIds.add(whishlist[i].product);
                     }
-                    print(whishlist.length);
-                    print(whishlist[0]);
-                    print("oooooooooooooooo");
                     setState(() {});
                   } else if (state is RemoveWishlistSuccess) {
                     setState(() {
@@ -418,7 +415,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 20, top: 20, bottom: 5),
+                           EdgeInsets.only(left: 20.w, top: 30.h, bottom: 5.w),
                       child: Text(
                         "Categories ",
                         style: CustomFont().subtitleText,
@@ -519,8 +516,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             }).toList(),
                           ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 30, bottom: 30),
+                      padding:  EdgeInsets.only(
+                          left: 20.w, right: 20.w, top: 30.h,),
                       child: Text(
                         "Trending",
                         style: CustomFont().subtitleText,
@@ -535,8 +532,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               itemCount: products.length,
                               itemBuilder: (context, index) => Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 00),
+                                  padding:  EdgeInsets.only(
+                                      left: 20.w, ),
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
@@ -612,13 +609,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               physics: NeverScrollableScrollPhysics(),
                               itemCount: seasonbanner.length,
                               itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.only(
-                                            left: 10,
-                                            right: 10,
-                                            top: 1,
-                                            bottom: 4)
-                                        .w
-                                        .w,
+                                    padding:  EdgeInsets.only(
+                                            left: 10.w,
+                                            right: 10.w,
+                                            top: 1.h,
+                                            bottom: 4.h),
                                     child: InkWell(
                                         onTap: () {
                                           Navigator.push(

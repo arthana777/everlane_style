@@ -41,6 +41,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   DetailProduct? productdetail;
   int? isclicked;
   bool isAddedToCart = false;
+  bool isItemOutOfStock = false;
   bool isInWishlist(int? productId) {
     return wishlistProductIds.contains(productId);
   }
@@ -52,6 +53,8 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
   void tappingfun(int index) {
     isclicked = index;
+    isItemOutOfStock = productdetail?.items?[index].stock == 0;
+
     setState(() {});
   }
   @override
@@ -62,7 +65,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
           backgroundColor: isAddedToCart?Colors.grey:CustomColor.primaryColor,
-          onPressed: () {
+          onPressed: isAddedToCart?null:() {
             if (isclicked != null && !isAddedToCart) {
               BlocProvider.of<CartBloc>(context).add(
                 AddToCart(
@@ -93,7 +96,10 @@ class _ProductDetailsState extends State<ProductDetails> {
               color: isAddedToCart?Colors.grey:CustomColor.primaryColor,
             ),
             child: Center(
-              child: Text(isAddedToCart?"Go to Cart":"Add to cart", style: CustomFont().buttontext),
+              child:  Text(
+                isItemOutOfStock ? "Out of Stock" : (isAddedToCart ? "Go to Cart" : "Add to cart"),
+                style: CustomFont().buttontext,
+              ),
             ),
           ),
           icon: IconButton(
@@ -328,7 +334,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                           width: double.infinity,
                           color: Colors.white,
                         ),
-                      ):Container(
+                      )
+                          : productdetail!.items.isEmpty
+                          ? Center(
+                        child: Text(
+                          'Out of Stock',
+                          style: CustomFont().subtitleText.copyWith(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                          :Container(
                         height: 50.h,
                        // color: Colors.orangeAccent,
                         child: ListView.builder(

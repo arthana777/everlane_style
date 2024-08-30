@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../sharedprefrence/sharedprefs_login.dart';
 import '../models/cartmodel.dart';
 import '../models/ordermodel.dart';
+import '../models/paymentresponsemodel.dart';
 
 class CartDatasource{
   final client = http.Client();
@@ -128,45 +129,49 @@ class CartDatasource{
   }
 
 
-  Future<String> placeOrder(String method,String ordertype,int aid) async {
-    print("aiddd$aid");
-    final String? stringValue = await getToken();
-    if (stringValue == null || stringValue.isEmpty) {
+
+
+  Future<String> placeOrder(String method, String orderType, int addressId) async {
+    print("Address ID: $addressId");
+
+    final String? token = await getToken();
+    if (token == null || token.isEmpty) {
       return "Failed: Token not found or is empty";
     }
-    final SharedPrefeService sp = SharedPrefeService();
+
     try {
       final response = await http.post(
         Uri.parse('https://18.143.206.136/api/place-order/'),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Token $stringValue',
+          'Authorization': 'Token $token',
         },
         body: jsonEncode({
           'payment_method': method,
-          'order_type': ordertype,
-          'address_id': aid,
+          'order_type': orderType,
+          'address_id': addressId,
         }),
       );
-      print(response.body);
-      if (response.statusCode == 200) {
-        final decodedResponse = jsonDecode(response.body);
-        print("ytytytyt${decodedResponse}");
-        if (decodedResponse['message'] ==
-            "Orders placed successfully.") {
-          // await getToken(token);
-          return "success";
-        }
-        else {
+
+      print("Response Body: ${response.body}");
+
+      if (response.statusCode == 201) { // Check for successful creation
+        final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
+
+        // Return the approval URL if it exists
+        if (decodedResponse['status'] == "success") {
+          return decodedResponse['approval_url'] ?? "No approval URL found";
+        } else {
           return "Failed: ${decodedResponse['message']}";
         }
-        // Login successful, proceed to next step
+      } else {
+        return "Failed: ${response.reasonPhrase}";
       }
     } catch (e) {
       return "Failed: ${e.toString()}";
     }
-    return "true";
   }
+
 
 
   Future<String> returnOrder(int orderItemId, int returnQuantity,String returnReason ) async {
@@ -251,6 +256,72 @@ class CartDatasource{
       throw Exception("$e");
     }
   }
+
+
+
+  Future<PaymentResponse?> paymentExecute(String paymentId, String payerId, String token) async {
+    final String? stringValue = await getToken();
+    if (stringValue == null || stringValue.isEmpty) {
+      return null;
+    }
+
+    final url = 'https://18.143.206.136/api/payment/execute/?paymentId=$paymentId&token=$token&PayerID=$payerId';
+    print("Request URL: $url");
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': 'Token $stringValue',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print("Successful response: ${response.body}");
+        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        return PaymentResponse.fromJson(responseBody);
+      } else {
+        print("Failed with status code: ${response.statusCode}");
+        return null;
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return null;
+    }
+  }
+
+  // Future<dynamic> paymentExecute(String paymentId, String payerId, String token) async {
+  //   final String? stringValue = await getToken();
+  //   if (stringValue == null || stringValue.isEmpty) {
+  //     return "Failed: Token not found or is empty";
+  //   }
+  //
+  //   final url = 'https://18.143.206.136/api/payment/execute/?paymentId=$paymentId&token=$token&PayerID=$payerId';
+  //   print("Request URL: $url");
+  //
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse(url),
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'Authorization': 'Token $stringValue',
+  //       },
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       print("Successful response: ${response.body}");
+  //       final Map<String, dynamic> responseBody = jsonDecode(response.body);
+  //       return responseBody;
+  //     } else {
+  //       print("Failed with status code: ${response.statusCode}");
+  //       return "Failed with status code: ${response.statusCode}";
+  //     }
+  //   } catch (e) {
+  //     print("Exception: $e");
+  //     return "Exception: $e";
+  //   }
+  // }
 
 
   Future<String> updateCartItemQuantity(int cartItemId, String action) async {

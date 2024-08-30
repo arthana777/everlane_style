@@ -34,8 +34,9 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  bool _isLoading = false;
   List<Cart> carts=[];
-  String selectedPaymentMethod = "COD";
+  String selectedPaymentMethod = "ONLINE";
   String selectedOrderType = "delivery";
    bool isSelected=false;
   bool _isAddressSelected = false;
@@ -118,10 +119,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Please select a delivery address')),
               );
-            }
-            else if (carts.isNotEmpty) {
+            } else if (carts.isNotEmpty) {
+              setState(() {
+                _isLoading = true; // Set loading to true
+              });
               if (selectedPaymentMethod == "COD") {
-                // Place order directly for COD
                 context.read<CartBloc>().add(PlaceOrder(
                   deliveryAddressId: widget.address?.id ?? 0,
                   orderType: selectedOrderType,
@@ -135,17 +137,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   MaterialPageRoute(builder: (context) => OrderSuccessScreen()),
                 );
               } else if (selectedPaymentMethod == "ONLINE") {
-
-                String approvalUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-3A653758636168226";
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WebviewScreen(url: approvalUrl),
-                  ),
-                );
+                // Trigger the online payment processing
+                context.read<CartBloc>().add(PlaceOrder(
+                  deliveryAddressId: widget.address?.id ?? 0,
+                  orderType: selectedOrderType,
+                  paymentMethod: selectedPaymentMethod,
+                ));
               }
-            }
-            else {
+            } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Your cart is empty. Please add items to the cart before placing an order.')),
               );
@@ -163,7 +162,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             color: CustomColor.primaryColor,
           ),
           child: Center(
-            child: Text("Place Order", style: CustomFont().buttontext),
+            child: _isLoading
+                ? CircularProgressIndicator(color: Colors.white) : Text("Place Order", style: CustomFont().buttontext),
           ),
         ),
         icon: Icon(
@@ -172,6 +172,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           color: CustomColor.buttoniconColor,
         ),
       ),
+
 
       backgroundColor:  Color(0xFFEFEFEF),
       appBar: PreferredSize(preferredSize: Size.fromHeight(50), child: CustomAppBar(text: "Confirm Order",
@@ -197,14 +198,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 print("Cart Loaded: ${carts.length} carts loaded.");
                 setState(() {});
               }
-              else if (state is placeOrderSuccess) {
-               // WidgetsBinding.instance.addPostFrameCallback((_) {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     SnackBar(content: Text('Order placed successfully!')),
-                //   );
-                // });
-
+              else if (state is PlaceOrderSuccess) {
+                final approvalUrl = state.approvalUrl;
+                print("apprival url in place order succresss${approvalUrl}");
+                if (selectedPaymentMethod == "ONLINE" && approvalUrl != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WebviewScreen(approvalUrl: approvalUrl),
+                    ),
+                  );
+                } else if (selectedPaymentMethod == "COD") {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => OrderSuccessScreen()),
+                  );
+                }
               }
+
 
               else if (state is CartError) {
                 setState(() {});

@@ -65,7 +65,7 @@ class Profile extends StatelessWidget {
           child: BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, state){
               if (state is ProfileLoading){
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color: Colors.purple,));
               } else if (state is ProfileLoaded){
                 return ProfileDetails(userProfile: state.userProfile);
               } else if (state is ProfileError){

@@ -64,6 +64,18 @@ class fetchOrders extends CartEvent {
   List<Object?> get props => [];
 }
 
+
+class ExecutePayment extends CartEvent {
+  @override
+  final String? paymentId;
+  final String? payerId;
+  final String? token;
+
+  ExecutePayment(this.paymentId, this.payerId, this.token, );
+  List<Object?> get props => [];
+}
+
+
 class ReturnOrder extends CartEvent {
   final int? orderItemId;
   final int? returnQuantity;
