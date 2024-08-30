@@ -19,6 +19,7 @@ import '../data/models/whishlistmodel.dart';
 import '../donation/donationscreen.dart';
 
 import '../widgets/customappbar.dart';
+import '../widgets/customcircularindicator.dart';
 import '../widgets/customcolor.dart';
 import '../widgets/customfont.dart';
 import 'cartitem.dart';
@@ -36,7 +37,8 @@ class _CartScreenState extends State<CartScreen> {
   List<Cart> carts = [];
   List<int> wishlistProductIds = [];
   List<WhislistProduct> whishlist = [];
-  int? isclicked; 
+  int? isclicked;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -104,11 +106,15 @@ class _CartScreenState extends State<CartScreen> {
             listener: (context, state) {
               print(state);
               if (state is CartLoading) {
-                // Handle loading state
+                setState(() {
+                  isLoading = true;
+                });
               } else if (state is CartLoaded) {
                 carts = state.carts;
                 print("Cart Loaded: ${carts.length} carts loaded.");
-                setState(() {});
+                setState(() {
+                  isLoading = false;
+                });
               }
               else if (state is CartError) {
                 setState(() {});
@@ -159,9 +165,7 @@ class _CartScreenState extends State<CartScreen> {
                 for (var i = 0; i <= whishlist.length; i++) {
                   wishlistProductIds.add(whishlist[i].product);
                 }
-                print(whishlist.length);
-                print(whishlist[0]);
-                print("oooooooooooooooo");
+
                 setState(() {});
               } else if (state is RemoveWishlistSuccess) {
                 setState(() {
@@ -181,7 +185,11 @@ class _CartScreenState extends State<CartScreen> {
         ],
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
+          child: isLoading
+              ? Padding(
+                padding:  EdgeInsets.symmetric(vertical: 300.h),
+                child: CustomCircularProgressIndicator(),
+              ):Column(
             children: [
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -192,8 +200,8 @@ class _CartScreenState extends State<CartScreen> {
                   print(carts.length);
                   if (cart.items.isEmpty) {
                     return Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 100.h,horizontal: 140.w),
-                      child: Text("No items in cart",style: CustomFont().subtitleText,),
+                      padding:  EdgeInsets.symmetric(vertical: 100.h,horizontal: 110.w),
+                      child: Text("YOUR CART IS EMPTY",style: CustomFont().bodyText,),
                     );
                   }
                   return Column(

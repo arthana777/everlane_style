@@ -7,6 +7,7 @@ import 'package:everlane_style/data/models/ordermodel.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/cartmodel.dart';
+import '../../data/models/paymentresponsemodel.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -65,21 +66,41 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
     });
 
+    // on<PlaceOrder>((event, emit) async {
+    //   emit(palceOrderLoading());
+    //   try {
+    //     print("Calling placeOrder with paymentMethod: ${event.paymentMethod}, orderType: ${event.orderType}, deliveryAddressId: ${event.deliveryAddressId}");
+    //     final result = await cartDataSource.placeOrder(event.paymentMethod,event.orderType,event.deliveryAddressId);
+    //     print("resultin placeorderbloc${result}");
+    //     if(result=="success"){
+    //       emit(PlaceOrderSuccess(approvalUrl: result));
+    //     }
+    //     else{
+    //       emit(placeOrdererror(message: result));
+    //     }
+    //   } catch (e) {
+    //     emit(placeOrdererror(message: e.toString()));
+    //   }
+    // });
+
     on<PlaceOrder>((event, emit) async {
+      print("PlaceOrder event triggered");
       emit(palceOrderLoading());
       try {
-        final result = await cartDataSource.placeOrder(event.paymentMethod,event.orderType,event.deliveryAddressId);
-        print("object${result}");
-        if(result=="success"){
-          emit(placeOrderSuccess());
-        }
-        else{
+        print("Calling placeOrder with paymentMethod: ${event.paymentMethod}, orderType: ${event.orderType}, deliveryAddressId: ${event.deliveryAddressId}");
+        final result = await cartDataSource.placeOrder(event.paymentMethod, event.orderType, event.deliveryAddressId);
+        print("result in placeOrderBloc: $result");
+        if (result.startsWith('https://')) {
+          emit(PlaceOrderSuccess(approvalUrl: result));
+        } else {
           emit(placeOrdererror(message: result));
         }
       } catch (e) {
+        print("Exception in placeOrder: $e");
         emit(placeOrdererror(message: e.toString()));
       }
     });
+
 
     on<IncreaseCartItemQuantity>((event, emit) async {
 
@@ -149,6 +170,32 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(ReturnError(message: e.toString()));
       }
     });
+
+
+    on<ExecutePayment>((event, emit) async {
+      emit(ExecutionLoading());
+      try {
+        // Call the paymentExecute method and get a PaymentResponse? object
+        final PaymentResponse? result = await cartDataSource.paymentExecute(
+          event.paymentId ?? '',
+          event.payerId ?? '',
+          event.token ?? '',
+        );
+
+        // Check if the result is not null and has a successful status
+        if (result != null && result.status == "success") {
+          // Emit ExecutionLoaded with the result if successful
+          emit(ExecutionLoaded(result));
+        } else {
+          // Emit an error state if the payment execution failed
+          emit(ExecutionError(message: result?.message ?? "Payment execution failed"));
+        }
+      } catch (e) {
+        // Handle any exceptions and emit an error state
+        emit(ExecutionError(message: e.toString()));
+      }
+    });
+
 
   }
 }

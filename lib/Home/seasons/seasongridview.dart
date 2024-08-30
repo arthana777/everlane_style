@@ -16,6 +16,7 @@ import '../../btm_navigation/btm_navigation.dart';
 import '../../data/models/product_model.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../productgrid/product_card.dart';
+import '../../widgets/customcircularindicator.dart';
 
 class Seasongridview extends StatefulWidget {
   final String seasonName;
@@ -33,6 +34,7 @@ class _SeasongridviewState extends State<Seasongridview> {
   List<Product> products = [];
   List<WhislistProduct> whishlist = [];
   List<int> wishlistProductIds = [];
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -68,9 +70,16 @@ class _SeasongridviewState extends State<Seasongridview> {
             BlocListener<ProductBloc, ProductState>(
               listener: (context, state) {
                 print(state);
-                if (state is SeasonsLoaded) {
+                if (state is SeasonsLoading) {
+                  setState(() {
+                    isLoading = true; // Show loading indicator
+                  });
+                }
+                else if (state is SeasonsLoaded) {
                   seasons = state.seasons;
-                  setState(() {});
+                  setState(() {
+                    isLoading = false;
+                  });
                   print("ssss${seasons.length}");
                   for (var i = 0; i < seasons.length; i++) {
                     print("GGGGG${seasons[i].id}");
@@ -145,7 +154,9 @@ class _SeasongridviewState extends State<Seasongridview> {
           ],
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-            child: GridView.builder(
+            child: isLoading
+                ? CustomCircularProgressIndicator()
+            :GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 0.62,

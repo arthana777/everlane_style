@@ -19,6 +19,7 @@ import '../domain/entities/category_entity.dart';
 import '../domain/entities/product_entity.dart';
 
 import '../productgrid/product_card.dart';
+import '../widgets/customcircularindicator.dart';
 
 class CategoryGridview extends StatefulWidget {
   final String subcategoryName;
@@ -36,6 +37,7 @@ class _CategoryGridviewState extends State<CategoryGridview> {
   List<WhislistProduct> whishlist = [];
   List<int> wishlistProductIds = [];
   List<CategoryEntity> subcategories = [];
+  bool isLoading = true;
   @override
   void initState() {
     BlocProvider.of<ProductBloc>(context).add(Loadfiltercategories(1));
@@ -67,15 +69,15 @@ class _CategoryGridviewState extends State<CategoryGridview> {
             BlocListener<ProductBloc, ProductState>(
               listener: (context, state) {
                 print(state);
-                // if (state is ProductLoaded) {
-                //   products = state.products;
-                //   print("FFFF${state.products.length}");
-                //   setState(() {});
-                // }
+                if (state is filtercategoryLoading) {
+                  setState(() {
+                    isLoading = true; // Show loading indicator
+                  });
+                }
                  if (state is filtercategoryLoaded) {
                   filtercategories = state.filtercategories;
                   setState(() {
-
+                    isLoading = false;
                   });
 
                   print("ssss${filtercategories.length}");
@@ -147,7 +149,8 @@ class _CategoryGridviewState extends State<CategoryGridview> {
           ],
           child: Padding(
             padding:  EdgeInsets.symmetric(horizontal: 10.w),
-            child: GridView.builder(
+            child: isLoading
+                ? CustomCircularProgressIndicator():GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 0.62,

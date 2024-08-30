@@ -58,6 +58,7 @@ dependencies:
   url_launcher: ^6.3.0
   flutter_image_compress: ^2.3.0
   webview_flutter:  ^4.0.1
+  flutter_inappwebview: ^5.8.0
 
 dev_dependencies:
   flutter_test:
@@ -90,16 +91,6 @@ flutter_launcher_icons:
   min_sdk_android: 21
   # To add assets to your application, add an assets section, like this:
   assets:
-    - asset/icons/applogo.png
-    - asset/images/applogo.png
-    - asset/images/login.jpg
-    - asset/images/images (2).jpg
-    - asset/images/hr pst.jpg
-    - asset/images/images (1).jpg
-    - asset/images/bnr1.jpg
-    - asset/images/th (2).jpg
-    - asset/images/bg0.jpg
-    - asset/images/logo1.jpg
     - assets/icons/applogo.png
     - assets/images/applogo.png
     - assets/images/login.jpg
@@ -108,10 +99,10 @@ flutter_launcher_icons:
     - assets/images/images (1).jpg
     - assets/images/bnr1.jpg
     - assets/images/th (2).jpg
-    - assets/images/authumn.jpg
-    - assets/images/monsoon.jpg
-    - assets/images/summer.jpg
-    - assets/images/winter.jpg
+    - assets/images/bg0.jpg
+    - assets/images/logo1.jpg
+
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
