@@ -13,8 +13,8 @@ class Qstmodalbottomsheet {
         context: context,
         builder: (BuildContext bc) {
           return Container(
-            height: size.height * 0.6.h,
-            decoration:  BoxDecoration(
+            height: size.height * 0.7.h,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20.0),
@@ -25,7 +25,7 @@ class Qstmodalbottomsheet {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: ListView(
                 physics: const ClampingScrollPhysics(),
-                children:  const [ Questions()],
+                children: const [Questions()],
               ),
             ),
           );

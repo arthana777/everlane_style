@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 class AdrressCustomField extends StatelessWidget {
   const AdrressCustomField({
     super.key,
+    this.suffixIcon,
+    this.boxShadow,
     this.hinttext,
     this.heigth,
     this.controller,
@@ -14,7 +16,8 @@ class AdrressCustomField extends StatelessWidget {
     this.width,
     this.validator,
   });
-
+  final Widget? suffixIcon;
+  final List<BoxShadow>? boxShadow;
   final String? hinttext;
   final double? heigth;
   final double? width;
@@ -26,13 +29,14 @@ class AdrressCustomField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10).w,
       height: heigth ?? 50.h,
       width: width,
       decoration: BoxDecoration(
+        boxShadow: boxShadow,
         color: Colors.white,
-        border: Border.all(color: Colors.black12),
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        //  border:
+        borderRadius: BorderRadius.all(Radius.circular(5)).w,
       ),
       child: TextFormField(
         onChanged: onchanged,
@@ -40,13 +44,15 @@ class AdrressCustomField extends StatelessWidget {
         maxLines: 1,
         keyboardType: inputType,
         style: const TextStyle(
-          color: Colors.black,
+          color: Colors.black54,
         ),
         validator: validator,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(left: 5),
+          suffixIcon: suffixIcon,
+          contentPadding: EdgeInsets.only(left: 5, bottom: 17).r,
           border: InputBorder.none,
           hintText: hinttext,
+          
           hintStyle: GoogleFonts.quicksand(color: Colors.grey, fontSize: 12.sp),
         ),
       ),
@@ -66,7 +72,7 @@ class CustomAdressSelection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black12,
         border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20).w,
       ),
       child: Center(child: Text(text ?? "")),
     );

@@ -50,7 +50,7 @@ dependencies:
   shared_preferences: ^2.3.1
   linear_progress_bar: ^1.1.2
   image_picker: ^1.1.2
-  flutter_launcher_icons: ^0.13.1
+  # flutter_launcher_icons: ^0.13.1
   page_transition: ^2.1.0
   fluttertoast: ^8.2.8
   dropdown_button2: ^2.3.9
@@ -81,37 +81,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "asset/icons/applogo.png"
-  min_sdk_android: 21
-  # To add assets to your application, add an assets section, like this:
   assets:
-    - asset/icons/applogo.png
-    - asset/images/applogo.png
-    - asset/images/login.jpg
-    - asset/images/images (2).jpg
-    - asset/images/hr pst.jpg
-    - asset/images/images (1).jpg
-    - asset/images/bnr1.jpg
-    - asset/images/th (2).jpg
-    - asset/images/bg0.jpg
-    - asset/images/logo1.jpg
-    - assets/icons/applogo.png
-    - assets/images/applogo.png
-    - assets/images/login.jpg
-    - assets/images/images (2).jpg
-    - assets/images/hr pst.jpg
-    - assets/images/images (1).jpg
-    - assets/images/bnr1.jpg
-    - assets/images/th (2).jpg
-    - assets/images/authumn.jpg
-    - assets/images/monsoon.jpg
-    - assets/images/summer.jpg
-    - assets/images/winter.jpg
+     - assets/icons/
+     - assets/images/
+     
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "asset/icons/applogo.png"
+#   min_sdk_android: 21
+#   # To add assets to your application, add an assets section, like this:
+  
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

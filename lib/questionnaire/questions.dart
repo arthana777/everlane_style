@@ -60,7 +60,14 @@ class _QuestionsState extends State<Questions> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-             SizedBox(height: 20.h),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Recommended Product",
+              style: CustomFont().titleText,
+            ),
+            SizedBox(height: 20.h),
             Text(
               "Provide structured and standardized responses, making the analysis process more streamlined and less time-consuming.",
               style: CustomFont().subText,
@@ -117,7 +124,7 @@ class _QuestionsState extends State<Questions> {
               value: selectedUsage,
               dataList: usageItems.map((item) => DropdownModel(item)).toList(),
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 30.h),
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

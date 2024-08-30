@@ -38,7 +38,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> _handlerefresh() async {
-    return await Future.delayed(Duration(seconds: 2));
+    return await Future.delayed(Duration(seconds: 1));
   }
 
   List<CategoryEntity> categories = [];
@@ -60,16 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'id': '1',
       'title': 'winter',
-     'image':
-      //'image': "https://drive.google.com/file/d/159d9IK0BY8I_99FxxkuTzU1mpkTaf17y/view?usp=sharing",
+      'image':
+          //'image': "https://drive.google.com/file/d/159d9IK0BY8I_99FxxkuTzU1mpkTaf17y/view?usp=sharing",
 
-      'https://media.istockphoto.com/id/1146996650/photo/knitted-wool-sweaters.jpg?s=612x612&w=0&k=20&c=e_heKrNwFWeAbkTVVA2aKJEO08jz9JZ-5diJPDK92ck='
+          'https://media.istockphoto.com/id/1146996650/photo/knitted-wool-sweaters.jpg?s=612x612&w=0&k=20&c=e_heKrNwFWeAbkTVVA2aKJEO08jz9JZ-5diJPDK92ck='
     },
     {
       'id': '2',
       'title': 'summer',
       'image':
-       'https://media.istockphoto.com/id/1465451690/photo/beach-umbralla-and-chair-on-sand-summer-holiday-travel-background.jpg?s=612x612&w=0&k=20&c=ChGTBog7Px_3uTkdCINE43kNf4qM2EZ-pkLzvYq5Wzs='
+          'https://media.istockphoto.com/id/1465451690/photo/beach-umbralla-and-chair-on-sand-summer-holiday-travel-background.jpg?s=612x612&w=0&k=20&c=ChGTBog7Px_3uTkdCINE43kNf4qM2EZ-pkLzvYq5Wzs='
     },
     {
       'id': '3',
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'id': '4',
       'title': 'autumn',
       'image':
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0dW1uJTIwZmFzaGlvbiUyMGJhbm5lcnxlbnwwfHwwfHx8MA%3D%3D'
     },
   ];
 

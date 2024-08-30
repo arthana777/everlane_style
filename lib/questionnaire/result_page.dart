@@ -6,6 +6,7 @@ import 'package:everlane_style/widgets/customfont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:everlane_style/data/datasources/qst_service.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
@@ -31,11 +32,11 @@ class ResultPage extends StatelessWidget {
             } else if (state is QuestionResultLoaded) {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of items per row
-                  childAspectRatio: 0.75, // Aspect ratio of each item
+                  crossAxisCount: 2, 
+                  childAspectRatio: 0.75, 
                 ),
                 itemCount:
-                    state.qstresult.length, // Assuming qstresults is a list
+                    state.qstresult.length,
                 itemBuilder: (context, index) {
                   final product = state.qstresult[index];
                   return Card(
@@ -50,21 +51,21 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0).w,
                           child: Text('${product.name ?? ""}',
                               style: CustomFont().titleText,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0).w,
                           child: Text(
                             '${product.price?.toString() ?? "N/A"}',
                             style: CustomFont().subText,
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 10.h,
                         )
                       ],
                     ),

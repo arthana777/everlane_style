@@ -5,6 +5,7 @@ import 'package:everlane_style/bloc/editprofile/bloc/editprofile_bloc.dart';
 import 'package:everlane_style/bloc/address/address_bloc.dart';
 import 'package:everlane_style/bloc/cart/cart_bloc.dart';
 import 'package:everlane_style/bloc/forgot_password/bloc/forgot_password_bloc.dart';
+import 'package:everlane_style/bloc/notifications/bloc/notification_bloc_bloc.dart';
 import 'package:everlane_style/bloc/product/product_bloc.dart';
 import 'package:everlane_style/bloc/question_bloc/bloc/question_bloc.dart';
 import 'package:everlane_style/bloc/question_result/bloc/question_result_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:everlane_style/bloc/userprofile/bloc/profile_bloc.dart';
 import 'package:everlane_style/bloc_signup/bloc/signup_bloc.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
 import 'package:everlane_style/data/datasources/forgot_password_service.dart';
+import 'package:everlane_style/data/datasources/notification_service.dart';
 import 'package:everlane_style/data/navigation_provider/navigation_provider.dart';
 import 'package:everlane_style/data/datasources/qst_service.dart';
 import 'package:everlane_style/data/datasources/editprofileservice.dart';
@@ -81,6 +83,10 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                 create: (BuildContext context) =>
                     QuestionBloc(QstService()),
+              ),
+               BlocProvider(
+                create: (BuildContext context) =>
+                    NotificationBlocBloc(NotificationService()),
               ),
               BlocProvider(
                 create: (BuildContext context) =>

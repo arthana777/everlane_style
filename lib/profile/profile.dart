@@ -1,10 +1,11 @@
-import 'package:everlane_style/Home/homescreen.dart';
+
 import 'package:everlane_style/bloc/change_password/bloc/change_password_bloc.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_event.dart';
 import 'package:everlane_style/bloc/change_password/bloc/change_password_state.dart';
 import 'package:everlane_style/btm_navigation/btm_navigation.dart';
 import 'package:everlane_style/checkout/myorders.dart';
 import 'package:everlane_style/data/datasources/change_password_repo.dart';
+import 'package:everlane_style/notification/notification_screen.dart';
 import 'package:everlane_style/whishlist/whishlist.dart';
 import 'package:everlane_style/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -63,12 +64,12 @@ class Profile extends StatelessWidget {
             }
           },
           child: BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, state){
-              if (state is ProfileLoading){
+            builder: (context, state) {
+              if (state is ProfileLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is ProfileLoaded){
+              } else if (state is ProfileLoaded) {
                 return ProfileDetails(userProfile: state.userProfile);
-              } else if (state is ProfileError){
+              } else if (state is ProfileError) {
                 return Center(child: Text(state.message));
               } else {
                 return const Center(
@@ -159,15 +160,15 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                 ),
                 SizedBox(height: 5.h),
                 ProfileTextfield(
-                  icon: Icons.settings,
-                  title: "Settings",
+                  icon: Icons.notifications_on_sharp,
+                  title: "Notification",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => EditProfile(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>  NotificationScreen(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 5.h),
@@ -205,7 +206,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                               height: 250.h,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 25, left: 10, right: 10).r,
+                                        top: 25, left: 10, right: 10)
+                                    .r,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,

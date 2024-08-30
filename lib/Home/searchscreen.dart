@@ -1,3 +1,4 @@
+import 'package:everlane_style/widgets/customcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,39 +23,49 @@ class Searchscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: CustomAppBar(
-        text: 'Search here..',
-        leading: InkWell(
-            onTap: (){
-              final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
-              navigationProvider.updateScreenIndex(0);
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back)),
-      )),
-      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(60.h),
+          child: CustomAppBar(
+            color: Colors.transparent,
+            text: 'Search here..',
+            leading: InkWell(
+                onTap: () {
+                  final navigationProvider =
+                      Provider.of<NavigationProvider>(context, listen: false);
+                  navigationProvider.updateScreenIndex(0);
+                  Navigator.pop(context);
+                },
+                child: Icon(Icons.arrow_back)),
+          )),
+      backgroundColor: CustomColor.backgroundColor,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: Column(
           children: [
             AdrressCustomField(
               hinttext: 'Search here',
+              suffixIcon: Icon(Icons.search_rounded),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black45,
+                  offset: Offset(0, 1),
+                  blurRadius: 1.0,
+                ),
+              ],
               controller: searchController,
               onchanged: (value) {
                 if (value.isNotEmpty) {
                   context.read<ProductBloc>().add(Searchproducts(value));
-
                 }
-
               },
             ),
-           // SizedBox(height: 5.h),
+            SizedBox(height: 25.h),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 // if (state is SearchLoading) {
                 //   return Center(child: CircularProgressIndicator());
                 // }
-                 if (state is SearchLoaded) {
+                if (state is SearchLoaded) {
                   return Expanded(
                     child: GridView.builder(
                         shrinkWrap: true,
@@ -72,18 +83,22 @@ class Searchscreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ProductDetails(productId: state.keyword[index].id??0 ,)),
+                                      builder: (context) => ProductDetails(
+                                            productId:
+                                                state.keyword[index].id ?? 0,
+                                          )),
                                 );
                                 context.read<ProductBloc>().add(
-                                  LoadDetails(state.keyword[0].id??0),
-                                );
+                                      LoadDetails(state.keyword[0].id ?? 0),
+                                    );
                               },
                               child: ProductCard(
-                                title: state.keyword[index].name??"no name",
+                                title: state.keyword[index].name ?? "no name",
                                 subtitle: state.keyword[index].brand,
-                                image: state.keyword[index].image??"",
-                                price: state.keyword[index].price??'',
-                                isInWishlist: whishlist.any((item) => item.id == keyword[index].id),
+                                image: state.keyword[index].image ?? "",
+                                price: state.keyword[index].price ?? '',
+                                isInWishlist: whishlist.any(
+                                    (item) => item.id == keyword[index].id),
                               ));
                         }),
                     // child: ListView.builder(

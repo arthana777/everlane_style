@@ -5,5 +5,5 @@ class CustomColor {
   static const Color primaryColor = Color(0xFF973d93);
   static final Color iconColor = Colors.black;
   static final Color buttoniconColor = Colors.white;
-  static final Color backgroundColor =   Color(0xFFF0F0F0);
+  static final Color backgroundColor =   Color(0xFFFAFAFA);
 }
